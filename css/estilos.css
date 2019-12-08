@@ -1,0 +1,27 @@
+.cont form{
+    margin-left: 30%;
+}
+
+header img {
+    cursor: pointer;
+}
+.menu div img, span{
+    margin: 5% 5% 5% 20%;
+}
+
+.menu div{
+    padding: 5%;
+}
+
+.menu div span {
+    text-align: center;
+    font-weight: bold;
+}
+.menu div img:hover {
+    cursor: pointer;
+}
+@media(max-width: 768px) {
+    .cont form div input {
+        width: 100%;
+    }
+}
