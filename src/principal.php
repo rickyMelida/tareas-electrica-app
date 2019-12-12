@@ -12,25 +12,94 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Rutinas electricas</title>
     <link rel="shortcut icon" href="../iconos/electrico.ico" type="image/x-icon">
+    <script>
+	  window.console = window.console || function(t) {};
+	</script>
+	<script>
+	  if (document.location.search.match(/type=embed/gi)) {
+	    window.parent.postMessage("resize", "*");
+	  }
+	</script>
+
 </head>
 <body>
-    <div class="container border border-primary">
-        <header class="text-center bg-primary p-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid border border-primary">
+        <!-- Cabecera de pagina principal --->
+        <!--header class="text-center bg-primary p-4">
             <a href="#" data-toggle="modal" data-target="#acceso"><img src="../iconos/config.png" class="float-left m-3" title="Reporte de horarios" ></a>                    
             <h1 class=" d-inline">Menu Principal</h1>
             <a href="../validaciones/cerrar_sesion.php"><img src="../iconos/perfil.png" class="float-right m-3" title="<?php echo $var_session;?>"></a>
-        </header>
-        <div class="row menu">
-            <div class="col-lg-6 col-md-6">
+        </header-->
+
+        <div class="row bg-info">
+            <div class="col-lg-12">
+                <div id="slider w-100">
+					<div class="carousel slide" id="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active">                
+                                <img src="../iconos/anotar.png" onclick="agregar()" width="200" height="200">
+								<div class="carousel-caption">
+								<h5>Agregar Tareas</h5>
+								</div>
+							</div>
+							<div class="carousel-item">
+                                <img src="../iconos/tareas.png" onclick="pendientes()" alt="" width="200" height="200"><br>
+								<div class="carousel-caption">
+								    <h5>Ver Pendientes</h5>
+								</div>
+							</div>
+							
+						</div>
+						<ol class="carousel-indicators">
+							<li data-slide-to="0"></li>
+							<li data-slide-to="1"></li>
+						</ol>
+						<a class="carousel-control-prev" href="#" role="button"><span class="carousel-control-prev-icon"></span></a>
+						<a class="carousel-control-next" href="#" role="button"><span class="carousel-control-next-icon"></span></a>
+					</div>
+				</div>
+            </div>
+            <!--div class="col-lg-6 col-md-6">
                 <img src="../iconos/anotar.png" onclick="agregar()" width="200" height="200"><br>
                 <span>Agregar Tareas</span>
             </div>
             <div class="col-lg-6 col-md-6">
                 <img src="../iconos/tareas.png" onclick="pendientes()" alt="" width="200" height="200"><br>
                 <span>Ver Pendientes</span>
-            </div>
+            </div-->
         </div>
     </div>
+
+    
 
 
     <!--Modal para ingresar como administrador-->
@@ -64,8 +133,38 @@
 
     <script src="../js/design.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js'></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script id="rendered-js">
+            ;(function ($, window, document) {
+                'use strict';
+                var $slider = $('#carousel'),hammer = new Hammer($slider.get(0));
+                $slider.find('img').each((index, elem) => {
+                    $(elem).prop('draggable', false);
+                });
+                $slider.carousel();
+                $slider.find(".carousel-control-prev").click(e => {
+                    e.preventDefault();
+                    $slider.carousel("prev");
+                });
+                $slider.find(".carousel-control-next").click(e => {
+                    e.preventDefault();
+                    $slider.carousel("next");
+                });
+                hammer.on("panleft panright", e => {
+                    e.preventDefault();
+                    if (e.type == 'panleft') $slider.carousel("next");
+                    if (e.type == 'panright') $slider.carousel("prev");
+                });
+
+                $slider.find('.carousel-indicators li').click(e => {
+                    $slider.carousel($(e.target).data('slide-to'));
+                });
+            })(jQuery, window, document);
+            //# sourceURL=pen.js
+    </script>
 </body>
 </html>
 
