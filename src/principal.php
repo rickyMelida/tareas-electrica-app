@@ -23,8 +23,8 @@
 
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Menu Principal</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -32,49 +32,42 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">Horario Tecnico</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" data-toggle="modal" data-target="#acceso" href="#">Reportes Horario</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#">Acerca de</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+            <!--form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+            </form-->
         </div>
     </nav>
 
 
-    <div class="container-fluid border border-primary">
-        <!-- Cabecera de pagina principal --->
-        <!--header class="text-center bg-primary p-4">
-            <a href="#" data-toggle="modal" data-target="#acceso"><img src="../iconos/config.png" class="float-left m-3" title="Reporte de horarios" ></a>                    
-            <h1 class=" d-inline">Menu Principal</h1>
-            <a href="../validaciones/cerrar_sesion.php"><img src="../iconos/perfil.png" class="float-right m-3" title="<?php echo $var_session;?>"></a>
-        </header-->
-
-        <div class="row bg-info">
+    <div class="container-fluid border border-primary bg-info" style="height: 100vh;">
+        <div class="row ">
             <div class="col-lg-12">
-                <div id="slider w-100">
+                <div id="slider" class=" m-auto w-100">
 					<div class="carousel slide" id="carousel">
 						<div class="carousel-inner">
 							<div class="carousel-item active">                
-                                <img src="../iconos/anotar.png" onclick="agregar()" width="200" height="200">
+                                <img src="../iconos/anotar.png" onclick="agregar()" class="m-5 d-block" width="250" height="300">
 								<div class="carousel-caption">
-								<h5>Agregar Tareas</h5>
+								    <h5 class="text-dark ">Agregar Tareas</h5>
 								</div>
 							</div>
 							<div class="carousel-item">
-                                <img src="../iconos/tareas.png" onclick="pendientes()" alt="" width="200" height="200"><br>
+                                <img src="../iconos/tareas.png" onclick="pendientes()" class="m-5" width="250" height="300">
 								<div class="carousel-caption">
-								    <h5>Ver Pendientes</h5>
+								    <h5 class="text-dark">Ver Pendientes</h5>
 								</div>
 							</div>
 							
@@ -88,14 +81,14 @@
 					</div>
 				</div>
             </div>
-            <!--div class="col-lg-6 col-md-6">
-                <img src="../iconos/anotar.png" onclick="agregar()" width="200" height="200"><br>
-                <span>Agregar Tareas</span>
+            
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <footer class="fixed-bottom bg-dark" > 
+                    <p>Lorem ipsum dolor sit amet </p>
+                </footer>
             </div>
-            <div class="col-lg-6 col-md-6">
-                <img src="../iconos/tareas.png" onclick="pendientes()" alt="" width="200" height="200"><br>
-                <span>Ver Pendientes</span>
-            </div-->
         </div>
     </div>
 
@@ -103,8 +96,8 @@
 
 
     <!--Modal para ingresar como administrador-->
-    <div class="modal fade " id="acceso">
-        <div class="modal-dialog">
+    <div class="modal fade" id="acceso">
+        <div class="modal-dialog bg-dark">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5>Iniciar sesion de administrador</h5>
