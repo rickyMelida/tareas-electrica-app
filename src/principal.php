@@ -32,16 +32,19 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Horario Tecnico</a>
+                    <a class="nav-link" href="#">Horario Tecnico</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#acceso" href="#">Reportes Horario</a>
+                    <a class="nav-link" data-toggle="modal" data-target="#acceso" href="#">Reportes Horario</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Acerca de</a>
+                    <a class="nav-link" href="../validaciones/cerrar_sesion.php">Cerrar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Acerca De</a>
                 </li>
             </ul>
             <!--form class="form-inline my-2 my-lg-0">
@@ -55,27 +58,27 @@
     <div class="container-fluid border border-primary bg-info" style="height: 100vh;">
         <div class="row ">
             <div class="col-lg-12">
-                <div id="slider" class=" m-auto w-100">
+                <div id="slider" class=" w-100">
 					<div class="carousel slide" id="carousel">
 						<div class="carousel-inner">
 							<div class="carousel-item active">                
-                                <img src="../iconos/anotar.png" onclick="agregar()" class="m-5 d-block" width="250" height="300">
+                                <img src="../iconos/anotar.png" onclick="agregar()" class="iconos-principal" width="250" height="300">
 								<div class="carousel-caption">
 								    <h5 class="text-dark ">Agregar Tareas</h5>
 								</div>
 							</div>
 							<div class="carousel-item">
-                                <img src="../iconos/tareas.png" onclick="pendientes()" class="m-5" width="250" height="300">
-								<div class="carousel-caption">
+								<div class="carousel-caption ">
 								    <h5 class="text-dark">Ver Pendientes</h5>
 								</div>
+                                <img src="../iconos/tareas.png" onclick="pendientes()" class="iconos-principal" width="250" height="300">
 							</div>
 							
 						</div>
-						<ol class="carousel-indicators">
+						<!--ol class="carousel-indicators">
 							<li data-slide-to="0"></li>
 							<li data-slide-to="1"></li>
-						</ol>
+						</ol-->
 						<a class="carousel-control-prev" href="#" role="button"><span class="carousel-control-prev-icon"></span></a>
 						<a class="carousel-control-next" href="#" role="button"><span class="carousel-control-next-icon"></span></a>
 					</div>

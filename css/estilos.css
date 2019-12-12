@@ -20,6 +20,14 @@ header img {
 .menu div img:hover {
     cursor: pointer;
 }
+
+.iconos-principal {
+    display: block;
+    margin: auto;
+    padding-top: 10%;
+    height: 65vh;
+    width: 70%;
+}
 @media(max-width: 768px) {
     .cont form div input {
         width: 100%;
