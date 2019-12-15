@@ -44,7 +44,7 @@
                     <a class="nav-link" href="../validaciones/cerrar_sesion.php">Cerrar Sesión</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Acerca De</a>
+                    <a class="nav-link" href="#" title="Desarrollador">Acerca De</a>
                 </li>
             </ul>
             <!--form class="form-inline my-2 my-lg-0">
@@ -55,14 +55,14 @@
     </nav>
 
 
-    <div class="container-fluid border border-primary bg-info" style="height: 100vh;">
+    <div class="container-fluid border border-primary bg-primary" style="height: 100vh;">
         <div class="row ">
             <div class="col-lg-12">
                 <div id="slider" class=" w-100">
 					<div class="carousel slide" id="carousel">
 						<div class="carousel-inner">
 							<div class="carousel-item active">                
-                                <img src="../iconos/anotar.png" onclick="agregar()" class="iconos-principal" width="250" height="300">
+                                <img src="../iconos/anotar.png" onclick="agregar()" class="iconos-principal" >
 								<div class="carousel-caption">
 								    <h5 class="text-dark ">Agregar Tareas</h5>
 								</div>
@@ -86,7 +86,7 @@
             </div>
             
         </div>
-        <div class="row">
+        <div class="row footer">
             <div class="col-md-12 col-lg-12">
                 <footer class="fixed-bottom bg-dark" > 
                     <p>Lorem ipsum dolor sit amet </p>

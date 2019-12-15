@@ -39,13 +39,8 @@
     <link rel="shortcut icon" href="../iconos/electrico.ico" type="image/x-icon">
 </head>
 <body>
-    <div class="container border border-primary">
-        <!--header class="text-center bg-primary p-4">   
-                <a href="./principal.php" class="btn btn-dark m-3  px-3 float-left">Volver..</a>
-
-                <h1 class=" d-inline">Agregar Tareas</h1>
-        </header-->
-        <form action="../validaciones/formulario.php" method="post" name="formulario" class="border border-dark p-3 bg-info">
+    <div class="container-fluid border border-primary w-100">
+        <form action="../validaciones/formulario.php" method="post" name="formulario" class="border border-dark p-3 bg-primary">
         <div class="row">
             <!---------------Tipos de trabajo--------------------->
             <div class="col-lg-4 col-md-12">
@@ -206,12 +201,25 @@
                     </div>
                 </div>
             </div>    
+
+            <div class="row">
+               <div class="col-lg-12">
+                <div class="form-group">
+                    <h3>Subir Imagenes</h3>
+                    <div class="col-sm-8">
+                        <input type="file" class="form-control" id="image" name="image" multiple>
+                    </div>
+                    <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
+                </div>
+               </div>
+            </div>
+            
+
+            <!---  Botones de guardar y volver --->
             <div class='row'>
                 <div class="col-lg-6 col-md-6">
                     <button type="submit" iid="enviar" class="btn btn-dark m-4 px-3">Guardar</button>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <a href="./principal.php" class="btn btn-dark m-4  px-3 float-right">Volver..</a>
+                    <a href="./principal.php" class="btn btn-dark float-right mt-4 mr-4">Volver..</a>
                 </div>
             </div>
         </form>

@@ -25,11 +25,19 @@ header img {
     display: block;
     margin: auto;
     padding-top: 10%;
-    height: 65vh;
-    width: 70%;
+    height: 75vh;
+    width: 30%;
+    cursor: pointer;
 }
 @media(max-width: 768px) {
     .cont form div input {
         width: 100%;
     }
+
+    .iconos-principal {
+        width : 250px;
+        height: 65vh;
+    }
+    
+
 }
