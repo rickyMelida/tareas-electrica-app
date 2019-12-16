@@ -25,6 +25,8 @@ create table usuarios (
 );
 
 drop table usuarios
+
+select * from usuarios
 show databases
 
 insert into tecnicos(nombre, cargo_t, turno) 

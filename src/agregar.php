@@ -204,13 +204,22 @@
 
             <div class="row">
                <div class="col-lg-12">
-                <div class="form-group">
-                    <h3>Subir Imagenes</h3>
-                    <div class="col-sm-8">
-                        <input type="file" class="form-control" id="image" name="image" multiple>
+                    <div class="form-group">
+                        <h4>Antes</h4>
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control" id="image" name="antes" multiple>
+                        </div>
+                        <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
                     </div>
-                    <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
-                </div>
+               </div>
+               <div class="col-lg-12">
+                    <div class="form-group">
+                        <h4>Despúes</h4>
+                        <div class="col-sm-8">
+                            <input type="file" class="form-control" id="image" name="despues" multiple>
+                        </div>
+                        <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
+                    </div>
                </div>
             </div>
             
