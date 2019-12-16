@@ -55,7 +55,7 @@
     </nav>
 
 
-    <div class="container-fluid border border-primary bg-primary" style="height: 100vh;">
+    <div class="container-fluid border border-dark bg-primary" style="height: 100vh;">
         <div class="row ">
             <div class="col-lg-12">
                 <div id="slider" class=" w-100">
