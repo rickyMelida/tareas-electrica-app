@@ -89,7 +89,7 @@
         <div class="row footer">
             <div class="col-md-12 col-lg-12">
                 <footer class="fixed-bottom bg-dark" > 
-                    <p>Lorem ipsum dolor sit amet </p>
+                    <p class="text-light m-2">Eléctrica PLG - 2019 &copy; </p>
                 </footer>
             </div>
         </div>

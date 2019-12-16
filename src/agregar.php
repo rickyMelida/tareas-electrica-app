@@ -177,15 +177,15 @@
                         <h2>Horas trabajadas</h2>
                         <div class="form-group">
                             <label for="h_inicial">Hora Inicial</label>
-                            <input type="text" name="h_inicial" id="h_inicial" class="ml-3 horas" placeholder="hh:mm" >
+                            <input type="text" name="h_inicial" id="h_inicial" class=" w-50 ml-4 horas" placeholder="hh:mm" >
                         </div>
                         <div class="form-group">
                             <label for="h_inicial">Hora Final</label>
-                            <input type="text" name="h_final" id="h_final" class="ml-4 horas" placeholder="hh:mm" >
+                            <input type="text" name="h_final" id="h_final" class="ml-4 horas w-50" placeholder="hh:mm" >
                         </div>
                         <div class="form-group disabled">
                             <label for="h_hombre">Horas hombre</label>
-                            <input type="text" name="h_hombre" class="hora" id="h_hombre" disabled>
+                            <input type="text" name="h_hombre" class="hora w-50" id="h_hombre" disabled>
                             <input type="hidden" name="res_hh" id="res_hh">
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                 <div class="col-lg-12 py-2 px-5">
                     <div class="form-group">
                         <h3>Descripcion del trabajo</h3>
-                        <textarea class="form-control" name="descripcion" id="txt_tarea" rows="2"></textarea>
+                        <textarea class="form-control" name="descripcion" id="txt_tarea" rows="3"></textarea>
                     </div>
                 </div>
             </div>    

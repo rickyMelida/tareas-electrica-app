@@ -10,8 +10,8 @@
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-<!--===============================================================================================>
-	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css"-->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->	
@@ -33,11 +33,11 @@
 		<div class="container-login100 bg-info">
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" method="post" action="./validaciones/validar_usuario.php">
-					<span class="login100-form-title p-b-26">
-						Planilla Eléctrica
+					<span class="login100-form-title p-b-26 text-primary">
+						Tareas Eléctrica
 					</span>
 					<span class="login100-form-title p-b-48">
-						<i class="zmdi zmdi-font"></i>
+						<img src="./iconos/electricista.png" width="100" height="100">
 					</span>
 
 					<div class="wrap-input100 validate-input">
