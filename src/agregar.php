@@ -202,6 +202,7 @@
                 </div>
             </div>    
 
+            <!---- Subir imagenes de antes y despues de los trabajos  -->
             <div class="row">
                <div class="col-lg-12">
                     <div class="form-group">

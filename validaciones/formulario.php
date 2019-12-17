@@ -19,75 +19,91 @@
         $turno = "Manhana";
     }
 
+    //Verificamos si es una imagen la que se cargo 
+    $v_antes = getimagesize($_FILES["image"]["name"]);
+    $v_despues = getimagesize($_FILES["image"]["tmp_name"]);
+
+
+
     $obj = new metodos();
-    //----------Si se da la opcion de finalizado----///
-    if($estado_tr == "finalizado") {
-        $hora_inicial = $_POST['h_inicial'];
-        $hora_final = $_POST['h_final'];
     
-        $horas_hombre = $_POST['res_hh'];
+    //Si se verifica correctamente que se subio una imagen
+    if($v_antes != false){
+
+        $antes = $_FILES["image"]["tmp_name"];
+        $despues = $_FILES["image"]["tmp_name"];
+
+        //Se almacenan la imagen en si misma en variables
+        $img_antes = addslashes(file_get_contents($antes));
+        $img_despues = addslashes(file_get_contents($despues));
+
+        //----------Si se da la opcion de finalizado----///
+        if($estado_tr == "finalizado") {
+            $hora_inicial = $_POST['h_inicial'];
+            $hora_final = $_POST['h_final'];
         
-        $tecnicos = isset($_POST['tecnico']) ? $_POST['tecnico'] : null;
-
-        if( $estado_tr == "finalizado" && $hora_inicial=="" && $hora_final=="" && empty($descripcion) ) {
-
-            echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";  
-
-        }else {
+            $horas_hombre = $_POST['res_hh'];
+            
+            $tecnicos = isset($_POST['tecnico']) ? $_POST['tecnico'] : null;
     
-            $arrayTecnicos = null;
-            $tec_sele = tecns($turno);            
-
-            $contador = 0;
-
-            $num_array = count($tecnicos);
+            if( $estado_tr == "finalizado" && $hora_inicial=="" && $hora_final=="" && empty($descripcion) ) {
+    
+                echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";  
+    
+            }else {
         
-            if($num_array > 0) {
-                foreach($tecnicos as $key => $value) {
-                    if($contador != $num_array-1) {
-                        $arrayTecnicos .= $value. ' ';
-                    }else {
-                        $arrayTecnicos .= $value;
-                        $contador ++;
+                $arrayTecnicos = null;
+                $tec_sele = tecns($turno);            
+    
+                $contador = 0;
+    
+                $num_array = count($tecnicos);
+            
+                if($num_array > 0) {
+                    foreach($tecnicos as $key => $value) {
+                        if($contador != $num_array-1) {
+                            $arrayTecnicos .= $value. ' ';
+                        }else {
+                            $arrayTecnicos .= $value;
+                            $contador ++;
+                        }
                     }
                 }
+                
+                $selec = "SELECT cargo_t from tecnicos where turno='$turno' and nombre='$arrayTecnicos'";
+    
+                $cargo = $obj->mostrar($selec);
+    
+                foreach($cargo as $key) {
+                    $res_cargo = $key['cargo_t'];         
+                }
+    
+                $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $hora_inicial, $hora_final, $horas_hombre, $turno, $arrayTecnicos, $res_cargo, $img_antes, $img_despues);
+                if($obj->agregar($datos) == 1) {
+                    echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
+                    //echo "Los tecnicos son ".$arrayTecnicos;
+                }else {
+                    echo "<script>alert('Error al agregar a la BD'); //window.open('../src/agregar.php','_self');</script>";        
+                }
             }
-            
-            $selec = "SELECT cargo_t from tecnicos where turno='$turno' and nombre='$arrayTecnicos'";
-
-            $cargo = $obj->mostrar($selec);
-
-            foreach($cargo as $key) {
-                $res_cargo = $key['cargo_t'];         
-            }
-
-            $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $hora_inicial, $hora_final, $horas_hombre, $turno, $arrayTecnicos, $res_cargo);
-            if($obj->agregar($datos) == 1) {
-                echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
-                //echo "Los tecnicos son ".$arrayTecnicos;
-            }else {
-                echo "<script>alert('Error al agregar a la BD'); //window.open('../src/agregar.php','_self');</script>";        
-
-            }
-        
-            
-
-        }
-
-    //----------Si se da la opcion de pendiente----///
-    }else {
-        if($estado_tr == "pendiente" && empty($descripcion)) {
-            echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";
-            error_reporting(0);
+    
+        //----------Si se da la opcion de pendiente----///
         }else {
-        
-            $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $turno);
-            if($obj->agregar($datos) == 1) {
+            if($estado_tr == "pendiente" && empty($descripcion)) {
+                echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";
                 error_reporting(0);
-                echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
+            }else {
+                $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $turno);
+                if($obj->agregar($datos) == 1) {
+                    error_reporting(0);
+                    echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
+                }
             }
         }
+    }else {
+        echo "<script>alert('Verifique el tipo de imagen seleccionado'); window.open('../src/agregar.php', '_self');</script>";
     }
+   
     
        
 

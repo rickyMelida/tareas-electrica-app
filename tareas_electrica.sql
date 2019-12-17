@@ -93,6 +93,10 @@ update t_tareas set tipo="Business_Center" where id_tar = 7
 select * from t_tareas
 
 select * from tareas
+	
+delete * from tareas
+
+alter table tareas add img_despues longblob not null
 
 truncate table tareas where estado= "Finalizado"
 insert into tareas(t_tarea, estado, des_tarea, fecha, hora_i, hora_f, horas_h, turno, tecnicos, cargo)
