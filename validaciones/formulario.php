@@ -71,11 +71,19 @@
                 array_push($car_tec, $key['nombre'], $key['cargo_t']);
             }
             
-            $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $hora_inicial, $hora_final, $horas_hombre, $turno, $car_tec[0], $car_tec[1], $img_antes, $img_despues);
+            $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $hora_inicial, $hora_final, $horas_hombre, $turno, $car_tec[0], $car_tec[1], $antes_nombre, $despues_nombre);
             
-            //Creamos la carpeta donde almacenaremos las imagenes de acuerdo al id de cada tarea
-            if (!file_exists("C:\wamp\www\tareas_electrica_app\tareas\'$var_session'")) {
-                mkdir("C:\wamp\www\tareas_electrica_app\tareas\'$var_session'", 0777);
+            //Creamos la carpeta(si no existe) donde almacenaremos las imagenes de acuerdo al id de cada tarea
+            if (!file_exists("../tareas/".$var_session, 0777)) {
+                mkdir("../tareas/".$var_session, 0777);
+            }
+            
+            //Seleccionamos el ultimo registro guardado
+            $ult_reg = "SELECT id_tarea from tareas order by id_tarea desc limit 1";
+
+            $r = $obj->mostrar($ult_reg);
+            if (!file_exists("../tareas/".$var_session."/".$r['id_tarea'], 0777)) {
+                mkdir("../tareas/".$var_session."/".$r['id_tarea'], 0777);
             }
             
             if($obj->agregar($datos) == 1) {

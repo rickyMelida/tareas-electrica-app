@@ -103,6 +103,10 @@ select tecnicos, horas_h from tareas where horas_h != "00:00:00"
 insert into tareas(t_tarea, estado, des_tarea,fecha,  turno)
 values("rutinas", "pendiente", "tareas","2019-10-20" , "tarde");
 
+select * FROM tareas
+
+select * from tareas order by id_tarea desc limit 1;
+
 insert into usuarios(usuario, pass, tecns) 
 		values('C_Barreto', 'camilobarreto', '1'),
 			  ('M_Sosa', 'millersosa', '2'),
