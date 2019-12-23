@@ -41,6 +41,7 @@ insert into tecnicos(nombre, cargo_t, turno)
 
 update tecnicos 
 select * from tecnicos
+
 alter table tecnicos add cargo_t varchar(50)
 
 update tecnicos set turno = "Manhana" where id_tecnico=5
@@ -90,11 +91,7 @@ insert into t_tareas(tipo)
                
 update t_tareas set tipo="Business_Center" where id_tar = 7
 
-select * from t_tareas
-
 select * from tareas
-	
-delete * from tareas
 
 alter table tareas add img_despues longblob not null
 
@@ -107,9 +104,20 @@ insert into tareas(t_tarea, estado, des_tarea,fecha,  turno)
 values("rutinas", "pendiente", "tareas","2019-10-20" , "tarde");
 
 insert into usuarios(usuario, pass, tecns) 
-		values('turnoMañana', 'homero', '1'),
-			  ('turnoTarde', '1975', '2'),
-			  ('turnoNoche', 'LuisC', '3');
+		values('C_Barreto', 'camilobarreto', '1'),
+			  ('M_Sosa', 'millersosa', '2'),
+			  ('L_Cabrera', 'luiscabrera', '3'),
+              ('R_Coronel', 'ramoncoronel', '4'),
+              ('S_Mendez', 'santiagomendez', '5'),
+              ('R_Melida', 'ricardomelida', '6'),
+              ('N_Acosta', 'nicolasacosta', '7'),
+              ('V_Velasquez', 'victorvelasquez', '8');
+              
+              select tecns from usuarios
+              
+              select nombre, cargo_t from tecnicos where id_tecnico = 1
+              
+insert into tecnicos(nombre, cargo_t, turno) values('Victor Velasquez', 'Junior', 'Mañana')
 
 SELECT t_tarea, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) as horas FROM tareas where t_tarea = "asistencia"
 
@@ -121,16 +129,13 @@ SELECT t_tarea, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
 
 select tecnicos, horas_h from tareas 
 
-select nombre from tecnicos
+select * from tecnicos
 
 SELECT * FROM tecnicos
 select tecnicos, horas_h from tareas where estado="Finalizado"
 
 DATE_SUB(NOW(), INTERVAL 1 HOUR)
 
-insert into usuarios(usuario, pass, tecns) value("admin", "electrica1234", 6)
-
-select * from usuarios where usuario='turnoMañana' and pass='homero'
 
 
 delete from tecnicos where id_tecnico > 9

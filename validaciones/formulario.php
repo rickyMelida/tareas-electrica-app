@@ -1,14 +1,22 @@
 <?php
+    require_once "autorizacion.php";
     require_once "validar_horario.php";
     require_once "conexionBD.php";
     require_once "metodos_crud.php";
     require_once "../procesos/tecnicos.php";
 
     //Guardamos los datos que vinieron desde el formulario
+
+    //Tipo de trabajo
     $tipo_tr = $_POST['t_trabajo'];
+
+    //Estado del trabajo
     $estado_tr = $_POST['estado'];
 
+    //Turno en que se realizo el trabajo
     $turno = $_POST['turno'];
+
+    //Descripcion del trabajo
     $descripcion = $_POST['descripcion'];
     
     //Guardamos la fecha que extraemos del sistema
@@ -19,69 +27,59 @@
         $turno = "Manhana";
     }
 
-    //Verificamos si es una imagen la que se cargo 
-    $v_antes = getimagesize($_FILES["image"]["name"]);
-    $v_despues = getimagesize($_FILES["image"]["tmp_name"]);
 
+    //Guardamos las imagenes que subimos de los trabajos
+    $antes_tipo = $_FILES['antes']['type'];
+    $antes_nombre = $_FILES['antes']['name'];
 
+    $despues_tipo = $_FILES['despues']['type'];
+    $despues_nombre = $_FILES['despues']['name'];
 
+    $carpeta_antes = $_SERVER['DOCUMENT_ROOT'].'/tareas-electrica-app/tareas/'.$var_session.'/';
+    $carpeta_despues = $_SERVER['DOCUMENT_ROOT'].'/tareas-electrica-app/tareas/'.$var_session.'/';
+    
+    
     $obj = new metodos();
-    
-    //Si se verifica correctamente que se subio una imagen
-    if($v_antes != false){
-
-        $antes = $_FILES["image"]["tmp_name"];
-        $despues = $_FILES["image"]["tmp_name"];
-
-        //Se almacenan la imagen en si misma en variables
-        $img_antes = addslashes(file_get_contents($antes));
-        $img_despues = addslashes(file_get_contents($despues));
-
-        //----------Si se da la opcion de finalizado----///
-        if($estado_tr == "finalizado") {
-            $hora_inicial = $_POST['h_inicial'];
-            $hora_final = $_POST['h_final'];
+    //----------Si se da la opcion de finalizado----///
+    if($estado_tr == "finalizado") {
+        //Guardamos la hora de inicio del trabajo
+        $hora_inicial = $_POST['h_inicial'];
         
-            $horas_hombre = $_POST['res_hh'];
-            
-            $tecnicos = isset($_POST['tecnico']) ? $_POST['tecnico'] : null;
-    
-            if( $estado_tr == "finalizado" && $hora_inicial=="" && $hora_final=="" && empty($descripcion) ) {
-    
-                echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";  
-    
-            }else {
+        //Guardamos la hora de finalizacion del trabajo
+        $hora_final = $_POST['h_final'];
         
-                $arrayTecnicos = null;
-                $tec_sele = tecns($turno);            
-    
-                $contador = 0;
-    
-                $num_array = count($tecnicos);
+        //Guardamos las horas hombre del trabajo(final-inicial)
+        $horas_hombre = $_POST['res_hh'];
+        
+        //Si algunos de los campos que se necesitan completar despues de dar la opcion de finalizado estan vacios
+        //Da un mensaje de alerta
+        if( $estado_tr == "finalizado" && $hora_inicial=="" && $hora_final=="" && empty($descripcion) ) {
+            echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";  
+        }else {
+            $car_tec = array();
+            $selec = "SELECT tecns from usuarios where usuario='$var_session'";
+            $id = $obj->mostrar($selec);
             
-                if($num_array > 0) {
-                    foreach($tecnicos as $key => $value) {
-                        if($contador != $num_array-1) {
-                            $arrayTecnicos .= $value. ' ';
-                        }else {
-                            $arrayTecnicos .= $value;
-                            $contador ++;
-                        }
-                    }
-                }
+            foreach($id as $key) {
+                $id_t = $key['tecns'];
+                $datos_tec = "SELECT nombre, cargo_t from tecnicos where id_tecnico='$id_t'";
                 
-                $selec = "SELECT cargo_t from tecnicos where turno='$turno' and nombre='$arrayTecnicos'";
-    
-                $cargo = $obj->mostrar($selec);
-    
-                foreach($cargo as $key) {
-                    $res_cargo = $key['cargo_t'];         
-                }
-    
-                $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $hora_inicial, $hora_final, $horas_hombre, $turno, $arrayTecnicos, $res_cargo, $img_antes, $img_despues);
-                if($obj->agregar($datos) == 1) {
-                    echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
-                    //echo "Los tecnicos son ".$arrayTecnicos;
+            }
+            
+            $res = $obj->mostrar($datos_tec);
+            foreach($res as $key) {
+                array_push($car_tec, $key['nombre'], $key['cargo_t']);
+            }
+            
+            $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $hora_inicial, $hora_final, $horas_hombre, $turno, $car_tec[0], $car_tec[1], $img_antes, $img_despues);
+            
+            //Creamos la carpeta donde almacenaremos las imagenes de acuerdo al id de cada tarea
+            if (!file_exists("C:\wamp\www\tareas_electrica_app\tareas\'$var_session'")) {
+                mkdir("C:\wamp\www\tareas_electrica_app\tareas\'$var_session'", 0777);
+            }
+            
+            if($obj->agregar($datos) == 1) {
+                //echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
                 }else {
                     echo "<script>alert('Error al agregar a la BD'); //window.open('../src/agregar.php','_self');</script>";        
                 }
@@ -96,13 +94,11 @@
                 $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $turno);
                 if($obj->agregar($datos) == 1) {
                     error_reporting(0);
-                    echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
+                   // echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
                 }
             }
         }
-    }else {
-        echo "<script>alert('Verifique el tipo de imagen seleccionado'); window.open('../src/agregar.php', '_self');</script>";
-    }
+    
    
     
        

@@ -19,7 +19,18 @@
 	  if (document.location.search.match(/type=embed/gi)) {
 	    window.parent.postMessage("resize", "*");
 	  }
-	</script>
+    </script>
+    
+    <style>
+        .principal {
+            background: #8E2DE2;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+        }
+    </style>
 
 </head>
 <body>
@@ -32,7 +43,10 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="#"> <?php echo $var_session;?><span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Inicio</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Horario Tecnico</a>
@@ -55,7 +69,7 @@
     </nav>
 
 
-    <div class="container-fluid border border-dark bg-primary" style="height: 100vh;">
+    <div class="container-fluid border border-dark principal" style="height: 100vh;">
         <div class="row ">
             <div class="col-lg-12">
                 <div id="slider" class=" w-100">

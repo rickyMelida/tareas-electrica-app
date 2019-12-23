@@ -2,30 +2,6 @@
     require_once "../validaciones/autorizacion.php";
     require_once "../procesos/tecnicos.php";
 
-    switch ($var_session) {
-        case 'turnoMañana':
-            $turno = "Mañana";
-            break;
-        case "Admin":
-            $turno = "Tarde";
-            break;
-        case 'turnoTarde' :
-            $turno = "Tarde";
-            break;
-        case 'turnoNoche' :
-            $turno = "Noche";
-            break;
-        case 'admin' :
-            $turno = "admin";
-            break;
-        default:
-            echo "<script>alert('Usuario No valido');
-                window.location = '../src/agregar.php';
-            </script>";   
-            break;
-    }
-
-    $tecnicos = tecns($turno);
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +16,7 @@
 </head>
 <body>
     <div class="container-fluid border border-primary w-100">
-        <form action="../validaciones/formulario.php" method="post" name="formulario" class="border border-dark p-3 bg-primary">
+        <form action="../validaciones/formulario.php" method="post" name="formulario" class="border border-dark p-3 bg-primary" enctype="multipart/form-data">
         <div class="row">
             <!---------------Tipos de trabajo--------------------->
             <div class="col-lg-4 col-md-12">
@@ -129,47 +105,6 @@
                         </div>
                     </div>
 
-                    <!-------------Tecnicos-------------------------------------->            
-                    <div class="col-lg-6 px-3">
-                        <h2>Tecnicos</h2>
-                            <div class="form-check my-4">
-                                <input type="checkbox" name="tecnico[]" id="tecnico_1" class="tecnicos" value="<?php echo $tecnicos[0];?>">
-                                <input type="hidden" name="cargo[]" value="">
-                                <label class="form-check-label n_tecnicos" for="tecnico_1"><?php echo $tecnicos[0]; ?></label>
-                            </div>
-
-                            <div class="form-check my-4">
-                                <input type="checkbox" name="tecnico[]" id="tecnico_2" class="tecnicos" value="<?php echo $tecnicos[1];?>">
-                                <label class="form-check-label n_tecnicos" for="tecnico_2"> <?php echo $tecnicos[1];?> </label>
-                            </div>
-                            
-                            <div class="form-check my-4">
-                                <input type="checkbox" name="tecnico[]" id="tecnico_3" class="tecnicos" value="<?php echo $tecnicos[2];?>">
-                                <label class="form-check-label n_tecnicos" for="tecnico_3"><?php echo $tecnicos[2];?> </label>
-                            </div>
-                            
-                            <div class="form-check my-4">
-                                <input type="checkbox" name="tecnico[]" id="tecnico_3" class="tecnicos" value="<?php echo $tecnicos[3];?>">
-                                <label class="form-check-label n_tecnicos" for="tecnico_3"><?php echo $tecnicos[3];?> </label>
-                            </div>                                     
-                            
-                            <div class="form-check my-4">
-                                <input type="checkbox" name="tecnico[]" id="tecnico_3" class="tecnicos" value="<?php echo $tecnicos[4];?>">
-                                <label class="form-check-label n_tecnicos" for="tecnico_3"><?php echo $tecnicos[4];?> </label>
-                            </div>
-                            
-                            <div class="form-check my-4">
-                                <input type="checkbox" name="tecnico[]" id="tecnico_3" class="tecnicos" value="<?php echo $tecnicos[5];?>">
-                                <label class="form-check-label n_tecnicos" for="tecnico_3"><?php echo $tecnicos[5];?> </label>
-                            </div>
-
-                            <div class="form-check my-4">
-                                <input type="checkbox" name="tecnico[]" id="tecnico_3" class="tecnicos" value="<?php echo $tecnicos[6];?>">
-                                <label class="form-check-label n_tecnicos" for="tecnico_3"><?php echo $tecnicos[6];?> </label>
-                            </div>
-
-                    </div>
-                </div>
 
                 <!-----------------------Horarios---------------------------->
                 <div class="row">

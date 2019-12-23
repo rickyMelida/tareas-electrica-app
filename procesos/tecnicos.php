@@ -3,31 +3,18 @@
     require_once "../validaciones/metodos_crud.php";
 
 
-    function tecns($turno) {
+    function tecns($id) {
         $ver = new metodos();
         
         $obj = new conectar();
         $con = $obj->conexion();
 
-        if($turno == "admin"){
-            mysqli_set_charset($con,'utf8');
-            $tecnicos = "SELECT * from tecnicos";
-        }else {
-            mysqli_set_charset($con,'utf8');
-            $tecnicos = "SELECT * from tecnicos where turno = '$turno'";
-        }
+        mysqli_set_charset($con,'utf8');
+        $tecnico = "SELECT nombre from tecnicos where id_tecnico='$id'";
 
+        $tecnicosBD = $ver->mostrar($tecnico);
 
-        $tecnicosBD = $ver->mostrar($tecnicos);
-
-        $tecs = array();
-        $i=0;
-        foreach ($tecnicosBD as $key) {
-            $tecs[$i] = $key['nombre'];
-            $i++;
-        }
-
-        return $tecs;
+        return $tecnicosBD;
     }
 
     
