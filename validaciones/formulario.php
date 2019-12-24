@@ -79,15 +79,32 @@
             }
             
             //Seleccionamos el ultimo registro guardado
-            $ult_reg = "SELECT id_tarea from tareas order by id_tarea desc limit 1";
+            $ult_reg = "SELECT * from tareas order by id_tarea desc limit 1";
 
             $r = $obj->mostrar($ult_reg);
-            if (!file_exists("../tareas/".$var_session."/".$r['id_tarea'], 0777)) {
-                mkdir("../tareas/".$var_session."/".$r['id_tarea'], 0777);
+            $res = array();
+            
+            foreach($r as $key) {
+                array_push($res, $key['id_tarea']);
+
             }
+            //$res es la variable(array)  donde esta almacenado el ultimo id de la tarea guardada
+            //echo $res[0];
+            
+            //Creamos la carpeta donde se van a almacenar las imagenes de acuerdo al id de la tarea, le sumamos una para que detecta
+            if (!file_exists("../tareas/".$var_session."/tarea_".($res[0] + 1), 0777)) {
+                mkdir("../tareas/".$var_session."/tarea_".($res[0] + 1), 0777);
+            }
+
+            //Movemos las imagenes a la carpeta previamente creada
+            move_uploaded_file($_FILES['antes']['tmp_name'], "../tareas/".$var_session."/tarea_".($res[0] + 1)."/".$antes_nombre);
+            move_uploaded_file($_FILES['despues']['tmp_name'], "../tareas/".$var_session."/tarea_".($res[0] + 1)."/".$despues_nombre);
+
+
+
             
             if($obj->agregar($datos) == 1) {
-                //echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
+                echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
                 }else {
                     echo "<script>alert('Error al agregar a la BD'); //window.open('../src/agregar.php','_self');</script>";        
                 }
@@ -102,7 +119,7 @@
                 $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $turno);
                 if($obj->agregar($datos) == 1) {
                     error_reporting(0);
-                   // echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
+                    echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
                 }
             }
         }
