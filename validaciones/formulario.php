@@ -56,6 +56,7 @@
         if( $estado_tr == "finalizado" && $hora_inicial=="" && $hora_final=="" && empty($descripcion) ) {
             echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";  
         }else {
+
             $car_tec = array();
             $selec = "SELECT tecns from usuarios where usuario='$var_session'";
             $id = $obj->mostrar($selec);
@@ -100,6 +101,19 @@
             move_uploaded_file($_FILES['antes']['tmp_name'], "../tareas/".$var_session."/tarea_".($res[0] + 1)."/".$antes_nombre);
             move_uploaded_file($_FILES['despues']['tmp_name'], "../tareas/".$var_session."/tarea_".($res[0] + 1)."/".$despues_nombre);
 
+            $tipo_antes = substr($antes_tipo, 6, 10);
+            $tipo_despues = substr($despues_tipo, 6, 10);
+
+            if($tipo_antes == "jpeg") {
+                $tipo_antes = "jpg";
+            }
+
+            if($tipo_despues == "jpeg") {
+                $tipo_despues = "jpg";
+            }
+
+            rename("../tareas/".$var_session."/tarea_".($res[0] + 1)."/".$antes_nombre, "../tareas/".$var_session."/tarea_".($res[0] + 1)."/antes.".$tipo_antes);
+            rename("../tareas/".$var_session."/tarea_".($res[0] + 1)."/".$despues_nombre, "../tareas/".$var_session."/tarea_".($res[0] + 1)."/despues.".$tipo_despues);
 
 
             
