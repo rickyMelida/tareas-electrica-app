@@ -103,7 +103,7 @@
         <div class="row footer">
             <div class="col-md-12 col-lg-12">
                 <footer class="fixed-bottom bg-dark" > 
-                    <p class="text-light m-2">Eléctrica PLG - 2019 &copy; </p>
+                    <p class="text-light m-2">Eléctrica PLG - 2020 &copy; </p>
                 </footer>
             </div>
         </div>

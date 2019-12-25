@@ -37,6 +37,7 @@ alter table tecnicos add cargo_t varchar(50)
 
 update tecnicos set turno = "Manhana" where id_tecnico=5
 
+select * from tareas
 SELECT cargo_t from tecnicos where turno = 'Tarde' and nombre= 'Ricardo Melida'
 SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
 
