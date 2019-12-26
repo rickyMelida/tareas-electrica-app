@@ -42,21 +42,18 @@
         <!-- Buscar por  -->
         <div class="row m-auto">
             <div class="col-10 p-3">
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tecnicos</button>
-                        <div class="dropdown-menu">
+                <form method="post" id="formulario">
+                    <div class="input-group">
+                      <select name="" class="form-control" id="">
                         <?php 
-                            foreach($tecs as $key) {
+                        foreach($tecs as $key){
+                            echo "<option>". $key['nombre'] ."</option>";
+                        }
                         ?>
-                        <a class="dropdown-item" href="#"> <?php echo $key['nombre'];?></a>
-                        <?php    
-                        }                        
-                        ?>
-                        </div>
+                      </select>
+                      <input type="button" value="Buscar" id="btn-buscar">
                     </div>
-                </div>
+                </form>
             </div>
         </div>
                         
@@ -66,7 +63,7 @@
             foreach($ver as $key) {
         ?>
         <div class="row m-auto">
-            <div class="col-6 col-lg-3 col-md-4">
+            <div class="col-12 col-lg-3 col-md-4">
                 <div class="card w-100 " >
                     <!-- Carrusel de las imagenes, con data-pause="false" el carrusel no se mueve automaticamente -->
                     <div id="tarea_<?php echo $card;?>" class="carousel slide" data-pause="false">
@@ -74,7 +71,7 @@
                         <ol class="carousel-indicators">
                             <li data-target="#tarea_<?php echo $card;?>" data-slide-to="0" class="active"></li>
                             <li data-target="#tarea_<?php echo $card;?>" data-slide-to="1"></li>
-                            <li data-target="#tarea_<?php echo $card;?>" data-slide-to="2"></li>
+                            
                         </ol>
 
                         <!-- Imagenes del carrusel -->
@@ -147,26 +144,22 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script>
+        $(function() {
+            $("#btn-buscar").click(function() {
+                $.ajax({
+                    type: "POST",
+                    url: "../procesos/tareas_tec.php",
+                    data: $("#formulario").serialize(),
+                    success : function(data) {
+                        
+                    }
+                });
+            });
+        });
+    </script>
+
+
 </body>
 </html>
-
-
-
-<?php
-        /*foreach($ver as $key){
-            echo "<tr>";
-            echo "<td scope='row'>".$key['id_tarea']."</td>";
-                echo "<td>".$key['t_tarea']."</td>";
-                echo "<td>".$key['des_tarea']."</td>";
-                echo "<td>".$key['fecha']."</td>";
-                echo "<td>".$key['hora_i']."</td>";
-                echo "<td>".$key['hora_f']."</td>";
-                echo "<td>".$key['horas_h']."</td>";
-                echo "<td>".$key['estado']."</td>";
-                echo "<td>".$key['turno']."</td>";
-                echo "<td>".$key['tecnicos']."</td>";
-                echo "<td>".$key['cargo']."</td>";
-                echo "</tr>";
-                
-        }*/
-    ?>

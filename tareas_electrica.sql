@@ -85,6 +85,9 @@ insert into t_tareas(tipo)
 -- Modificamos el tipo de tareas BC --
 update t_tareas set tipo="Business_Center" where id_tar = 7
 
+update tareas set img_antes="antes.png", img_despues="despues.png" where id_tarea=1
+
+select * from tareas
 
 truncate table tareas where estado= "Finalizado"
 

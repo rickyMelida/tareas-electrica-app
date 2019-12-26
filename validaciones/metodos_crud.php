@@ -63,6 +63,15 @@
 
             return $res;
         }
+
+        public function modificar_nombre($tipo_antes, $tipo_despues, $res) {
+            $obj = new conectar();
+            $con = $obj ->conexion();
+            $sql = "UPDATE tareas set img_antes='antes.$tipo_antes', img_despues='despues.$tipo_despues' where id_tarea = ($res[0] + 1)";
+
+
+            return $result = mysqli_query($con, $sql);
+        }
     }
 
 ?>
