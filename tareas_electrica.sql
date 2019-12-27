@@ -12,6 +12,7 @@ create table usuarios (
     foreign key (tecns) references tecnicos(id_tecnico)
 );
 
+<<<<<<< HEAD
 -- Se crea la tabla tecnicos -----------
 create table tecnicos (
 	id_tecnico int auto_increment,
@@ -20,6 +21,28 @@ create table tecnicos (
 	turno varchar(50) not null,
     primary key(id_tecnico)
 )
+=======
+-- Se agregan tecnicos ----
+insert into tecnicos(nombre, cargo_t, turno) 
+			  values("Camilo Barreto","Senior", "Mañana"),
+					("Miler Sosa", "Senior", "Tarde"),
+                    ("Luis Cabrera", "Senior", "Noche"),
+                    ("Ramon Coronel", "Junior", "Mañana"),
+                    ("Santiago Mendez", "Junior", "Mañana"),
+                    ("Ricardo Melida", "Junior", "Tarde" ),
+                    ("Nicolas Acosta", "Junior", "Tarde"),
+                    ("Lazaro Romero", "Junior", "Noche" );
+
+-- Modificacion de tipo de dato de cargo
+alter table tecnicos add cargo_t varchar(50)
+
+update tecnicos set turno = "Manhana" where id_tecnico=5
+
+select * from tareas
+SELECT cargo_t from tecnicos where turno = 'Tarde' and nombre= 'Ricardo Melida'
+SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
+
+>>>>>>> e32b784f2bd228129347d162c03fea868e975331
 
 -- Creamos la tabla de las tareas
 create table tareas (
@@ -90,6 +113,10 @@ update t_tareas set tipo="Business_Center" where id_tar = 7
 
 update tareas set img_antes="antes.png", img_despues="despues.png" where id_tarea=1
 
+<<<<<<< HEAD
+=======
+select * from tareas
+>>>>>>> e32b784f2bd228129347d162c03fea868e975331
 
 truncate table tareas where estado= "Finalizado"
 

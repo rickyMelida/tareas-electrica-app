@@ -42,7 +42,22 @@
         <!-- Buscar por  -->
         <div class="row m-auto">
             <div class="col-10 p-3">
+<<<<<<< HEAD
 			    <input type="text" name="busqueda" id="busqueda" placeholder="Buscar...">
+=======
+                <form method="post" id="formulario">
+                    <div class="input-group">
+                      <select name="" class="form-control" id="">
+                        <?php 
+                        foreach($tecs as $key){
+                            echo "<option>". $key['nombre'] ."</option>";
+                        }
+                        ?>
+                      </select>
+                      <input type="button" value="Buscar" id="btn-buscar">
+                    </div>
+                </form>
+>>>>>>> e32b784f2bd228129347d162c03fea868e975331
             </div>
         </div>
                         
@@ -51,7 +66,10 @@
             $card = 1;
             foreach($ver as $key) {
         ?>
+<<<<<<< HEAD
         
+=======
+>>>>>>> e32b784f2bd228129347d162c03fea868e975331
         <div class="row m-auto">
             <div class="col-12 col-lg-3 col-md-4">
                 <div class="card w-100 " >
