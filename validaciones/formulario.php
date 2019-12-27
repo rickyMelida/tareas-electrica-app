@@ -119,6 +119,7 @@
             
             if($obj->agregar($datos) == 1) {
                 echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
+                    $modifica = $obj->modificar_nombre($tipo_antes, $tipo_despues, $res);
                 }else {
                     echo "<script>alert('Error al agregar a la BD'); //window.open('../src/agregar.php','_self');</script>";        
                 }
