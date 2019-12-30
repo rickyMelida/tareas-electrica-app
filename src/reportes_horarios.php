@@ -68,36 +68,39 @@
     <link rel="shortcut icon" href="../iconos/electrico.ico" type="image/x-icon">
 </head>
 <body class="bg-light">
-    <div class="container border border-primary">
-        <header class="text-center bg-primary p-4">   
-            <a href="reportes.php" class="float-left m-3 btn btn-outline-dark">Volver</a>
-            <a href="reportes.php" class="float-right m-3 btn btn-outline-dark">Historial</a>
-            <h1 class=" d-inline">Reportes de Horas</h1>
-        </header>
+    <div class="container">
+    <div class="row">
+            <div class="col-md-12 col-lg-12 bg-dark">
+               <a href="principal.php" class="float-left m-2 btn btn-outline-light text-light">Volver</a>
+              <h1 class=" d-inline text-light m-4">Reportes</h1>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-md-10 m-auto p-3">
+            <div class="col-md-10 p-3">
 
             <!-----------------Reporte General----------------------------->
-            <table class="table table-bordered table-primary">
-                <thead>
+
+            <table class="table">
+                <thead class="thead-dark">
                     <tr>
-                        <th scope="col" class="text-center">Mes</th>
-                        <th scope="col" class="text-center">Año</th>
-                        <th scope="col" class="text-center">Horas Hombre Actual</th>
-                        <th scope="col" class="text-center">Horas Hombre Objetivo</th>
-                        <th scope="col" class="text-center">Diferencia</th>
+                        <th scope="col">Mes</th>
+                        <th scope="col">Año</th>
+                        <th scope="col">H. H. Actual</th>
+                        <th scope="col">H. H. Objetivo</th>
+                        <th scope="col">Diferencia</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="text-center"><b> <?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%B"));?> </b></td>
-                        <td class="text-center"><b> <?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%Y"));?> </b></td>
-                        <td class="text-center"><b> <?php foreach($datos_hh as $key) { echo $key['horas'];} ?> </b></td>
-                        <td class="text-center"><b> <?php echo $objetivo." Hs"; ?> </b></td>
-                        <td class="text-center"><b> <?php echo $interval->format('%H:%i:%S '); ?> </b></td>
+                        <th scope="row"><?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%B"));?></th>
+                        <td><?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%Y"));?></td>
+                        <td><?php foreach($datos_hh as $key) { echo $key['horas'];} ?> </td>
+                        <td><?php echo $objetivo." Hs"; ?></td>
+                        <td><?php echo $interval->format('%H:%i:%S '); ?></td>
                     </tr>
                 </tbody>
             </table>
+               
             </div>
         </div>
 
@@ -334,6 +337,14 @@
             <div class="col-md-12 m-auto p-3 ">
                 <div id="barra" class="m-auto w-100"></div>
             </div>  
+        </div>
+        <!-- Pie de agina de la aplicacion --->
+        <div class="row footer my-5">
+            <div class="col-md-12 col-lg-12">
+                <footer class="fixed-bottom bg-dark" > 
+                    <p class="text-light m-2">Eléctrica PLG - 2020 &copy; </p>
+                </footer>
+            </div>
         </div>
     </div>
 
