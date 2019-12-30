@@ -4,7 +4,6 @@
 
     $obj = new metodos();
 
-<<<<<<< HEAD
     $sql = "SELECT * from tareas ORDER BY id_tarea";
 
     if(isset($_POST['nombre'])) {
@@ -27,6 +26,4 @@
     $res = $obj->mostrar($sql);
 
 
-=======
->>>>>>> e32b784f2bd228129347d162c03fea868e975331
 ?>

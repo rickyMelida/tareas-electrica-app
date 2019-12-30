@@ -42,7 +42,7 @@ select * from tareas
 SELECT cargo_t from tecnicos where turno = 'Tarde' and nombre= 'Ricardo Melida'
 SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
 
->>>>>>> e32b784f2bd228129347d162c03fea868e975331
+
 
 -- Creamos la tabla de las tareas
 create table tareas (
@@ -111,12 +111,11 @@ insert into t_tareas(tipo)
 -- Modificamos el tipo de tareas BC --
 update t_tareas set tipo="Business_Center" where id_tar = 7
 
-update tareas set img_antes="antes.png", img_despues="despues.png" where id_tarea=1
+update tareas set img_antes="antes.jpg", img_despues="despues.jpg" where id_tarea=2
 
-<<<<<<< HEAD
-=======
 select * from tareas
->>>>>>> e32b784f2bd228129347d162c03fea868e975331
+
+update tareas set img_antes=antes.jpg where id= 1
 
 truncate table tareas where estado= "Finalizado"
 
