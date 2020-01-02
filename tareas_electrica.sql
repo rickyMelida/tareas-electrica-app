@@ -1,7 +1,7 @@
 create database tareas_electrica	
 use tareas_electrica
 
--- Se crea la tabla usuarios
+-- Se crea la tabla usuarios-----------------------------------------
 create table usuarios (
 	id_usuario int(5) auto_increment,
     usuario varchar(50) not null,
@@ -12,8 +12,7 @@ create table usuarios (
     foreign key (tecns) references tecnicos(id_tecnico)
 );
 
-<<<<<<< HEAD
--- Se crea la tabla tecnicos -----------
+-- Se crea la tabla tecnicos ------------------------------
 create table tecnicos (
 	id_tecnico int auto_increment,
     nombre varchar(100) not null,
@@ -21,7 +20,8 @@ create table tecnicos (
 	turno varchar(50) not null,
     primary key(id_tecnico)
 )
-=======
+
+
 -- Se agregan tecnicos ----
 insert into tecnicos(nombre, cargo_t, turno) 
 			  values("Camilo Barreto","Senior", "Mañana"),
@@ -38,10 +38,8 @@ alter table tecnicos add cargo_t varchar(50)
 
 update tecnicos set turno = "Manhana" where id_tecnico=5
 
-select * from tareas
 SELECT cargo_t from tecnicos where turno = 'Tarde' and nombre= 'Ricardo Melida'
 SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
-
 
 
 -- Creamos la tabla de las tareas
@@ -73,9 +71,10 @@ create table tec_tareas(
 	
 )
 
+alter table tareas add id_tar1 int
 alter  table tareas add foreign key(id_tar1) references t_tareas(id_tar)
 
--- Tabla de los tipos de tareas
+-- Tabla de los tipos de tareas -----------------------------------
 create table t_tareas(
 	id_tar int auto_increment, 
     tipo varchar(200) not null,
@@ -91,7 +90,11 @@ alter table tecnicos add cargo_t varchar(50)
 
 update tecnicos set turno = "Manhana" where id_tecnico=5
 
+update tareas set img_antes="antes.jpg", img_despues="despues.jpg" where id_tarea=8
+
 select * from tareas
+select * from t_tareas where tipo = "Mantenimiento"
+
 SELECT cargo_t from tecnicos where turno = 'Tarde' and nombre= 'Ricardo Melida'
 SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
 
@@ -107,18 +110,22 @@ insert into t_tareas(tipo)
                ("Businesss Center"),
                ("Gimnasio"),
                ("TIC");
-               
+
+delete from tareas where id_tarea = 7
 -- Modificamos el tipo de tareas BC --
 update t_tareas set tipo="Business_Center" where id_tar = 7
 
 update tareas set img_antes="antes.jpg", img_despues="despues.jpg" where id_tarea=2
 
+<<<<<<< HEAD
 select * from tareas
 
 update tareas set img_antes=antes.jpg where id= 1
 
 truncate table tareas where estado= "Finalizado"
 
+=======
+>>>>>>> 8b6878dd16e461817915c1d6d7fb32eeaa488a0f
 insert into tareas(t_tarea, estado, des_tarea, fecha, hora_i, hora_f, horas_h, turno, tecnicos, cargo)
 values("rutinas", "Finalizado", "Rutinas de trafos y generadores","1992-02-12", "13:00", "15:30", "2:00",  "tarde", "Ricardo Mélida", "Junior");
 
@@ -127,8 +134,9 @@ select tecnicos, horas_h from tareas where horas_h != "00:00:00"
 insert into tareas(t_tarea, estado, des_tarea,fecha,  turno)
 values("rutinas", "pendiente", "tareas","2019-10-20" , "tarde");
 
-
 select * from tareas order by id_tarea desc limit 1;
+
+drop table t_tareas
 
 insert into usuarios(usuario, pass, tecns) 
 		values('C_Barreto', 'camilobarreto', '1'),
@@ -165,3 +173,9 @@ SELECT t_tarea, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
 
 
 DATE_SUB(NOW(), INTERVAL 1 HOUR)
+
+select * from usuarios;
+select * from tecnicos;
+select * from tareas
+
+select usuario from usuarios inner join tecnicos on usuarios.tecns=tecnicos.id_tecnico where nombre = "Ricardo Melida"

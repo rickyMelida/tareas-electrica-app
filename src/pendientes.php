@@ -9,12 +9,10 @@
 
     mysqli_set_charset($con,'utf8');
     $sql = "SELECT * from tareas";
-    $sql_tec = "SELECT nombre from tecnicos";
 
     $muestra = new metodos();
     $ver = $muestra->mostrar($sql);
 
-    $tecs = $muestra->mostrar($sql_tec);
 
 ?>
 
@@ -50,6 +48,10 @@
         <?php
             $card = 1;
             foreach($ver as $key) {
+                $sql_tec = "SELECT usuario from usuarios inner join tecnicos on usuarios.tecns=tecnicos.id_tecnico where nombre = '$key[tecnicos]'";
+                $tecs = $muestra->mostrar($sql_tec);
+                foreach($tecs as $tec){
+
         ?>
         
         <div class="row m-auto">
@@ -69,29 +71,29 @@
                             
                             <!-- Imagen del antes del trabajo -->
                             <div class="carousel-item active">
-                                <img src="../tareas/<?php echo $var_session;?>/tarea_<?php echo $key['id_tarea']."/".$key['img_antes'] ;?>" class="d-block w-100 img-thumbnail" alt="Imagen antes">
+                                <img src="../tareas/<?php echo $tec['usuario'];?>/tarea_<?php echo $key['id_tarea']."/".$key['img_antes'] ;?>" class="d-block w-100 img-thumbnail" alt="Imagen antes">
                             </div>
 
                             <!-- Imagen del despues del trabajo -->
                             <div class="carousel-item">
-                                <img src="../tareas/<?php echo $var_session;?>/tarea_<?php echo $key['id_tarea']."/".$key['img_despues'] ;?>" class="d-block w-100 img-thumbnail" alt="Imagen despues">
+                                <img src="../tareas/<?php echo $tec['usuario'];?>/tarea_<?php echo $key['id_tarea']."/".$key['img_despues'] ;?>" class="d-block w-100 img-thumbnail" alt="Imagen despues">
                             </div>
                         </div>
 
-                        <!-- -->
+                        <!-- Boton antes -->
                         <a class="carousel-control-prev" href="#tarea_<?php echo $card;?>" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
 
-                        <!-- -->
+                        <!-- Boton despues -->
                         <a class="carousel-control-next" href="#tarea_<?php echo $card;?>" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Tarea <?php echo $card;?></h5>
+                        <h5 class="card-title">Tarea #<?php echo $card;?></h5>
                         <p class="card-text">
                             <div>
                                 <strong>Descripcion:</strong> <span><?php echo $key['des_tarea'];?></span>
@@ -117,10 +119,11 @@
 
         <?php
             $card = $card + 1;
+                }
             }        
         ?>
         <!-- Pie de agina de la aplicacion --->
-       <div class="row footer">
+       <div class="row footer my-5">
             <div class="col-md-12 col-lg-12">
                 <footer class="fixed-bottom bg-dark" > 
                     <p class="text-light m-2">Eléctrica PLG - 2020 &copy; </p>
@@ -134,22 +137,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-    <script>
-        $(function() {
-            $("#btn-buscar").click(function() {
-                $.ajax({
-                    type: "POST",
-                    url: "../procesos/tareas_tec.php",
-                    data: $("#formulario").serialize(),
-                    success : function(data) {
-                        
-                    }
-                });
-            });
-        });
-    </script>
-
 
 </body>
 </html>
