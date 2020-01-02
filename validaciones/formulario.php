@@ -85,6 +85,7 @@
             //Creamos la carpeta(si no existe) donde almacenaremos las imagenes de acuerdo al id de cada tarea
             if (!file_exists("../tareas/".$var_session, 0777)) {
                 mkdir("../tareas/".$var_session, 0777);
+                
             }
             
             //Seleccionamos el ultimo registro guardado
