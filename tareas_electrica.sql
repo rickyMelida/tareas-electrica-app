@@ -71,6 +71,8 @@ create table tec_tareas(
 	
 )
 
+drop table tec_tareas
+truncate table tareas
 alter table tareas add id_tar1 int
 alter  table tareas add foreign key(id_tar1) references t_tareas(id_tar)
 
@@ -111,21 +113,9 @@ insert into t_tareas(tipo)
                ("Gimnasio"),
                ("TIC");
 
-delete from tareas where id_tarea = 7
--- Modificamos el tipo de tareas BC --
-update t_tareas set tipo="Business_Center" where id_tar = 7
-
 update tareas set img_antes="antes.jpg", img_despues="despues.jpg" where id_tarea=2
 
-<<<<<<< HEAD
-select * from tareas
 
-update tareas set img_antes=antes.jpg where id= 1
-
-truncate table tareas where estado= "Finalizado"
-
-=======
->>>>>>> 8b6878dd16e461817915c1d6d7fb32eeaa488a0f
 insert into tareas(t_tarea, estado, des_tarea, fecha, hora_i, hora_f, horas_h, turno, tecnicos, cargo)
 values("rutinas", "Finalizado", "Rutinas de trafos y generadores","1992-02-12", "13:00", "15:30", "2:00",  "tarde", "Ricardo Mélida", "Junior");
 
@@ -135,6 +125,8 @@ insert into tareas(t_tarea, estado, des_tarea,fecha,  turno)
 values("rutinas", "pendiente", "tareas","2019-10-20" , "tarde");
 
 select * from tareas order by id_tarea desc limit 1;
+
+truncate table tareas
 
 drop table t_tareas
 
