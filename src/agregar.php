@@ -13,10 +13,18 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Agregar</title>
     <link rel="shortcut icon" href="../iconos/electrico.ico" type="image/x-icon">
+    <style>
+        .principal {
+            /*background: #3a7bd5;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+    </style>
 </head>
 <body>
     <div class="container-fluid border border-primary w-100">
-        <form action="../validaciones/formulario.php" method="post" name="formulario" class="border border-dark p-3 bg-primary" enctype="multipart/form-data">
+        <form action="../validaciones/formulario.php" method="post" name="formulario" class="border border-dark p-3 principal" enctype="multipart/form-data">
         <div class="row">
             <!---------------Tipos de trabajo--------------------->
             <div class="col-lg-4 col-md-12">

@@ -4,7 +4,7 @@
     error_reporting(0);
     $var_session = $_SESSION['usuario'];
 
-    if($var_session != "admin") {
+    if($var_session != "Admin") {
         echo "<script>alert('Debe iniciar sesion como administrador para ver esta pagina!');
                 window.location.href = '../index.php';
         </script>";

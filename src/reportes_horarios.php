@@ -66,50 +66,60 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <title>Horarios</title>
     <link rel="shortcut icon" href="../iconos/electrico.ico" type="image/x-icon">
+    <style>
+        .principal {
+            /*background: #3a7bd5;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+    </style>
 </head>
-<body class="bg-light">
+<body class="principal">
     <div class="container">
     <div class="row">
-            <div class="col-md-12 col-lg-12 bg-dark">
-               <a href="principal.php" class="float-left m-2 btn btn-outline-light text-light">Volver</a>
-              <h1 class=" d-inline text-light m-4">Reportes</h1>
-            </div>
+        <div class="col-md-12 col-lg-12 bg-dark">
+        <a href="principal.php" class="float-left m-2 btn btn-outline-light text-light">Volver</a>
+        <h1 class=" d-inline text-light m-4">Reportes</h1>
         </div>
+    </div>
         <div class="row">
             <div class="col-md-10 p-3">
 
             <!-----------------Reporte General----------------------------->
 
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Mes</th>
-                        <th scope="col">Año</th>
-                        <th scope="col">H. H. Actual</th>
-                        <th scope="col">H. H. Objetivo</th>
-                        <th scope="col">Diferencia</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row"><?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%B"));?></th>
-                        <td><?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%Y"));?></td>
-                        <td><?php foreach($datos_hh as $key) { echo $key['horas'];} ?> </td>
-                        <td><?php echo $objetivo." Hs"; ?></td>
-                        <td><?php echo $interval->format('%H:%i:%S '); ?></td>
-                    </tr>
-                </tbody>
-            </table>
-               
+            <div class="table-responsive-xl">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Mes</th>
+                            <th scope="col">Año</th>
+                            <th scope="col">H. H. Actual</th>
+                            <th scope="col">H. H. Objetivo</th>
+                            <th scope="col">Diferencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row"><?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%B"));?></th>
+                            <td><?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%Y"));?></td>
+                            <td><?php foreach($datos_hh as $key) { echo $key['horas'];} ?> </td>
+                            <td><?php echo $objetivo." Hs"; ?></td>
+                            <td><?php echo $interval->format('%H:%i:%S '); ?></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            </div>
+            
         </div>
 
         <div class="row">
             <div class="col-md-6 col-lg-6 col-sm-12 m-auto p-3">
 
             <!-----------------Reporte por tecnico----------------------------->
-                <table class="table table-bordered table-primary">
-                    <thead>
+                <table class="table">
+                    <thead class="thead-dark">
                         <tr>
                             <th scope="col" class="text-center">Técnicos</th>
                             <th scope="col" class="text-center">Total de horas por mes</th>
@@ -139,8 +149,8 @@
             <div class="col-md-6 col-lg-6 col-sm-12 m-auto p-3">
                 
             <!-----------------Reporte por sector----------------------------->
-                <table class="table table-bordered table-primary">
-                    <thead>
+                <table class="table">
+                    <thead class="thead-dark">
                         <tr>
                             <th scope="col" class="text-center">Tipo de Trabajo</th>
                             <th scope="col" class="text-center">Total de horas por mes</th>

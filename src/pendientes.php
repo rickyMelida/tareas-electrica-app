@@ -25,9 +25,17 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="shortcut icon" href="../iconos/electrico.ico" type="image/x-icon">
     <title>Pendientes</title>
+    <style>
+        .principal {
+            /*background: #3a7bd5;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+    </style>
 </head>
-<body class="bg-light">
-    <div class="container">
+<body class="principal">
+    <div class="container-fluid">
         
         <!-- Cabecera de la aplicacion -->
         <div class="row">
@@ -54,7 +62,7 @@
 
         ?>
         
-        <div class="row m-auto">
+        <div class="row m-5">
             <div class="col-12 col-lg-3 col-md-4">
                 <div class="card w-100 " >
                     <!-- Carrusel de las imagenes, con data-pause="false" el carrusel no se mueve automaticamente -->

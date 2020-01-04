@@ -23,12 +23,9 @@
     
     <style>
         .principal {
-            background: #8E2DE2;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #4A00E0, #8E2DE2);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #4A00E0, #8E2DE2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-
-
+            /*background: #3a7bd5;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
         }
     </style>
 
@@ -49,7 +46,7 @@
                     <a class="nav-link" href="#">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Horario Tecnico</a>
+                    <a class="nav-link" data-toggle="modal" data-target="#acceso" href="#">Horario Tecnico</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="modal" data-target="#acceso" href="#">Reportes Horario</a>
@@ -58,41 +55,32 @@
                     <a class="nav-link" href="../validaciones/cerrar_sesion.php">Cerrar Sesión</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Desarrollador">Acerca De</a>
+                    <a class="nav-link" href="https://rickymelida.github.io/" title="Desarrollador">Acerca De</a>
                 </li>
             </ul>
-            <!--form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form-->
         </div>
     </nav>
 
 
-    <div class="container-fluid border border-dark principal" style="height: 100vh;">
-        <div class="row ">
+    <div class="container-fluid border border-dark principal" style="height: 90vh;">
+        <div class="row">
             <div class="col-lg-12">
                 <div id="slider" class=" w-100">
-					<div class="carousel slide" id="carousel">
+					<div class="carousel slide" id="carousel" data-pause="false">
 						<div class="carousel-inner">
 							<div class="carousel-item active">                
                                 <img src="../iconos/anotar.png" onclick="agregar()" class="iconos-principal" >
 								<div class="carousel-caption">
-								    <h5 class="text-dark ">Agregar Tareas</h5>
+								    <h5 class="text-secondary">Agregar Tareas</h5>
 								</div>
 							</div>
 							<div class="carousel-item">
-								<div class="carousel-caption ">
-								    <h5 class="text-dark">Ver Pendientes</h5>
+								<div class="carousel-caption">
+								    <h5 class="text-secondary ">Ver Pendientes</h5>
 								</div>
-                                <img src="../iconos/tareas.png" onclick="pendientes()" class="iconos-principal" width="250" height="300">
+                                <img src="../iconos/tareas.png" onclick="pendientes()" class="iconos-principal">
 							</div>
-							
 						</div>
-						<!--ol class="carousel-indicators">
-							<li data-slide-to="0"></li>
-							<li data-slide-to="1"></li>
-						</ol-->
 						<a class="carousel-control-prev" href="#" role="button"><span class="carousel-control-prev-icon"></span></a>
 						<a class="carousel-control-next" href="#" role="button"><span class="carousel-control-next-icon"></span></a>
 					</div>

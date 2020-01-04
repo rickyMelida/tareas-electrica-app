@@ -48,8 +48,16 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <title>Reportes</title>
     <link rel="shortcut icon" href="../iconos/electrico.ico" type="image/x-icon">
+    <style>
+        .principal {
+            /*background: #3a7bd5;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+    </style>
 </head>
-<body>
+<body class="principal">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-lg-12 bg-dark">
