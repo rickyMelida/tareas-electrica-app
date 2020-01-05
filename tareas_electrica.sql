@@ -170,4 +170,9 @@ select * from usuarios;
 select * from tecnicos;
 select * from tareas
 
+insert into tecnicos(nombre, turno, cargo_t) 
+values('Admin', 'Admin', 'Admin')
+
+insert into usuarios(usuario, pass, tecns) values('Admin', 'electrica1234', '9')
+
 select usuario from usuarios inner join tecnicos on usuarios.tecns=tecnicos.id_tecnico where nombre = "Ricardo Melida"
