@@ -6,7 +6,6 @@
     //Objetivo de las horas hombre
     $objetivo = "23:00:00";
 
-    $var_session = $_COOKIE['admin'];
     $obj = new metodos();
 
     //Seleccion de todos los tecnicos
@@ -15,12 +14,12 @@
 
     $c = new conectar();
     $con = $c->conexion();
-    $nom = "SELECT nombre from tecnicos";
+    $nom = "SELECT tecnicos from tareas";
     $result = mysqli_query($con, $nom);
     $r = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     foreach($r as $key) {
-        array_push($nombres_tec, $key['nombre']);
+        array_push($nombres_tec, $key['tecnicos']);
     }
 
     //Seleccion de tareas
@@ -129,10 +128,8 @@
                         <?php 
                             ////Extraemos a los datos de los tecnicos
                             for($i=0;$i<count($nombres_tec);$i++){
-
                                 $sql_tec = "SELECT tecnicos, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas where tecnicos='$nombres_tec[$i]'";
                                 $datos_tec = $obj->mostrar($sql_tec);
-
                                 foreach($datos_tec as $key){ ?>
                                     <tr>
                                         <td class="text-center"><b> <?php echo $key['tecnicos'];?> </b></td>
