@@ -85,6 +85,7 @@
             //Creamos la carpeta(si no existe) donde almacenaremos las imagenes de acuerdo al id de cada tarea
             if (!file_exists("../tareas/".$var_session, 0777)) {
                 mkdir("../tareas/".$var_session, 0777);
+                chmod("../tareas/".$var_session, 0777);
                 
             }
             
@@ -104,6 +105,7 @@
             //Creamos la carpeta donde se van a almacenar las imagenes de acuerdo al id de la tarea, le sumamos una para que detecta
             if (!file_exists("../tareas/".$var_session."/tarea_".($res[0] + 1), 0777)) {
                 mkdir("../tareas/".$var_session."/tarea_".($res[0] + 1), 0777);
+                chmod("../tareas/".$var_session."/tarea_".($res[0] + 1), 0777);
             }
 
             //Movemos las imagenes a la carpeta previamente creada
