@@ -16,7 +16,12 @@
     $con = $obj->conexion();
 
     mysqli_set_charset($con,'utf8');
-    $sql = "SELECT * from usuarios where usuario= 'Admin' and pass='$pass'";
+    if($_COOKIE['usuario'] == 'Admin') {
+        $sql = "SELECT * from usuarios where usuario= 'Admin'";
+    
+    }else {
+        $sql = "SELECT * from usuarios where usuario= 'Admin' and pass='$pass'";
+    }
 
     $resultado = mysqli_query($con, $sql);
 
