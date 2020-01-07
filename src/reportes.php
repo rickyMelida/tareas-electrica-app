@@ -65,7 +65,7 @@
 <body class="principal">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 col-lg-12 bg-dark p-3">
+            <div class="col-md-12 col-lg-12 bg-dark p-2">
                <a href="principal.php" class="float-left m-2 btn btn-outline-light text-light">Salir</a>
               <h1 class=" d-inline text-light m-5">Reportes</h1>
             </div>

@@ -100,6 +100,7 @@
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
+                    
                     <div class="card-body">
                         <h5 class="card-title">Tarea #<?php echo $card;?></h5>
                         <p class="card-text">

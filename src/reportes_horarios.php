@@ -6,6 +6,9 @@
     //Objetivo de las horas hombre
     $objetivo = "23:00:00";
 
+    //Fecha actual
+    $fecha = gmmktime(date(H), date(i), date(s), date(m), date(d), date(Y));
+
     $obj = new metodos();
 
     //Seleccion de todos los tecnicos
@@ -14,15 +17,15 @@
 
     $c = new conectar();
     $con = $c->conexion();
-    $nom = "SELECT tecnicos from tareas";
+    $nom = "SELECT nombre from tecnicos";
     $result = mysqli_query($con, $nom);
     $r = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     foreach($r as $key) {
-        array_push($nombres_tec, $key['tecnicos']);
+        array_push($nombres_tec, $key['nombre']);
     }
 
-    //Seleccion de tareas
+    //----------------Seleccion de tareas
     $nombres_tipo_tarea = array();
 
     $tipo = "SELECT tipo from t_tareas";
@@ -75,15 +78,17 @@
     </style>
 </head>
 <body class="principal">
-    <div class="container">
-    <div class="row">
-        <div class="col-md-12 col-lg-12 bg-dark">
-        <a href="principal.php" class="float-left m-2 btn btn-outline-light text-light">Volver</a>
-        <h1 class=" d-inline text-light m-4">Reportes</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 bg-dark p-3">
+                <a href="principal.php" class="float-left m-2 btn btn-outline-light text-light">Volver</a>
+                <h1 class=" d-inline text-light m-4">Reportes</h1>
+            </div>
         </div>
     </div>
+    <div class="container">
         <div class="row">
-            <div class="col-md-10 p-3">
+            <div class="col-md-12 p-3">
 
             <!-----------------Reporte General----------------------------->
 
@@ -100,7 +105,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row"><?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%B"));?></th>
+                            <th scope="row"><?php setlocale(LC_TIME, 'es_PY.UTF-8'); echo ucfirst(strftime("%B", $fecha)); ?></th>
                             <td><?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%Y"));?></td>
                             <td><?php foreach($datos_hh as $key) { echo $key['horas'];} ?> </td>
                             <td><?php echo $objetivo." Hs"; ?></td>
@@ -256,16 +261,29 @@
             function barra() {
             var data = google.visualization.arrayToDataTable([
                 ['Técnico', 'Horas Hombre', {role: 'style'}],
+
                 
                 
 
                 <?php
-                       /* $horas_t = array();
+                        $horas_t = array();
                         $h_t = array();
                         $h_t_t = array();
 
                         $m_t = array();
                         $m_t_t = array();
+                        $colores  = array 
+                        (
+                            '#b87333', 
+                            '#c82a54',
+                            '#ef280f',
+                            '#e5e4e2',
+                            '#02ac66',
+                            '#222222',
+                            '#109dfa'
+
+
+                        );
 
                         //Declaramos variable tipo array donde vamos a guardar los datos con los minutos en decimales
                         $todos_t = array();
@@ -280,7 +298,7 @@
                             foreach($datos_t_t as $key) {
                                 
                                 $horas_t = $obj->tipo_horas($key['horas']);
-                                array_push($nombres_t, $key['t_tarea']);
+                                array_push($nombres_t, $key['tecnicos']);
 
                             }
 
@@ -305,26 +323,17 @@
                         }
                         
                         for($k=0;$k < count($todos_t);$k++) {
-                            echo "['$nombres_t[$k]', ".(float)$todos_t[$k]."],";
-                            
-                        }*/
+                            echo "['$nombres_t[$k]', ".(float)$todos_t[$k].",'".$colores[$k]."'], ";
+                        }
                     ?>
-
-
-
-
                 
-                
-                
-                
-                
-                ['Camilo Barreto', 8.94, '#b87333'],
+               /* ['Camilo Barreto', 8.21, '#b87333'],
                 ['Miler Sosa', 10.49, '#c82a54'],
                 ['Luis Cabrera ', 19.30, '#ef280f'],
                 ['Ramon Coronel', 21.45, '#e5e4e2'],
                 ['Santiago Mendez', 11.4, '#02ac66'],
                 ['Ricardo Melida', 18.45, '#222222'],
-                ['Nicolas Acosta', 7.45, '#109dfa'],
+                ['Nicolas Acosta', 7.45, '#109dfa'],*/
             ]);
 
             var options = {
@@ -340,6 +349,7 @@
            
 
         </script>
+
         <!-- Grafica en torta por sector -->
         <div class="row">
             <div class="col-md-12 m-auto p-3 ">

@@ -115,6 +115,8 @@ insert into t_tareas(tipo)
 
 update tareas set img_antes="antes.jpg", img_despues="despues.jpg" where id_tarea=2
 
+update usuarios set id_usuario = 1 where usuario='C_Barreto'
+
 
 insert into tareas(t_tarea, estado, des_tarea, fecha, hora_i, hora_f, horas_h, turno, tecnicos, cargo)
 values("rutinas", "Finalizado", "Rutinas de trafos y generadores","1992-02-12", "13:00", "15:30", "2:00",  "tarde", "Ricardo Mélida", "Junior");
@@ -158,7 +160,7 @@ insert into tecnicos(nombre, turno, cargo_t) values('Victor Velazquez', 'Mañana
 
 SELECT t_tarea, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) as horas FROM tareas where t_tarea = "Mantenimiento"
 
-SELECT tecnicos, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas where tecnicos = "Luis Cabrera"
+SELECT tecnicos, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas where tecnicos = "Ramon Coronel"
 
 select t_tarea from tareas
 
