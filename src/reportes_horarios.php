@@ -174,6 +174,7 @@
                 </table>
             </div>
         </div>
+
         <!------Grficos para el KPI----------->
         <script type="text/javascript">
             google.charts.load('current', {'packages':['corechart']});
@@ -244,6 +245,8 @@
                 var chart = new google.visualization.PieChart(document.getElementById('grafica'));
                 chart.draw(data, options);
             }
+
+
             /*-------------------------- GRAFICA EN BARRA POR TECNICO ----------------------------------------*/
 
 
@@ -310,6 +313,11 @@
 
 
 
+                
+                
+                
+                
+                
                 ['Camilo Barreto', 8.94, '#b87333'],
                 ['Miler Sosa', 10.49, '#c82a54'],
                 ['Luis Cabrera ', 19.30, '#ef280f'],

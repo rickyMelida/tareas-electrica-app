@@ -63,21 +63,21 @@
     </style>
 </head>
 <body class="principal">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 col-lg-12 bg-dark">
+            <div class="col-md-12 col-lg-12 bg-dark p-3">
                <a href="principal.php" class="float-left m-2 btn btn-outline-light text-light">Salir</a>
               <h1 class=" d-inline text-light m-5">Reportes</h1>
             </div>
         </div>
     <div class="row mt-5 menu">
         <div class="col-lg-6 col-md-12">
+            <a href="reportes_horarios.php"> <img src="../iconos/reporte.png" width="200" height="200" alt="Reportes de Horarios" title="Reportes de Horarios"> </a>
             <h1>Reporte Horarios</h1>
-            <a href="reportes_horarios.php"> <img src="../iconos/reporte.png" width="200" height="200"> </a>
         </div>
         <div class="col-lg-6 col-md-12">
-            <h1>Horario tecnicos</h1>
-            <a href="horario_tecnicos.php"> <img src="../iconos/electricista.png" width="200" height="200"> </a>
+            <a href="horario_tecnicos.php"> <img src="../iconos/electricista.png" width="200" height="200" alt="Horarios de Técnicos" title="Horarios de Técnicos"> </a>
+            <h1 class=" ">Horario tecnicos</h1>
 
         </div>
         </div>
