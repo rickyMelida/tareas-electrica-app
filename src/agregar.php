@@ -24,8 +24,18 @@
 </head>
 <body>
     <div class="container-fluid border border-primary w-100">
-        <form action="../validaciones/formulario.php" method="post" name="formulario" class="border border-dark p-3 principal" enctype="multipart/form-data">
+        <!-- Cabecera de la aplicacion -->
+        <div class="row mb-2">
+            <div class="col-md-12 col-lg-12 bg-dark p-2">
+               <a href="principal.php" class="float-left m-2 btn btn-outline-light text-light">Volver</a>
+              <h2 class=" d-inline text-light my-5">Agregar Tareas</h2>
+            </div>
+        </div>
+
+        <!-- Formulario de ingreso de tareas y pendientes ----- -->
+        <form action="../validaciones/formulario.php" method="post" name="formulario" class="border border-dark p-3 principal mx-lg-5" enctype="multipart/form-data">
         <div class="row">
+            
             <!---------------Tipos de trabajo--------------------->
             <div class="col-lg-4 col-md-12">
                 <h2>Tipos de Trabajo</h2>
@@ -114,63 +124,66 @@
                     </div>
 
 
-                <!-----------------------Horarios---------------------------->
-                <div class="row">
-                    <div class="col-lg-12 px-3">
-                        <h2>Horas trabajadas</h2>
-                        <div class="form-group">
-                            <label for="h_inicial">Hora Inicial</label>
-                            <input type="text" name="h_inicial" id="h_inicial" class=" w-50 ml-4 horas" placeholder="hh:mm" >
-                        </div>
-                        <div class="form-group">
-                            <label for="h_inicial">Hora Final</label>
-                            <input type="text" name="h_final" id="h_final" class="ml-4 horas w-50" placeholder="hh:mm" >
-                        </div>
-                        <div class="form-group disabled">
-                            <label for="h_hombre">Horas hombre</label>
-                            <input type="text" name="h_hombre" class="hora w-50" id="h_hombre" disabled>
-                            <input type="hidden" name="res_hh" id="res_hh">
+                    <!-----------------------Horarios---------------------------->
+                    <div class="row">
+                        <div class="col-lg-12 px-3">
+                            <h2>Horas trabajadas</h2>
+                            <div class="form-group">
+                                <label for="h_inicial">Hora Inicial</label>
+                                <input type="text" name="h_inicial" id="h_inicial" class=" w-50 ml-4 horas" placeholder="hh:mm" >
+                            </div>
+                            <div class="form-group">
+                                <label for="h_inicial">Hora Final</label>
+                                <input type="text" name="h_final" id="h_final" class="ml-4 horas w-50" placeholder="hh:mm" >
+                            </div>
+                            <div class="form-group disabled">
+                                <label for="h_hombre">Horas hombre</label>
+                                <input type="text" name="h_hombre" class="hora w-50" id="h_hombre" disabled>
+                                <input type="hidden" name="res_hh" id="res_hh">
+                            </div>
                         </div>
                     </div>
+
+                </div>
+            </div>
+        </div>    
+
+
+        <!---- Subir imagenes de antes y despues de los trabajos  -->
+        <div class="row m-auto">
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <h4>Antes</h4>
+                    <div class="col-sm-8">
+                        <input type="file" class="form-control" id="image" name="antes" multiple>
+                    </div>
+                    <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <h4>Despúes</h4>
+                    <div class="col-sm-8">
+                        <input type="file" class="form-control" id="image" name="despues" multiple>
+                    </div>
+                    <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
                 </div>
             </div>
         </div>
-        <!-------------Descripcion del trabajo-------------------------------------->
-        <div class="row">
-                <div class="col-lg-12 py-2 px-5">
-                    <div class="form-group">
-                        <h3>Descripcion del trabajo</h3>
-                        <textarea class="form-control" name="descripcion" id="txt_tarea" rows="3"></textarea>
-                    </div>
-                </div>
-            </div>    
 
-            <!---- Subir imagenes de antes y despues de los trabajos  -->
-            <div class="row">
-               <div class="col-lg-12">
-                    <div class="form-group">
-                        <h4>Antes</h4>
-                        <div class="col-sm-8">
-                            <input type="file" class="form-control" id="image" name="antes" multiple>
-                        </div>
-                        <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
-                    </div>
-               </div>
-               <div class="col-lg-12">
-                    <div class="form-group">
-                        <h4>Despúes</h4>
-                        <div class="col-sm-8">
-                            <input type="file" class="form-control" id="image" name="despues" multiple>
-                        </div>
-                        <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
-                    </div>
-               </div>
+            <!-------------Descripcion del trabajo-------------------------------------->
+        <div class="row">
+            <div class="col-lg-12 py-2 px-5">
+                <div class="form-group">
+                    <h3>Descripcion del trabajo</h3>
+                    <textarea class="form-control" name="descripcion" id="txt_tarea" rows="5"></textarea>
+                </div>
             </div>
-            
+        </div>    
 
             <!---  Botones de guardar y volver --->
             <div class='row'>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-12 col-md-12">
                     <button type="submit" iid="enviar" class="btn btn-dark m-4 px-3">Guardar</button>
                     <a href="./principal.php" class="btn btn-dark float-right mt-4 mr-4">Volver..</a>
                 </div>
