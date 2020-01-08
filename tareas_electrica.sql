@@ -160,7 +160,7 @@ insert into tecnicos(nombre, turno, cargo_t) values('Victor Velazquez', 'Mañana
 
 SELECT t_tarea, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) as horas FROM tareas where t_tarea = "Mantenimiento"
 
-SELECT tecnicos, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas where tecnicos = "Ramon Coronel"
+SELECT tecnicos, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas where tecnicos = "Ricardo Melida"
 
 select t_tarea from tareas
 
