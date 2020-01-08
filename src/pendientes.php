@@ -62,7 +62,7 @@
 
         ?>
         
-        <div class="row m-5">
+        <div class="row m-2">
             <div class="col-12 col-lg-3 col-md-4">
                 <div class="card w-100 " >
                     <!-- Carrusel de las imagenes, con data-pause="false" el carrusel no se mueve automaticamente -->
