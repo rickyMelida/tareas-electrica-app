@@ -166,6 +166,8 @@ select t_tarea from tareas
 
 SELECT t_tarea, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
 
+SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
+
 
 DATE_SUB(NOW(), INTERVAL 1 HOUR)
 
