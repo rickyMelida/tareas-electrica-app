@@ -4,7 +4,7 @@
     require_once "../validaciones/metodos_crud.php";
 
     //Objetivo de las horas hombre
-    $objetivo = "23:00:00";
+    $objetivo = "200:00:00";
 
     //Fecha actual
     $fecha = gmmktime(date(H), date(i), date(s), date(m), date(d), date(Y));
@@ -45,14 +45,14 @@
      ///Extraemos el total de las horas hombre
     $hh = "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas";
     $datos_hh = $obj->mostrar($hh);
-
+    $actual = 0;
     /*$hora1 = array();
     foreach($datos_hh as $key) { array_push($hora1, $key['horas']) ;}*/
 
-    $horaInicio = new DateTime($hora1);
+    /*$horaInicio = new DateTime($hora1);
     $horaTermino = new DateTime($objetivo);
     
-    $interval = $horaInicio->diff($horaTermino);
+    $interval = $horaInicio->diff($horaTermino);*/
     //echo $interval->format('%H horas %i minutos %s seconds');
 
 ?>
@@ -107,9 +107,9 @@
                         <tr>
                             <th scope="row"><?php setlocale(LC_TIME, 'es_PY.UTF-8'); echo ucfirst(strftime("%B", $fecha)); ?></th>
                             <td><?php setlocale(LC_TIME, "spanish"); echo ucfirst(strftime("%Y"));?></td>
-                            <td><?php foreach($datos_hh as $key) { echo $key['horas'];} ?> </td>
+                            <td><?php foreach($datos_hh as $key) { $actual = $key['horas']; echo $actual;} ?> </td>
                             <td><?php echo $objetivo." Hs"; ?></td>
-                            <td><?php echo $interval->format('%H:%i:%S '); ?></td>
+                            <td><?php echo $obj->diff($actual, $objetivo); ?></td>
                         </tr>
                     </tbody>
                 </table>
