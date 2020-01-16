@@ -8,7 +8,10 @@
     
 
     mysqli_set_charset($con,'utf8');
-    $sql = "SELECT * from tareas";
+    //$sql = "SELECT * from tareas";
+    $sql = "SELECT * from tareas order by id_tarea desc";
+    $cant = mysqli_query($con, $sql);
+    $cant_tar = mysqli_num_rows($cant);
 
     $muestra = new metodos();
     $ver = $muestra->mostrar($sql);
@@ -54,7 +57,7 @@
                         
         <!-- Lista de tareas de acuerdo al tecnico -->
         <?php
-            $card = 1;
+            $card = $cant_tar;
             foreach($ver as $key) {
                 $sql_tec = "SELECT usuario from usuarios inner join tecnicos on usuarios.tecns=tecnicos.id_tecnico where nombre = '$key[tecnicos]'";
                 $tecs = $muestra->mostrar($sql_tec);
@@ -127,7 +130,7 @@
         </div>
 
         <?php
-            $card = $card + 1;
+            $card = $card - 1;
                 }
             }        
         ?>
