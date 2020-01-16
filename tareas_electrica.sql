@@ -100,6 +100,8 @@ select * from t_tareas where tipo = "Mantenimiento"
 SELECT cargo_t from tecnicos where turno = 'Tarde' and nombre= 'Ricardo Melida'
 SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
 
+select * from tareas
+
 
 -- Insertamos los tipos de tareas --
 insert into t_tareas(tipo) 
@@ -157,7 +159,7 @@ insert into tecnicos(nombre, cargo_t, turno)
               
 insert into tecnicos(nombre, turno, cargo_t) values('Victor Velazquez', 'Mañana', 'Junior')
               
-
+id
 SELECT t_tarea, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) as horas FROM tareas where t_tarea = "Mantenimiento"
 
 SELECT tecnicos, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas where tecnicos = "Ramon Coronel"
@@ -165,6 +167,7 @@ SELECT tecnicos, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas whe
 select t_tarea from tareas
 
 SELECT t_tarea, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
+SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
 
 
 DATE_SUB(NOW(), INTERVAL 1 HOUR)
