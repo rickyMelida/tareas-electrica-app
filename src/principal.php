@@ -72,12 +72,12 @@
 							<div class="carousel-item active">                
                                 <img src="../iconos/anotar.png" onclick="agregar()" class="iconos-principal" >
 								<div class="carousel-caption">
-								    <h5 class="text-secondary">Agregar Tareas</h5>
+								    <h5 class="text-warning">Agregar Tareas</h5>
 								</div>
 							</div>
 							<div class="carousel-item">
 								<div class="carousel-caption">
-								    <h5 class="text-secondary ">Ver Pendientes</h5>
+								    <h5 class="text-warning ">Ver Pendientes</h5>
 								</div>
                                 <img src="../iconos/tareas.png" onclick="pendientes()" class="iconos-principal">
 							</div>
@@ -92,7 +92,7 @@
         <div class="row footer">
             <div class="col-md-12 col-lg-12">
                 <footer class="fixed-bottom bg-dark" > 
-                    <p class="text-light m-2">Eléctrica PLG - 2020 &copy; </p>
+                    <p class="text-light m-2">Eléctrica - 2020 &copy; </p>
                 </footer>
             </div>
         </div>
