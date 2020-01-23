@@ -48,7 +48,7 @@ create table tareas (
     t_tarea varchar(200) not null,
     estado varchar(50) not null,
     des_tarea text not null,
-    fecha date not null,
+    fecha_gen date not null,
     
     hora_i time,
     hora_f time,
@@ -60,6 +60,15 @@ create table tareas (
     
     primary key(id_tarea)
 );
+
+-- Modificacion de datos de la tabla tareas---------------
+alter table tareas change fecha fecha_gen date not null
+
+
+ALTER TABLE tareas ADD fecha_cierre date AFTER fecha_gen;
+
+select * from tareas
+
 
 -- Creamos la tabla para la conexion entre tecnicos y tareas
 create table tec_tareas(
@@ -120,8 +129,18 @@ update tareas set img_antes="antes.jpg", img_despues="despues.jpg" where id_tare
 update usuarios set id_usuario = 1 where usuario='C_Barreto'
 
 
-insert into tareas(t_tarea, estado, des_tarea, fecha, hora_i, hora_f, horas_h, turno, tecnicos, cargo)
-values("rutinas", "Finalizado", "Rutinas de trafos y generadores","1992-02-12", "13:00", "15:30", "2:00",  "tarde", "Ricardo Mélida", "Junior");
+insert into tareas(t_tarea, estado, des_tarea, fecha_gen, fecha_cierre, hora_i, hora_f, horas_h, turno, tecnicos, cargo, img_antes, img_despues, id_tar1)
+values("rutinas", "Finalizado", "Rutinas de trafos y generadores",STR_TO_DATE('10.31.2003' ,GET_FORMAT(date,'USA')),"1992-02-12",  "13:00", "15:30", "2:00",  "tarde", "Ricardo Mélida", "Junior", "antes.jpg", "despues", 1);
+
+-- ejemplo de formato fecha
+INSERT INTO demo (fecha)
+VALUES (STR_TO_DATE(REPLACE('15/01/2005','/','.') ,GET_FORMAT(date,'EUR')))
+
+
+-- Agregamos un pendiente de ejemplo
+insert into tareas(t_tarea, estado, des_tarea, fecha_gen, turno, tecnicos, cargo, id_tar1)
+values("rutinas", "Pendiente", "Verificacion de luces CC", "2019-10-20", "tarde", "Ricardo Mélida", "Junior", 1);
+
 
 select tecnicos, horas_h from tareas where horas_h != "00:00:00"
 
@@ -159,7 +178,7 @@ insert into tecnicos(nombre, cargo_t, turno)
               
 insert into tecnicos(nombre, turno, cargo_t) values('Victor Velazquez', 'Mañana', 'Junior')
               
-id
+
 SELECT t_tarea, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) as horas FROM tareas where t_tarea = "Mantenimiento"
 
 SELECT tecnicos, SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas where tecnicos = "Ricardo Melida"
@@ -178,9 +197,39 @@ select * from usuarios;
 select * from tecnicos;
 select * from tareas
 
+-- Formato de horas mas legible ----
+select fecha_gen from tareas
+SET lc_time_names = 'es_ES';
+SELECT DATE_FORMAT(fecha_gen,'%d - %b - %Y') AS fecha_ge FROM tareas;
+
+
 insert into tecnicos(nombre, turno, cargo_t) 
 values('Admin', 'Admin', 'Admin')
 
 insert into usuarios(usuario, pass, tecns) values('Admin', 'electrica1234', '9')
 
 select usuario from usuarios inner join tecnicos on usuarios.tecns=tecnicos.id_tecnico where nombre = "Ricardo Melida"
+
+update tareas set fecha_cierre = "2019-10-20"  where id_tarea <= 10
+
+
+
+
+
+
+
+
+-- Ejemplo de BD de fechas ----
+create database formato_fecha
+use formato_fecha
+
+CREATE TABLE `demo` (
+	`id` int(11) NOT NULL auto_increment,
+	`fecha` date not null,
+	PRIMARY KEY  (`id`)
+) ENGINE=InnoDB
+
+INSERT INTO demo (fecha)
+VALUES (STR_TO_DATE(REPLACE('15/01/2005','/','.') ,GET_FORMAT(date,'EUR')))
+
+select * from demo

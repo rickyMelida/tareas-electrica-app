@@ -130,11 +130,11 @@
                             <h2>Horas trabajadas</h2>
                             <div class="form-group">
                                 <label for="h_inicial">Hora Inicial</label>
-                                <input type="text" name="h_inicial" id="h_inicial" class=" w-50 ml-4 horas" placeholder="hh:mm" >
+                                <input type="text" name="h_inicial" id="h_inicial" class=" w-50 ml-4 horas" >
                             </div>
                             <div class="form-group">
                                 <label for="h_inicial">Hora Final</label>
-                                <input type="text" name="h_final" id="h_final" class="ml-4 horas w-50" placeholder="hh:mm" >
+                                <input type="text" name="h_final" id="h_final" class="ml-4 w-50 horas" >
                             </div>
                             <div class="form-group disabled">
                                 <label for="h_hombre">Horas hombre</label>
@@ -155,7 +155,7 @@
                 <div class="form-group">
                     <h4>Antes</h4>
                     <div class="col-sm-8">
-                        <input type="file" class="form-control" id="image" name="antes" multiple>
+                        <input type="file" class="form-control images" id="image" name="antes" multiple>
                     </div>
                     <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
                 </div>
@@ -164,7 +164,7 @@
                 <div class="form-group">
                     <h4>Despúes</h4>
                     <div class="col-sm-8">
-                        <input type="file" class="form-control" id="image" name="despues" multiple>
+                        <input type="file" class="form-control images" id="image" name="despues" multiple>
                     </div>
                     <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
                 </div>

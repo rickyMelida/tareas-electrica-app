@@ -1,8 +1,9 @@
-//var seg = document.getElementById('h_final');
-        var pen = document.getElementById('pendiente').checked;
+var horas = document.getElementsByClassName('horas');
+var seg = document.getElementsByClassName('horas')[1];
+var images = document.getElementsByClassName('images');
 
+window.addEventListener('load', deshabilitar_t);
 
-        var seg = document.getElementById('h_final');
 
         //----------Condicionando horas----------------//
         seg.addEventListener('focusout', function() {
@@ -74,31 +75,24 @@ function pendientes() {
 }
 
 
-var tecnicos = document.getElementsByClassName('tecnicos');
-var horas = document.getElementsByClassName('horas');
-var n_tecnicos = document.getElementsByClassName('n_tecnicos');
-var horas = document.getElementsByClassName('horas');
-
-window.addEventListener('load', deshabilitar_t);
 
 
-//-------------Funcion para habilitar los tecnicos
+
+
+//-------------Funcion para habilitar los horarios
 function habilitar_t() {    
-    for (var i = 0; i < tecnicos.length; i++) {
-        tecnicos[i].disabled = false;
+    for (var i = 0; i < horas.length; i++) {
         horas[i].disabled = false;
+        images[i].disabled = false;
         horas[i].placeholder = 'hh:mm';
-        n_tecnicos[i].getElementsByClassName.color = 'black';
     }
 }
 
 //-------------Funcion para deshabilitar los tecnicos
 function deshabilitar_t() {
-    for (var i = 0; i < tecnicos.length; i++) {
-        tecnicos[i].disabled = true;
-        horas[i].disabled = true;
-        tecnicos[i].checked = 0;        
-        n_tecnicos[i].getElementsByClassName.color = 'gray';
+    for (var i = 0; i < horas.length; i++) {
+        horas[i].disabled = true;     
+        images[i].disabled = true; 
     }
 
 }
@@ -123,3 +117,4 @@ function validar(hora) {
         return false;
     }
 }
+

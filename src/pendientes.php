@@ -8,7 +8,6 @@
     
 
     mysqli_set_charset($con,'utf8');
-    //$sql = "SELECT * from tareas";
     $sql = "SELECT * from tareas order by id_tarea desc";
     $cant = mysqli_query($con, $sql);
     $cant_tar = mysqli_num_rows($cant);
@@ -30,7 +29,6 @@
     <title>Pendientes</title>
     <style>
         .principal {
-            /*background: #3a7bd5;  /* fallback for old browsers */
             background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
             background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
@@ -111,7 +109,10 @@
                                 <strong>Descripcion:</strong> <span><?php echo $key['des_tarea'];?></span>
                             </div> 
                             <div>
-                                <strong>Fecha:</strong> <span><?php echo $key['fecha']; ?></span>
+                                <strong>Fecha Gen.:</strong> <span><?php echo date('d-m-Y', strtotime($key['fecha_gen'])); ?></span>
+                            </div>
+                            <div>
+                                <strong>Fecha Cier.:</strong> <span><?php echo date('d-m-Y', strtotime($key['fecha_cierre'])); ?></span>
                             </div>
                             <div>
                                 <strong>Inicio:</strong> <span><?php echo $key['hora_i']; ?></span>

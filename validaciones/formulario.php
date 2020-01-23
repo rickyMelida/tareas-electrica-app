@@ -20,7 +20,8 @@
     $descripcion = $_POST['descripcion'];
     
     //Guardamos la fecha que extraemos del sistema
-    $fecha = date("Y")."-".date("m")."-".date("d");
+    $fecha_gen = date("Y")."-".date("m")."-".date("d");
+    
 
     //Cambiar el nombre del turno por manhana
     if($turno == "Mañana") {
@@ -41,7 +42,14 @@
     
     $obj = new metodos();
 
-    //----------Si se da la opcion de finalizado----///
+    $id_tipo_tar = "SELECT id_tar from t_tareas where tipo = '$tipo_tr'";
+    $res_t_t = $obj->mostrar($id_tipo_tar);
+
+    foreach($res_t_t as $key) {
+        $id_tp_tr = $key['id_tar'];
+    }
+
+    //-------------------------- Si se da la opcion de finalizado -----------------------///
     if($estado_tr == "finalizado") {
         //Guardamos la hora de inicio del trabajo
         $hora_inicial = $_POST['h_inicial'];
@@ -51,6 +59,9 @@
         
         //Guardamos las horas hombre del trabajo(final-inicial)
         $horas_hombre = $_POST['res_hh'];
+
+        //Si el estado del trabajo es finalizado la fecha de cierre es el mismo que la fecha de generacion 
+        $fecha_cierre = $fecha_gen;
         
         //Si algunos de los campos que se necesitan completar despues de dar la opcion de finalizado estan vacios
         //Da un mensaje de alerta
@@ -58,12 +69,6 @@
             echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";  
         }else {
 
-            $id_tipo_tar = "SELECT id_tar from t_tareas where tipo = '$tipo_tr'";
-            $res_t_t = $obj->mostrar($id_tipo_tar);
-
-            foreach($res_t_t as $key) {
-                $id_tp_tr = $key['id_tar'];
-            }
 
             $car_tec = array();
             $selec = "SELECT tecns from usuarios where usuario='$var_session'";
@@ -80,7 +85,7 @@
                 array_push($car_tec, $key['nombre'], $key['cargo_t']);
             }
             
-            $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $hora_inicial, $hora_final, $horas_hombre, $turno, $car_tec[0], $car_tec[1], $antes_nombre, $despues_nombre, $id_tp_tr);
+            $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha_gen, $hora_inicial, $hora_final, $horas_hombre, $turno, $car_tec[0], $car_tec[1], $antes_nombre, $despues_nombre, $id_tp_tr);
             
             //Creamos la carpeta(si no existe) donde almacenaremos las imagenes de acuerdo al id de cada tarea
             if (!file_exists("../tareas/".$var_session, 0777)) {
@@ -142,18 +147,15 @@
                 echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";
                 error_reporting(0);
             }else {
-                $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha, $turno);
+                $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha_gen, $turno);
                 if($obj->agregar($datos) == 1) {
                     error_reporting(0);
                     echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
+                }else {
+                    echo "<script>alert('Error al agregar a la BD'); window.open('../src/agregar.php','_self');</script>";        
+                    
                 }
             }
         }
-    
-   
-    
-       
-
-    
 
 ?>
