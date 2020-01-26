@@ -24,9 +24,9 @@
     
 
     //Cambiar el nombre del turno por manhana
-    if($turno == "Mañana") {
+    /*if($turno == "Mañana") {
         $turno = "Manhana";
-    }
+    }*/
 
 
     //Guardamos las imagenes que subimos de los trabajos
@@ -49,8 +49,23 @@
         $id_tp_tr = $key['id_tar'];
     }
 
+    $car_tec = array();
+    $selec = "SELECT tecns from usuarios where usuario='$var_session'";
+    $id = $obj->mostrar($selec);
+    
+    foreach($id as $key) {
+        $id_t = $key['tecns'];
+        $datos_tec = "SELECT nombre, cargo_t from tecnicos where id_tecnico='$id_t'";
+        
+    }
+    
+    $res = $obj->mostrar($datos_tec);
+    foreach($res as $key) {
+        array_push($car_tec, $key['nombre'], $key['cargo_t']);
+    }
+
     //-------------------------- Si se da la opcion de finalizado -----------------------///
-    if($estado_tr == "finalizado") {
+    if($estado_tr == "Finalizado") {
         //Guardamos la hora de inicio del trabajo
         $hora_inicial = $_POST['h_inicial'];
         
@@ -63,99 +78,100 @@
         //Si el estado del trabajo es finalizado la fecha de cierre es el mismo que la fecha de generacion 
         $fecha_cierre = $fecha_gen;
         
+
         //Si algunos de los campos que se necesitan completar despues de dar la opcion de finalizado estan vacios
         //Da un mensaje de alerta
-        if( $estado_tr == "finalizado" && $hora_inicial=="" && $hora_final=="" && empty($descripcion) ) {
+        if($hora_inicial=="" && $hora_final=="" && empty($descripcion) ) {
             echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";  
         }else {
+            
+            //Directorio donde van a ser almacenadas todas las imagenes de las tareas
+            $task_server = '/var/www/html/task_server/';
 
-
-            $car_tec = array();
-            $selec = "SELECT tecns from usuarios where usuario='$var_session'";
-            $id = $obj->mostrar($selec);
-            
-            foreach($id as $key) {
-                $id_t = $key['tecns'];
-                $datos_tec = "SELECT nombre, cargo_t from tecnicos where id_tecnico='$id_t'";
-                
-            }
-            
-            $res = $obj->mostrar($datos_tec);
-            foreach($res as $key) {
-                array_push($car_tec, $key['nombre'], $key['cargo_t']);
-            }
-            
-            $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha_gen, $hora_inicial, $hora_final, $horas_hombre, $turno, $car_tec[0], $car_tec[1], $antes_nombre, $despues_nombre, $id_tp_tr);
-            
             //Creamos la carpeta(si no existe) donde almacenaremos las imagenes de acuerdo al id de cada tarea
-            if (!file_exists("../tareas/".$var_session, 0777)) {
-                mkdir("../tareas/".$var_session, 0777);
-                chmod("../tareas/".$var_session, 0777);
+            if (!file_exists($task_server.$var_session, 0777)) {
+                //creamos la carpeta
+                mkdir($task_server.$var_session, 0777, true);
+                //le damos los permisos correspondientes
+                chmod($task_server.$var_session, 0777);
                 
             }
             
             //Seleccionamos el ultimo registro guardado
             $ult_reg = "SELECT * from tareas order by id_tarea desc limit 1";
-
+            
             $r = $obj->mostrar($ult_reg);
-            $res = array();
-            
+
+            //$res_id es la variable(array)  donde esta almacenado el ultimo id de la tarea guardada
+            $res_id = array();
             foreach($r as $key) {
-                array_push($res, $key['id_tarea']);
-
+                array_push($res_id, $key['id_tarea']); 
             }
-            //$res es la variable(array)  donde esta almacenado el ultimo id de la tarea guardada
-            //echo $res[0];
             
+
             //Creamos la carpeta donde se van a almacenar las imagenes de acuerdo al id de la tarea, le sumamos una para que detecta
-            if (!file_exists("../tareas/".$var_session."/tarea_".($res[0] + 1), 0777)) {
-                mkdir("../tareas/".$var_session."/tarea_".($res[0] + 1), 0777);
-                chmod("../tareas/".$var_session."/tarea_".($res[0] + 1), 0777);
+            $file_moved_a = $_FILES['antes']['tmp_name'];
+            $file_moved_d = $_FILES['despues']['tmp_name'];
+            $directorio = $task_server.$var_session."/tarea_".($res_id[0] + 1);
+
+            if (!file_exists($directorio, 0777, true)) {
+                //Creamos la carpeta
+                mkdir($directorio, 0777);
+                //Le damos los permisos
+                chmod($directorio, 0777);
             }
-
+            
             //Movemos las imagenes a la carpeta previamente creada
-            move_uploaded_file($_FILES['antes']['tmp_name'], "../tareas/".$var_session."/tarea_".($res[0] + 1)."/".$antes_nombre);
-            move_uploaded_file($_FILES['despues']['tmp_name'], "../tareas/".$var_session."/tarea_".($res[0] + 1)."/".$despues_nombre);
 
+            move_uploaded_file($file_moved_a, $directorio.'/'.$antes_nombre);
+            move_uploaded_file($file_moved_d, $directorio.'/'.$despues_nombre);
+            
+            
             $tipo_antes = substr($antes_tipo, 6, 10);
             $tipo_despues = substr($despues_tipo, 6, 10);
-
+            
             if($tipo_antes == "jpeg") {
                 $tipo_antes = "jpg";
             }
-
+            
             if($tipo_despues == "jpeg") {
                 $tipo_despues = "jpg";
             }
 
-            rename("../tareas/".$var_session."/tarea_".($res[0] + 1)."/".$antes_nombre, "../tareas/".$var_session."/tarea_".($res[0] + 1)."/antes.".$tipo_antes);
-            rename("../tareas/".$var_session."/tarea_".($res[0] + 1)."/".$despues_nombre, "../tareas/".$var_session."/tarea_".($res[0] + 1)."/despues.".$tipo_despues);
-
-
+            rename($directorio.'/'.$antes_nombre, $directorio."/antes.".$tipo_antes);
+            rename($directorio.'/'.$despues_nombre, $directorio."/despues.".$tipo_despues);
             
+            
+            $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha_gen, $fecha_cierre, $hora_inicial, $hora_final, $horas_hombre, $turno, $car_tec[0], $car_tec[1], $antes_nombre, $despues_nombre, $id_tp_tr);
+            
+
             if($obj->agregar($datos) == 1) {
                 echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
-                    $modifica = $obj->modificar_nombre($tipo_antes, $tipo_despues, $res);
-                }else {
+                $modifica = $obj->modificar_nombre($tipo_antes, $tipo_despues, $res_id);
+            }else {
                     echo "<script>alert('Error al agregar a la BD'); //window.open('../src/agregar.php','_self');</script>";        
-                }
-            }
+            } 
+
+
+        }
     
         //----------Si se da la opcion de pendiente----///
+    }else {
+        if($estado_tr == "Pendiente" && empty($descripcion)) {
+            echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";
+            error_reporting(0);
         }else {
-            if($estado_tr == "pendiente" && empty($descripcion)) {
-                echo "<script>alert('Faltan completar el pendiente'); window.open('../src/agregar.php','_self');</script>";
+            //tareas(t_tarea, estado, des_tarea, fecha_gen, turno, tecnicos, cargo, id_tar1)
+            $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha_gen, $turno, $car_tec[0], $car_tec[1], $id_tp_tr);
+            if($obj->agregar_pendiente($datos)) {
                 error_reporting(0);
+                echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
             }else {
-                $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha_gen, $turno);
-                if($obj->agregar($datos) == 1) {
-                    error_reporting(0);
-                    echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
-                }else {
-                    echo "<script>alert('Error al agregar a la BD'); window.open('../src/agregar.php','_self');</script>";        
-                    
-                }
+                echo "<script>alert('Error al agregar a la BD'); window.open('../src/agregar.php','_self');</script>";        
+                
             }
         }
+    }
+    
 
 ?>

@@ -95,16 +95,16 @@
                         <div class="row">
                             <div class="col-lg-12 p-3">
                                 <div class="form-check">
-                                    <input type="radio" name="estado" id="pendiente" value="pendiente" onclick="deshabilitar_t()" checked>
-                                    <label class="form-check-label" for="pendiente">Pendiente</label>
+                                    <input type="radio" name="estado" id="pendiente" value="Pendiente" onclick="deshabilitar_t()" checked>
+                                    <label class="form-check-label" for="Pendiente">Pendiente</label>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-12 p-3">
                                     <div class="form-check">
-                                        <input type="radio" name="estado" id="finalizado" onclick="habilitar_t()" value="finalizado">
-                                        <label class="form-check-label" for="finalizado">Finalizado</label>
+                                        <input type="radio" name="estado" id="Finalizado" onclick="habilitar_t()" value="Finalizado">
+                                        <label class="form-check-label" for="Finalizado">Finalizado</label>
                                     </div>                                     
                             </div>
                         </div>

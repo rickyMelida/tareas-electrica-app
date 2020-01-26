@@ -15,6 +15,14 @@
     $muestra = new metodos();
     $ver = $muestra->mostrar($sql);
 
+    $estado_tarea = array();
+
+    foreach($key as $ver) {
+        array_push($estado_tarea, $key['estado']);
+    }
+
+    $task_server = '../../task_server/';
+
 
 ?>
 
@@ -59,10 +67,9 @@
             foreach($ver as $key) {
                 $sql_tec = "SELECT usuario from usuarios inner join tecnicos on usuarios.tecns=tecnicos.id_tecnico where nombre = '$key[tecnicos]'";
                 $tecs = $muestra->mostrar($sql_tec);
-                foreach($tecs as $tec){
+                foreach($tecs as $tec){  
 
         ?>
-        
         <div class="row m-2">
             <div class="col-12 col-lg-3 col-md-4">
                 <div class="card w-100 " >
@@ -80,12 +87,12 @@
                             
                             <!-- Imagen del antes del trabajo -->
                             <div class="carousel-item active">
-                                <img src="../tareas/<?php echo $tec['usuario'];?>/tarea_<?php echo $key['id_tarea']."/".$key['img_antes'] ;?>" class="d-block w-100 img-thumbnail" alt="Imagen antes">
+                                <img src="<?php echo $task_server; if($key['estado'] == 'Pendiente') { echo 'pendientes/pendiente.jpg'; }else { echo $tec['usuario'].'/tarea_'; ?><?php echo $key['id_tarea']."/".$key['img_antes'] ; }?>" class="d-block w-100 img-thumbnail" alt="Imagen antes">
                             </div>
 
                             <!-- Imagen del despues del trabajo -->
                             <div class="carousel-item">
-                                <img src="../tareas/<?php echo $tec['usuario'];?>/tarea_<?php echo $key['id_tarea']."/".$key['img_despues'] ;?>" class="d-block w-100 img-thumbnail" alt="Imagen despues">
+                                <img src="<?php echo $task_server; if($key['estado'] == 'Pendiente') { echo 'pendientes/pendiente.jpg'; }else { echo $tec['usuario'].'/tarea_'; ?><?php echo $key['id_tarea']."/".$key['img_despues'] ; }?>" class="d-block w-100 img-thumbnail" alt="Imagen despues">
                             </div>
                         </div>
 
@@ -112,19 +119,19 @@
                                 <strong>Fecha Gen.:</strong> <span><?php echo date('d-m-Y', strtotime($key['fecha_gen'])); ?></span>
                             </div>
                             <div>
-                                <strong>Fecha Cier.:</strong> <span><?php echo date('d-m-Y', strtotime($key['fecha_cierre'])); ?></span>
+                                <strong>Fecha Cier.:</strong> <span><?php if ($key['estado'] == 'Pendiente') { echo 'dd-mm-aaaa'; }else { echo date('d-m-Y', strtotime($key['fecha_cierre'])); } ?></span>
                             </div>
                             <div>
-                                <strong>Inicio:</strong> <span><?php echo $key['hora_i']; ?></span>
+                                <strong>Inicio:</strong> <span><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['hora_i']; }?></span>
                             </div>
                             <div>
-                                <strong>Fin:</strong> <span><?php echo $key['hora_f']; ?></span>
+                                <strong>Fin:</strong> <span><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['hora_f']; }?></span>
                             </div>
                             <div>
-                                <strong>Horas Hombre:</strong> <span><?php echo $key['horas_h']; ?></span>
+                                <strong>Horas Hombre:</strong> <span><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['horas_h']; }?></span>
                             </div>
                         </p>
-                        <a href="index.php" class="btn btn-primary">Volver..</a>
+                        <a href="index.php" class="btn btn-primary">Ver mas..</a>
                     </div>
                 </div>
             </div>
@@ -144,6 +151,8 @@
             </div>
         </div>
     </div>
+
+
     
     
     

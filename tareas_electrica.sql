@@ -130,14 +130,14 @@ update usuarios set id_usuario = 1 where usuario='C_Barreto'
 
 
 insert into tareas(t_tarea, estado, des_tarea, fecha_gen, fecha_cierre, hora_i, hora_f, horas_h, turno, tecnicos, cargo, img_antes, img_despues, id_tar1)
-values("rutinas", "Finalizado", "Rutinas de trafos y generadores",STR_TO_DATE('10.31.2003' ,GET_FORMAT(date,'USA')),"1992-02-12",  "13:00", "15:30", "2:00",  "tarde", "Ricardo Mélida", "Junior", "antes.jpg", "despues", 1);
+values("Mantenimiento", "Finalizado", "Rutinas de trafos y generadores",STR_TO_DATE('10.31.2003' ,GET_FORMAT(date,'USA')),"1992-02-12",  "13:00", "15:30", "2:00",  "tarde", "Camilo Barreto", "Junior", "antes.jpg", "despues", 3);
 
 -- ejemplo de formato fecha
 INSERT INTO demo (fecha)
 VALUES (STR_TO_DATE(REPLACE('15/01/2005','/','.') ,GET_FORMAT(date,'EUR')))
 
 
--- Agregamos un pendiente de ejemplo
+-- Agregamos un pendiente de ejemplo ----------------------------------------------------------------
 insert into tareas(t_tarea, estado, des_tarea, fecha_gen, turno, tecnicos, cargo, id_tar1)
 values("rutinas", "Pendiente", "Verificacion de luces CC", "2019-10-20", "tarde", "Ricardo Mélida", "Junior", 1);
 
@@ -195,10 +195,10 @@ DATE_SUB(NOW(), INTERVAL 1 HOUR)
 
 select * from usuarios;
 select * from tecnicos;
-select * from tareas
+select * from tareas order by id_tarea desc
 
 -- Formato de horas mas legible ----
-select fecha_gen from tareas
+select * from tareas
 SET lc_time_names = 'es_ES';
 SELECT DATE_FORMAT(fecha_gen,'%d - %b - %Y') AS fecha_ge FROM tareas;
 
@@ -212,6 +212,7 @@ select usuario from usuarios inner join tecnicos on usuarios.tecns=tecnicos.id_t
 
 update tareas set fecha_cierre = "2019-10-20"  where id_tarea <= 10
 
+update tareas set tecnicos = "Admin" where id_tarea = 3
 
 
 
