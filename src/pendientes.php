@@ -158,13 +158,68 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="principal.php" method="post">
-                            <input type="text">
+                        <div class="container m-auto">
+                            <form>
+                                <div class="form-group">
+                                    <label for="tarea_num">Tarea #: </label>
+                                    <label class="bg-light w-25 text-center"> 3</label>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Tipo de tarea</label>
+                                    <select class="form-control" id="exampleFormControlSelect1">
+                                        <option>Rutinas</option>
+                                        <option>Asistencia</option>
+                                        <option>Mantenimiento</option>
+                                        <option>Correctivo</option>
+                                        <option>Salon de Eventos</option>
+                                        <option>Marketing</option>
+                                        <option>Businesss Center</option>
+                                        <option>Gimnasio</option>
+                                        <option>TIC</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label for="h_inicial">Hora Inicial</label>
+                                        <input type="text" name="h_inicial" id="h_inicial" class=" w-50 ml-4 horas">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="h_inicial">Hora Final</label>
+                                        <input type="text" name="h_final" id="h_final" class="ml-4 w-50 horas" >
+                                    </div>
+                                    <div class="form-group disabled">
+                                        <label for="h_hombre">Horas hombre</label>
+                                        <input type="text" name="h_hombre" class="hora w-50" id="h_hombre" disabled>
+                                        <input type="hidden" name="res_hh" id="res_hh">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <h4>Antes</h4>
+                                        <div class="col-sm-8">
+                                            <input type="file" class="form-control images" id="image" name="antes" multiple>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h4>Despúes</h4>
+                                        <div class="col-sm-8">
+                                            <input type="file" class="form-control images" id="image" name="despues" multiple>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Descripcion</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                </div>
+                            </form>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-                        </form>
+                            
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     </div>
                 </div>
             </div>
@@ -229,7 +284,9 @@
 
 
             $(document).on('click', '.cerrar_pendientes', function() {
-                alert('cerrar pendientes');
+                var id_pendiente = $(this).attr('id');
+
+                //alert('cerrar pendientes : ' + id_pendiente);
                 $('#cerrar_pendiente').modal('show');
             });
         })

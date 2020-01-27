@@ -198,7 +198,7 @@ select * from tecnicos;
 select * from tareas order by id_tarea desc
 
 -- Formato de horas mas legible ----
-select * from tareas
+select * from tareas where estado = "Pendiente"
 SET lc_time_names = 'es_ES';
 SELECT DATE_FORMAT(fecha_gen,'%d - %b - %Y') AS fecha_ge FROM tareas;
 
