@@ -113,35 +113,85 @@
                         <h5 class="card-title">Tarea #<?php echo $card;?></h5>
                         <p class="card-text">
                             <div>
-                                <strong>Descripcion:</strong> <span><?php echo $key['des_tarea'];?></span>
+                                <strong>Descripcion:</strong> <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php echo $key['des_tarea'];?></span>
                             </div> 
                             <div>
-                                <strong>Fecha Gen.:</strong> <span><?php echo date('d-m-Y', strtotime($key['fecha_gen'])); ?></span>
+                                <strong>Fecha Gen.:</strong> <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php echo date('d-m-Y', strtotime($key['fecha_gen'])); ?></span>
                             </div>
                             <div>
-                                <strong>Fecha Cier.:</strong> <span><?php if ($key['estado'] == 'Pendiente') { echo 'dd-mm-aaaa'; }else { echo date('d-m-Y', strtotime($key['fecha_cierre'])); } ?></span>
+                                <strong>Fecha Cier.:</strong> <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php if ($key['estado'] == 'Pendiente') { echo 'dd-mm-aaaa'; }else { echo date('d-m-Y', strtotime($key['fecha_cierre'])); } ?></span>
                             </div>
                             <div>
-                                <strong>Inicio:</strong> <span><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['hora_i']; }?></span>
+                                <strong>Inicio:</strong> <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['hora_i']; }?></span>
                             </div>
                             <div>
-                                <strong>Fin:</strong> <span><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['hora_f']; }?></span>
+                                <strong>Fin:</strong> <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['hora_f']; }?></span>
                             </div>
                             <div>
-                                <strong>Horas Hombre:</strong> <span><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['horas_h']; }?></span>
+                                <strong>Horas Hombre:</strong > <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['horas_h']; }?></span>
                             </div>
                         </p>
-                        <a href="index.php" class="btn btn-primary">Ver mas..</a>
+                        <button <?php echo "id='$card'"; if($key['estado'] == 'Pendiente') { echo " class='cerrar_pendientes btn btn-primary'"; }else { echo "class='ver_detalles btn btn-primary'"; }?> >
+                            <?php if($key['estado'] == 'Pendiente') { echo "Cerrar"; }else { echo "Ver mas.."; }?>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
+
+        
         <?php
             $card = $card - 1;
                 }
             }        
         ?>
+
+        <!-- Modal para cerrar los pendientes -->
+        <div class="modal fade" id="cerrar_pendiente" tabindex="-1" role="dialog" aria-labelledby="cerrar_pendienteTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Cerrar Tarea</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="principal.php" method="post">
+                            <input type="text">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para ver detalles de las tareas realizadas -->
+        <div class="modal fade" id="ver_detalles" tabindex="-1" role="dialog" aria-labelledby="ver_detallesTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" > <strong> Tarea Realizada <?php echo $key['id_tar']; ?> </strong></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="detalles">
+                    
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <!-- Pie de agina de la aplicacion --->
        <div class="row footer my-5">
             <div class="col-md-12 col-lg-12">
@@ -150,15 +200,39 @@
                 </footer>
             </div>
         </div>
+
     </div>
 
 
     
     
     
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            //Si se presiona ver detalles
+            $(document).on('click', '.ver_detalles', function() {
+                var id_tarea = $(this).attr('id');
 
+                $.ajax({
+                    url: '../procesos/detalles.php',
+                    method: 'post',
+                    data:{ id_tarea: id_tarea },
+                    success: function(data) {
+                        $('#detalles').html(data);
+                        $('#ver_detalles').modal('show');
+                    }
+                });
+            });
+
+
+            $(document).on('click', '.cerrar_pendientes', function() {
+                alert('cerrar pendientes');
+                $('#cerrar_pendiente').modal('show');
+            });
+        })
+    </script>
 </body>
 </html>
