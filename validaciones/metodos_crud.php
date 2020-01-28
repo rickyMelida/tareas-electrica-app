@@ -13,6 +13,16 @@
             //return mysqli_fetch_row($result);
         }
 
+        public function asociativo($sql) {
+            $obj = new conectar();
+            $con = $obj ->conexion();
+
+            $result  = mysqli_query($con, $sql);
+
+            return mysqli_fetch_assoc($result);
+        }
+
+
         public function agregar($datos) {
             $obj = new conectar();
             $con = $obj ->conexion();

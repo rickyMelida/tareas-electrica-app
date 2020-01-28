@@ -159,41 +159,44 @@
                     </div>
                     <div class="modal-body">
                         <div class="container m-auto">
-                            <form>
+                            <form id="form-modal" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="tarea_num">Tarea #: </label>
-                                    <label class="bg-light w-25 text-center"> 3</label>
+                                    <label for="tarea_num">Tarea # </label>
+                                    <label class="bg-light text-center" id="num_tarea"></label>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Tipo de tarea</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                        <option>Rutinas</option>
-                                        <option>Asistencia</option>
-                                        <option>Mantenimiento</option>
-                                        <option>Correctivo</option>
-                                        <option>Salon de Eventos</option>
-                                        <option>Marketing</option>
-                                        <option>Businesss Center</option>
-                                        <option>Gimnasio</option>
-                                        <option>TIC</option>
+                                    <select class="form-control" id="tipo_tarea">
+                                        <option value="Rutinas">Rutinas</option>
+                                        <option value="Asistencia">Asistencia</option>
+                                        <option value="Mantenimiento">Mantenimiento</option>
+                                        <option value="Correctivo">Correctivo</option>
+                                        <option value="Salon de Eventos">Salon de Eventos</option>
+                                        <option value="Marketing">Marketing</option>
+                                        <option value="Businesss Center">Businesss Center</option>
+                                        <option value="Gimnasio">Gimnasio</option>
+                                        <option value="TIC">TIC</option>
 
                                     </select>
                                 </div>
+
+                                
                                 <div class="form-group">
-                                    <div class="form-group">
-                                        <label for="h_inicial">Hora Inicial</label>
-                                        <input type="text" name="h_inicial" id="h_inicial" class=" w-50 ml-4 horas">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="h_inicial">Hora Final</label>
-                                        <input type="text" name="h_final" id="h_final" class="ml-4 w-50 horas" >
-                                    </div>
-                                    <div class="form-group disabled">
-                                        <label for="h_hombre">Horas hombre</label>
-                                        <input type="text" name="h_hombre" class="hora w-50" id="h_hombre" disabled>
-                                        <input type="hidden" name="res_hh" id="res_hh">
-                                    </div>
+                                    <label for="h_inicial" class="d-block">Hora Inicial:</label>
+                                    <input type="text" name="h_inicial" id="h_inicial" class="ml-3">
                                 </div>
+                                <div class="form-group">
+                                    <label for="h_final" class="d-block">Hora Final:</label>
+                                    <input type="text" name="h_final" id="h_final" class="ml-3">
+                                </div>
+                                <div class="form-group disabled">
+                                    <label for="h_hombre" class="d-block">Horas hombre:</label>
+                                    <input type="text" name="h_hombre"  id="h_hombre" class="ml-3" disabled>
+                                    <input type="hidden" name="res_hh" id="res_hh">
+                                </div>
+                                
+
                                 <div class="form-group">
                                     <div class="form-group">
                                         <h4>Antes</h4>
@@ -211,15 +214,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Descripcion</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    <textarea class="form-control" id="description" rows="3"></textarea>
                                 </div>
-                            </form>
-                        </div>
+                            </div>
                             
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" id="guardar" class="btn btn-primary">Guardar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -282,14 +285,116 @@
                 });
             });
 
-
+            //Si se presiona cerrar pendientes
             $(document).on('click', '.cerrar_pendientes', function() {
                 var id_pendiente = $(this).attr('id');
 
-                //alert('cerrar pendientes : ' + id_pendiente);
-                $('#cerrar_pendiente').modal('show');
+                $.ajax({
+                    url: '../procesos/datos_modificar.php',
+                    method: 'post',
+                    dataType: 'json',
+                    data: { id_pendiente: id_pendiente },
+                    success: function(data) {
+                        $('#num_tarea').html(data.id_tarea);
+                        $("#tipo_tarea > option[value='"+data.t_tarea+"']").attr('selected', true);
+                        $('#description').val(data.des_tarea);
+
+                        $('#cerrar_pendiente').modal('show');
+
+                        //Calculamos las horas hombre con el focusout de la hora final del trabajo
+                        $('#h_final').focusout(function() {
+                            //alert('sale');
+                            var valida_h1 = new Array();
+                            var valida_h2 = new Array();
+
+                            var hora_i = $('#h_inicial').val();
+                            var hora_f = $('#h_final').val();
+
+                            valida_h1 = validar(hora_i);
+                            valida_h2 = validar(hora_f);
+
+                            var hora_h = valida_h2[0] - valida_h1[0];
+                            var min_h = valida_h2[1] - valida_h1[1];
+
+
+                            //Validamos la hora para que no de negativo
+                            if(hora_h < 0)  {
+                                hora_h = hora_h * (-1);
+                            }
+
+                            //Condicionamos para que los minutos no den negativo
+                            if(min_h < 0)  {
+                                min_h = min_h * (-1);
+                            }
+
+
+                            //Condicionamos si el horario inicial es mayor que el final
+                            if(hora_f < hora_i) {
+                                hora_h = ( (24 + parseInt(hora_f)) - parseInt(hora_i) );
+
+                                if (valida_h2[1] < valida_h1[1]) {
+                                    hora_h = ( (24 + parseInt(hora_f)) - parseInt(hora_i) ) - 1;
+                                    min_h = ((parseInt(valida_h2[1]) + 60) - (valida_h1[1]));
+
+                                }
+                            }
+
+                            
+
+                            if(validar(hora_i) == false || validar(hora_f) == false){
+                                if(validar(hora_i) == false){
+                                    alert('Formato de hora inicial no valido!');
+                                    //document.getElementById('h_inicial').select();
+                                }
+
+                                if(validar(hora_f) == false){
+                                    alert('Formato de hora final no valido!');
+                                    //document.getElementById('h_final').select();
+                                }
+                            }else{
+                                $('#h_hombre').val(hora_h + ":" + min_h);
+                                $('#res_hh').val(hora_h + ":" + min_h);
+
+                            }
+                        });
+                    }
+                });
             });
-        })
+
+
+            //Si se presiona para guardar el formulario
+            $('#form-modal').on('submit', function(event) {
+                event.preventDefault();
+                if($('#h_inicial').val() == '' && $('#h_final').val() == '') {
+                    alert('Faltan completar los horarios');
+                }
+
+                
+
+                $('#cerrar_pendiente').modal('hide');
+                //alert('Aqui se guardan los datos ');
+            });
+        });
+
+        ///Funcion para validar hora
+        function validar(hora) {
+            var horario = new Array();
+
+            var horas = hora.substr(0, 2);
+            var minuto = hora.substr(3,5);
+            var puntos = hora.substr(2, 1);
+
+            if(!isNaN(horas) && hora.length == 5 && puntos == ':' && horas <= 23 && minuto <= 59) {
+                horario[0] = horas;
+                horario[1] = minuto;
+
+                return horario;
+
+            }else {
+                return false;
+            }
+        }
+        
     </script>
 </body>
 </html>
