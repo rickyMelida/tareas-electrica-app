@@ -109,8 +109,9 @@ select * from t_tareas where tipo = "Mantenimiento"
 SELECT cargo_t from tecnicos where turno = 'Tarde' and nombre= 'Ricardo Melida'
 SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
 
-select * from tareas
+select * from t_tareas
 
+SELECT * from usuarios
 
 -- Insertamos los tipos de tareas --
 insert into t_tareas(tipo) 
@@ -215,8 +216,24 @@ update tareas set fecha_cierre = "2019-10-20"  where id_tarea <= 10
 update tareas set tecnicos = "Admin" where id_tarea = 3
 
 
+-- Cerramos un pendiente
+update tareas 
+set t_tarea = 'Correctivo', 
+estado = 'Finalizado',
+des_tarea = 'Se verifco algo',
+fecha_cierre = '2020-01-29',
+hora_i = '13:00',
+hora_f = '14:30',
+horas_h = '1:0',
+turno = 'Tarde',
+tecnicos = 'Luis Cabrera',
+cargo='Senior',
+img_antes = 'antes.jpg',
+img_despues = 'despues.jpg' where id_tarea=3;
 
+select * from tareas where id_tarea=3
 
+update tareas set img_antes='antes.jpg', img_despues='despues.jpg' where id_tarea=7
 
 
 
