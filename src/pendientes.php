@@ -152,7 +152,7 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Cerrar Tarea</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">Cerrar Tarea </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -161,13 +161,22 @@
                         <div class="container m-auto">
                             <form id="form-modal" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label for="tarea_num">Tarea # </label>
-                                    <label class="bg-light text-center" id="num_tarea"></label>
+                                    <label for="tarea_num">Tarea #: </label>
+                                    <label type="text" class="bg-light text-center w-25" id="id"></label>
+                                    <input type="hidden" name="id_tarea" id='id_tarea'>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Tipo de tarea</label>
-                                    <select class="form-control" id="tipo_tarea">
+                                    <label for="tarea_num">Generado por:  </label>
+                                    <label class="bg-light text-center" id="tecnico"></label>
+                                    <input type="hidden" name="generado" id="generado">
+                                    <!-- Colocamos el nombre del usuario que genero el pendiente en input tipo oculto -->
+                                    <input type="hidden" name="tecnico" id="realizado" value="<?php echo $var_session; ?>">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tipo_tarea">Tipo de tarea</label>
+                                    <select class="form-control" id="tipo_tarea" name="tipo_tarea">
                                         <option value="Rutinas">Rutinas</option>
                                         <option value="Asistencia">Asistencia</option>
                                         <option value="Mantenimiento">Mantenimiento</option>
@@ -181,7 +190,15 @@
                                     </select>
                                 </div>
 
-                                
+                                <div class="form-group">
+                                    <label for="turno">Turno</label>
+                                    <select class="form-control" name="turno" id="turno" >
+                                        <option value="Mañana">Mañana</option>
+                                        <option value="Tarde">Tarde</option>
+                                        <option value="Noche">Noche</option>
+                                    </select>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="h_inicial" class="d-block">Hora Inicial:</label>
                                     <input type="text" name="h_inicial" id="h_inicial" class="ml-3">
@@ -214,7 +231,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlTextarea1">Descripcion</label>
-                                    <textarea class="form-control" id="description" rows="3"></textarea>
+                                    <textarea class="form-control" name="description" id="description" rows="3"></textarea>
+                                    <!-- Colocamos la fecha de generacion del pendiente en input tipo oculto -->
+                                    <input type="hidden" name="fecha_gen" id="fecha_gen">
                                 </div>
                             </div>
                             
@@ -295,9 +314,13 @@
                     dataType: 'json',
                     data: { id_pendiente: id_pendiente },
                     success: function(data) {
-                        $('#num_tarea').html(data.id_tarea);
+                        $('#tecnico').html(data.tecnicos);
+                        $('#id').html(data.id_tarea);
+                        $('#id_tarea').val(data.id_tarea);
                         $("#tipo_tarea > option[value='"+data.t_tarea+"']").attr('selected', true);
+                        $("#turno > option[value='"+data.turno+"']").attr('selected', true);
                         $('#description').val(data.des_tarea);
+                        $('#fecha_gen').val(data.fecha_gen);
 
                         $('#cerrar_pendiente').modal('show');
 
@@ -365,11 +388,22 @@
             //Si se presiona para guardar el formulario
             $('#form-modal').on('submit', function(event) {
                 event.preventDefault();
-                if($('#h_inicial').val() == '' && $('#h_final').val() == '') {
-                    alert('Faltan completar los horarios');
+                if($('#description').val() == ''){
+                    alert('Falta completar el pendiente');
                 }
+                var datos = new FormData(this);
 
-                
+                $.ajax({
+                    url: '../procesos/cerrar_pendiente.php',
+                    method: 'post',
+                    data: datos,
+                    contentType: false,
+                    processData: false,
+                    success: function(data){
+                        alert(data);
+                        location.reload();
+                    }
+                });
 
                 $('#cerrar_pendiente').modal('hide');
                 //alert('Aqui se guardan los datos ');

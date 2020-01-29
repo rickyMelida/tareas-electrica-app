@@ -60,7 +60,7 @@
     }
     
     $res = $obj->mostrar($datos_tec);
-    foreach($res as $key) {
+    foreach($res as $key) { 
         array_push($car_tec, $key['nombre'], $key['cargo_t']);
     }
 
@@ -88,7 +88,7 @@
             //Directorio donde van a ser almacenadas todas las imagenes de las tareas
             $task_server = '/var/www/html/task_server/';
 
-            //Creamos la carpeta(si no existe) donde almacenaremos las imagenes de acuerdo al id de cada tarea
+            //Creamos la carpeta(si no existe) donde almacenaremos las imagenes de acuerdo al usuario
             if (!file_exists($task_server.$var_session, 0777)) {
                 //creamos la carpeta
                 mkdir($task_server.$var_session, 0777, true);
@@ -147,7 +147,7 @@
 
             if($obj->agregar($datos) == 1) {
                 echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
-                $modifica = $obj->modificar_nombre($tipo_antes, $tipo_despues, $res_id);
+                $modifica = $obj->modificar_nombre($tipo_antes, $tipo_despues, $res_id[0]);
             }else {
                     echo "<script>alert('Error al agregar a la BD'); //window.open('../src/agregar.php','_self');</script>";        
             } 

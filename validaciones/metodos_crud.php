@@ -84,10 +84,33 @@
             return $res;
         }
 
+        public function cerrar_pendiente($datos, $id) {
+            $obj = new conectar();
+            $con = $obj->conexion();
+
+            $sql = "UPDATE tareas 
+            set t_tarea = '$datos[0]', 
+            estado = '$datos[1]',
+            des_tarea = '$datos[2]',
+            fecha_cierre = '$datos[3]',
+            hora_i = '$datos[4]',
+            hora_f = '$datos[5]',
+            horas_h = '$datos[6]',
+            turno = '$datos[7]',
+            tecnicos = '$datos[8]',
+            cargo='$datos[9]',
+            img_antes = '$datos[10]',
+            img_despues = '$datos[11]',
+            id_tar1 = '$datos[12]' where id_tarea='$id'";
+
+            return $result = mysqli_query($con, $sql);
+
+        }
+
         public function modificar_nombre($tipo_antes, $tipo_despues, $res) {
             $obj = new conectar();
             $con = $obj ->conexion();
-            $sql = "UPDATE tareas set img_antes='antes.$tipo_antes', img_despues='despues.$tipo_despues' where id_tarea = ($res[0] + 1)";
+            $sql = "UPDATE tareas set img_antes='antes.$tipo_antes', img_despues='despues.$tipo_despues' where id_tarea = ($res + 1)";
 
 
             return $result = mysqli_query($con, $sql);
