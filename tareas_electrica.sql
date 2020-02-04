@@ -67,7 +67,7 @@ alter table tareas change fecha fecha_gen date not null
 
 ALTER TABLE tareas ADD fecha_cierre date AFTER fecha_gen;
 
-select * from tareas
+select * from tareas order by id_tarea desc limit 0, 10
 
 
 -- Creamos la tabla para la conexion entre tecnicos y tareas
@@ -196,7 +196,10 @@ DATE_SUB(NOW(), INTERVAL 1 HOUR)
 
 select * from usuarios;
 select * from tecnicos;
-select * from tareas order by id_tarea desc
+select * from tareas order by id_tarea asc limit 10
+
+
+select * from tareas limit 10
 
 -- Formato de horas mas legible ----
 select * from tareas where estado = "Pendiente"

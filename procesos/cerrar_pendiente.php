@@ -108,7 +108,7 @@
         
 
         if($obj->cerrar_pendiente($datos, $id_tarea) == 1) {
-            echo 'Se cerró pendiente!';
+            echo 'Pendiente cerrado!';
             $modifica = $obj->modificar_nombre($tipo_antes, $tipo_despues, ($id_tarea - 1));
 
         }else {

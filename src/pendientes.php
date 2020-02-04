@@ -1,28 +1,17 @@
 <?php
     require_once ("../validaciones/autorizacion.php");
-    require_once ("../validaciones/conexionBD.php");
-    require_once ("../validaciones/metodos_crud.php");
+    include_once '../validaciones/conexionBD.php';
+    include_once '../validaciones/metodos_crud.php';
 
     $obj = new conectar();
     $con = $obj->conexion();
-    
 
-    mysqli_set_charset($con,'utf8');
-    $sql = "SELECT * from tareas order by id_tarea desc";
-    $cant = mysqli_query($con, $sql);
+    $tareas = "SELECT * from tareas";
+
+    $cant = mysqli_query($con, $tareas);
     $cant_tar = mysqli_num_rows($cant);
 
-    $muestra = new metodos();
-    $ver = $muestra->mostrar($sql);
-
-    $estado_tarea = array();
-
-    foreach($key as $ver) {
-        array_push($estado_tarea, $key['estado']);
-    }
-
-    $task_server = '../../task_server/';
-
+    $num_pag = ceil($cant_tar/10);
 
 ?>
 
@@ -34,6 +23,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="shortcut icon" href="../iconos/electrico.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/waitMe.min.css">
     <title>Pendientes</title>
     <style>
         .principal {
@@ -62,23 +52,15 @@
         </div>
                         
         <!-- Lista de tareas de acuerdo al tecnico -->
-        <?php
-            $card = $cant_tar;
-            foreach($ver as $key) {
-                $sql_tec = "SELECT usuario from usuarios inner join tecnicos on usuarios.tecns=tecnicos.id_tecnico where nombre = '$key[tecnicos]'";
-                $tecs = $muestra->mostrar($sql_tec);
-                foreach($tecs as $tec){  
-
-        ?>
         <div class="row m-2">
             <div class="col-12 col-lg-3 col-md-4">
                 <div class="card w-100 " >
                     <!-- Carrusel de las imagenes, con data-pause="false" el carrusel no se mueve automaticamente -->
-                    <div id="tarea_<?php echo $card;?>" class="carousel slide" data-pause="false">
+                    <div id="tarea_1" class="carousel slide" data-pause="false">
                         <!-- -->
                         <ol class="carousel-indicators">
-                            <li data-target="#tarea_<?php echo $card;?>" data-slide-to="0" class="active"></li>
-                            <li data-target="#tarea_<?php echo $card;?>" data-slide-to="1"></li>
+                            <li data-target="#tarea_1" data-slide-to="0" class="active"></li>
+                            <li data-target="#tarea_1" data-slide-to="1"></li>
                             
                         </ol>
 
@@ -87,65 +69,81 @@
                             
                             <!-- Imagen del antes del trabajo -->
                             <div class="carousel-item active">
-                                <img src="<?php echo $task_server; if($key['estado'] == 'Pendiente') { echo 'pendientes/pendiente.jpg'; }else { echo $tec['usuario'].'/tarea_'; ?><?php echo $key['id_tarea']."/".$key['img_antes'] ; }?>" class="d-block w-100 img-thumbnail" alt="Imagen antes">
+                                <img src="../../task_server/R_Melida/tarea_1/antes.png" class="d-block w-100 img-thumbnail" id="img_antes_1" alt="Imagen antes">
                             </div>
 
                             <!-- Imagen del despues del trabajo -->
                             <div class="carousel-item">
-                                <img src="<?php echo $task_server; if($key['estado'] == 'Pendiente') { echo 'pendientes/pendiente.jpg'; }else { echo $tec['usuario'].'/tarea_'; ?><?php echo $key['id_tarea']."/".$key['img_despues'] ; }?>" class="d-block w-100 img-thumbnail" alt="Imagen despues">
+                                <img src="../../task_server/R_Melida/tarea_1/despues.png" class="d-block w-100 img-thumbnail" id="img_despues_1" alt="Imagen despues">
                             </div>
                         </div>
 
                         <!-- Boton antes -->
-                        <a class="carousel-control-prev" href="#tarea_<?php echo $card;?>" role="button" data-slide="prev">
+                        <a class="carousel-control-prev" href="#tarea_1" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="sr-only">Previous</span>
                         </a>
 
                         <!-- Boton despues -->
-                        <a class="carousel-control-next" href="#tarea_<?php echo $card;?>" role="button" data-slide="next">
+                        <a class="carousel-control-next" href="#tarea_1" role="button" data-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="sr-only">Next</span>
                         </a>
                     </div>
                     
                     <div class="card-body">
-                        <h5 class="card-title">Tarea #<?php echo $card;?></h5>
+                        <h5 class="card-title">Tarea # <span id="id_tarea_1"></span></h5>
                         <p class="card-text">
                             <div>
-                                <strong>Descripcion:</strong> <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php echo $key['des_tarea'];?></span>
+                                <strong>Descripcion:</strong><span id="descripcion_1"></span>
                             </div> 
                             <div>
-                                <strong>Fecha Gen.:</strong> <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php echo date('d-m-Y', strtotime($key['fecha_gen'])); ?></span>
+                                <strong>Fecha Gen.:</strong> <span id="fecha_gen_1"></span>
                             </div>
                             <div>
-                                <strong>Fecha Cier.:</strong> <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php if ($key['estado'] == 'Pendiente') { echo 'dd-mm-aaaa'; }else { echo date('d-m-Y', strtotime($key['fecha_cierre'])); } ?></span>
+                                <strong>Fecha Cier.:</strong> <span id="fecha_cierre_1"></span>
                             </div>
                             <div>
-                                <strong>Inicio:</strong> <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['hora_i']; }?></span>
+                                <strong>Inicio:</strong> <span id="h_inicio_1"></span>
                             </div>
                             <div>
-                                <strong>Fin:</strong> <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['hora_f']; }?></span>
+                                <strong>Fin:</strong> <span id="h_fin_1"></span>
                             </div>
                             <div>
-                                <strong>Horas Hombre:</strong > <span <?php if($key['estado'] == 'Pendiente') { echo "class='text-danger'"; }?> ><?php if ($key['estado'] == 'Pendiente') { echo '00:00:00'; }else { echo $key['horas_h']; }?></span>
+                                <strong>Horas Hombre:</strong > <span id="h_h_1"></span>
                             </div>
                         </p>
-                        <button <?php echo "id='$card'"; if($key['estado'] == 'Pendiente') { echo " class='cerrar_pendientes btn btn-primary'"; }else { echo "class='ver_detalles btn btn-primary'"; }?> >
-                            <?php if($key['estado'] == 'Pendiente') { echo "Cerrar"; }else { echo "Ver mas.."; }?>
+                        <button class='cerrar_pendientes btn btn-primary' >
+                            Ver mas
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-
-
         
-        <?php
-            $card = $card - 1;
-                }
-            }        
-        ?>
+
+        <!-- Paginacion de los pendientes --->
+        <div class="row">
+            <div class="col-12 col-lg-3 col-md-4 ">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <?php for($i=0;$i<=$num_pag;$i++){?>
+
+                        <li class="pagina page-item" id="pagina_<?php echo $i+1; ?>"><a class="page-link" href="#"><?php echo $i+1;?></a></li>
+
+                    <?php
+                    }
+                    ?>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+            </div>
+        </div>
 
         <!-- Modal para cerrar los pendientes -->
         <div class="modal fade" id="cerrar_pendiente" tabindex="-1" role="dialog" aria-labelledby="cerrar_pendienteTitle" aria-hidden="true">
@@ -285,10 +283,15 @@
     
     
     <script src="https://code.jquery.com/jquery-3.4.1.js" ></script>
+    <script src="../js/waitMe.min.js"></script>
+    <script src="../js/sweetalert2.all.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
+
+            pagina_1();
+
             //Si se presiona ver detalles
             $(document).on('click', '.ver_detalles', function() {
                 var id_tarea = $(this).attr('id');
@@ -313,6 +316,7 @@
                     method: 'post',
                     dataType: 'json',
                     data: { id_pendiente: id_pendiente },
+                    
                     success: function(data) {
                         $('#tecnico').html(data.tecnicos);
                         $('#id').html(data.id_tarea);
@@ -321,6 +325,7 @@
                         $("#turno > option[value='"+data.turno+"']").attr('selected', true);
                         $('#description').val(data.des_tarea);
                         $('#fecha_gen').val(data.fecha_gen);
+                        
 
                         $('#cerrar_pendiente').modal('show');
 
@@ -380,6 +385,7 @@
 
                             }
                         });
+                        
                     }
                 });
             });
@@ -388,25 +394,86 @@
             //Si se presiona para guardar el formulario
             $('#form-modal').on('submit', function(event) {
                 event.preventDefault();
-                if($('#description').val() == ''){
-                    alert('Falta completar el pendiente');
+                if($('#description').val() == ''|| $('#h_inicial').val()=='' || $('#h_final').val() == ''){
+                    //alert('Falta completar el pendiente');
+                    Swal.fire('Ups!', 'Faltan completar algunos datos','error');
+                }else {
+                    var datos = new FormData(this);
+
+                    $.ajax({
+                        url: '../procesos/cerrar_pendiente.php',
+                        method: 'post',
+                        data: datos,
+                        contentType: false,
+                        processData: false,
+                        
+                        success: function(data){
+                            Swal.fire('Excelente!', data,'success').then(function() {
+                                $('body').waitMe({ 
+                                    effect: 'orbit', 
+                                    text: 'Cargando..',
+                                    fontSize: '24px' 
+                                });
+                                
+                                $('#cerrar_pendiente').modal('hide');
+                                setTimeout(function() {
+                                    location.reload();
+                                    $('body').waitMe('hide');
+                                }, 1000);
+                            });
+
+                            
+                        }
+                    });
+
                 }
-                var datos = new FormData(this);
+            });
+        });
 
-                $.ajax({
-                    url: '../procesos/cerrar_pendiente.php',
-                    method: 'post',
-                    data: datos,
-                    contentType: false,
-                    processData: false,
-                    success: function(data){
-                        alert(data);
-                        location.reload();
-                    }
-                });
 
-                $('#cerrar_pendiente').modal('hide');
-                //alert('Aqui se guardan los datos ');
+
+        //Una vez que carga la pagina se establece la pagina 1
+        function pagina_1() {
+            var pagina = $('#pagina_1');
+            var task_server = '../../task_server/';
+
+
+            $.ajax({
+                url: '../procesos/paginacion.php',
+                method: 'post',
+                dataType: 'json',
+                data: {pagina: pagina.attr('id')},  
+                success: function(data) {
+                    pagina.addClass('active');
+                    $('#id_tarea_1').html(data[0].id_tarea);
+                    $('#descripcion_1').html(data[0].des_tarea);
+                    $('#fecha_gen_1').html(data[0].fecha_gen);
+                    $('#fecha_cierre_1').html(data[0].fecha_cierre);
+                    $('#h_inicio_1').html(data[0].hora_i);
+                    $('#h_fin_1').html(data[0].hora_f);
+                    $('#h_h_1').html(data[0].horas_h);
+                    
+                    console.log(data);
+                }
+
+            });
+        }
+
+
+        //Si se presiona una de los botones para la paginacion
+        $('.pagina').on('click', function() {
+            pagina = $(this).attr('id');
+            
+            $.ajax({
+                url: '../procesos/paginacion.php',
+                method: 'post',
+                dataType: 'json',
+                data: {pagina: pagina},  
+                success: function(data) {
+                    console.log(data);
+
+                }
+
             });
         });
 
