@@ -33,7 +33,6 @@
         array_push($estado_tarea, $key['estado']);
     }
 
-
     echo json_encode($ver);
 
 ?>
