@@ -452,23 +452,27 @@
                     $('#descripcion_1').html(data[0].des_tarea);
                     $('#fecha_gen_1').html(data[0].fecha_gen);
 
+                   
 
                     if(data[0].estado == 'Pendiente') {
                         //Cambiamos el color del texto si es un pendiente
-                        $('#id_tarea_' + (i+1)).addClass('text-danger');
-                        $('#descripcion_' + (i+1)).addClass('text-danger');
-                        $('#fecha_gen_' + (i+1)).addClass('text-danger');
+                        $('#id_tarea_1').addClass('text-danger');
+                        $('#descripcion_1').addClass('text-danger');
+                        $('#fecha_gen_1').addClass('text-danger');
 
 
-                        $('#fecha_cierre_' + (i+1)).addClass('text-danger');
-                        $('#h_inicio_' + (i+1)).addClass('text-danger');
-                        $('#h_fin_' + (i+1)).addClass('text-danger');
-                        $('#h_h_' + (i+1)).addClass('text-danger');
+                        $('#fecha_cierre_1').addClass('text-danger');
+                        $('#h_inicio_1').addClass('text-danger');
+                        $('#h_fin_1').addClass('text-danger');
+                        $('#h_h_1').addClass('text-danger');
 
                         $('#fecha_cierre_1').html('dd-mm-aaaa');
                         $('#h_inicio_1').html('00:00:00');
                         $('#h_fin_1').html('00:00:00');
                         $('#h_h_1').html('00:00:00');
+
+                        $('#img_antes_1').attr('src', task_server+'pendientes/pendiente.jpg');
+                        $('#img_despues_1').attr('src', task_server+'pendientes/pendiente.jpg');
 
                         if($('.ver_detalles')) {
                             $('.btn-ver-1').removeClass('ver_detalles');
@@ -476,11 +480,26 @@
                         $('.btn-ver-1').text('Cerrar');
                         $('.btn-ver-1').addClass('cerrar_pendientes');
                         $('.btn-ver-1').attr('id', data[0].id_tarea);
+
                     }else { 
                         $('#fecha_cierre_1').html(data[0].fecha_cierre);
                         $('#h_inicio_1').html(data[0].hora_i);
                         $('#h_fin_1').html(data[0].hora_f);
                         $('#h_h_1').html(data[0].horas_h);
+
+
+                         //Hacemos la peticion para extraer el usuario de acuerdo al tecnico
+                        $.ajax({
+                            url: '../procesos/usuario_tecnico.php',
+                            method: 'post',
+                            dataType: 'html',
+                            data: {nombre: data[0].tecnicos},  
+                            success: function(usuario) {
+                                $('#img_antes_1').attr('src', task_server + usuario + '/tarea_' + data[0].id_tarea + '/' + data[0].img_antes);
+                                $('#img_despues_1').attr('src', task_server + usuario + '/tarea_' + data[0].id_tarea + '/' + data[0].img_despues);
+                            }
+                        });
+
 
                         if($('.cerrar_pendientes')) {
                             $('.btn-ver-1').removeClass('cerrar_pendientes');
@@ -491,6 +510,8 @@
                         $('.btn-ver-1').attr('id', data[0].id_tarea);
 
                     }
+
+                    
 
                     let tareas = $('#tareas');
 
@@ -510,8 +531,11 @@
 
                         tarea_esp.find('#tarea_1').attr('id', 'tarea_'+ (i+1));
                         tarea_esp.find('a').attr('href', '#tarea_'+ (i+1));
+                        tarea_esp.find('#img_antes_1').attr('id', 'img_antes_'+(i+1));
+                        tarea_esp.find('#img_despues_1').attr('id', 'img_despues_'+(i+1));
 
                         tarea_esp.find('.btn-ver-1').attr('id', data[i].id_tarea);
+
 
 
                         tarea_esp.appendTo(tareas);
@@ -540,16 +564,52 @@
                             $('#h_h_' + (i+1)).addClass('text-danger');
                             $('#h_h_' + (i+1)).html('hh:mm:ss');
 
+                            $('#img_antes_' + (i+1)).attr('src', task_server+'pendientes/pendiente.jpg');
+                            $('#img_despues_'+(i+1)).attr('src', task_server+'pendientes/pendiente.jpg');
+
                             if($('.ver_detalles')) {
                                 $('#'+data[i].id_tarea).removeClass('ver_detalles');
                             }
                             $('#'+data[i].id_tarea).text('Cerrar');
                             $('#'+data[i].id_tarea).addClass('cerrar_pendientes');
                         }else {
+
+                            //si hay algun texto de las tareas realizadas que esta en rojo
+                            if($('.text-danger')) {
+                                $('#id_tarea_' + (i+1)).removeClass('text-danger');
+                                $('#descripcion_' + (i+1)).removeClass('text-danger');
+                                $('#fecha_gen_' + (i+1)).removeClass('text-danger');
+                                $('#fecha_cierre_' + (i+1)).removeClass('text-danger');
+                                $('#h_inicio_' + (i+1)).removeClass('text-danger');
+                                $('#h_fin_' + (i+1)).removeClass('text-danger');
+                                $('#h_h_' + (i+1)).removeClass('text-danger');
+                            }
+
+                            $('#id_tarea_' + (i+1)).addClass('text-dark');
+                            $('#descripcion_' + (i+1)).addClass('text-dark');
+                            $('#fecha_gen_' + (i+1)).addClass('text-dark');
+                            $('#fecha_cierre_' + (i+1)).addClass('text-dark');
+                            $('#h_inicio_' + (i+1)).addClass('text-dark');
+                            $('#h_fin_' + (i+1)).addClass('text-dark');
+                            $('#h_h_' + (i+1)).addClass('text-dark');
+
                             $('#fecha_cierre_' + (i+1)).html(data[i].fecha_cierre);
                             $('#h_inicio_' + (i+1)).html(data[i].hora_i);
                             $('#h_fin_' + (i+1)).html(data[i].hora_f);
                             $('#h_h_' + (i+1)).html(data[i].horas_h);
+
+
+                            //Hacemos la peticion para extraer el usuario de acuerdo al tecnico
+                            $.ajax({
+                                url: '../procesos/usuario_tecnico.php',
+                                method: 'post',
+                                dataType: 'html',
+                                data: {nombre: data[i].tecnicos},  
+                                success: function(usuario) {
+                                    $('#img_antes_' + (i+1) ).attr('src', task_server + usuario + '/tarea_' + data[i].id_tarea + '/' + data[i].img_antes);
+                                    $('#img_despues_' + (i+1) ).attr('src', task_server + usuario + '/tarea_' + data[i].id_tarea + '/' + data[i].img_despues);
+                                }
+                            });
 
                             if($('.cerrar_pendientes')) {
                                 $('#'+data[i].id_tarea).removeClass('cerrar_pendientes');
@@ -557,9 +617,9 @@
                             $('#'+data[i].id_tarea).text('Ver Detalles');
                             $('#'+data[i].id_tarea).addClass('ver_detalles');
                         }
-                        
-                        
                     }
+
+                    
                 }
 
             });
@@ -569,6 +629,7 @@
         //Si se presiona una de los botones para la paginacion
         $('.pagina').on('click', function() {
             let pagina_sel = $(this);
+            var task_server = '../../task_server/';
             
             $.ajax({
                 url: '../procesos/paginacion.php',
@@ -589,6 +650,9 @@
 
                         $('.ver-'+(j+1)).attr('id', datos[j].id_tarea);
 
+                        var users = datos[j].id_tarea;
+                        var tecnico = datos[j].tecnicos;
+
                         if(datos[j].estado == 'Pendiente') {
                             $('#fecha_cierre_' + (j+1)).html('dd-mm-aaaa');
                             $('#h_inicio_' + (j+1)).html('00:00:00');
@@ -600,6 +664,9 @@
                             $('#h_fin_' + (j+1)).addClass('text-danger');
                             $('#h_h_' + (j+1)).addClass('text-danger');
 
+                            $('#img_antes_' + (j+1)).attr('src', task_server+'pendientes/pendiente.jpg');
+                            $('#img_despues_'+(j+1)).attr('src', task_server+'pendientes/pendiente.jpg');
+
                             if($('.ver_detalles')) {
                                 $('#' + datos[j].id_tarea).removeClass('ver_detalles');
                             }
@@ -607,10 +674,46 @@
                             $('#'+datos[j].id_tarea).addClass('cerrar_pendientes');
                             
                         }else { 
+
+                            //si hay algun texto de las tareas realizadas que esta en rojo
+                            if($('.text-danger')) {
+                                $('#id_tarea_' + (j+1)).removeClass('text-danger');
+                                $('#descripcion_' + (j+1)).removeClass('text-danger');
+                                $('#fecha_gen_' + (j+1)).removeClass('text-danger');
+                                $('#fecha_cierre_' + (j+1)).removeClass('text-danger');
+                                $('#h_inicio_' + (j+1)).removeClass('text-danger');
+                                $('#h_fin_' + (j+1)).removeClass('text-danger');
+                                $('#h_h_' + (j+1)).removeClass('text-danger');
+                            }
+
+                            $('#id_tarea_' + (j+1)).addClass('text-dark');
+                            $('#descripcion_' + (j+1)).addClass('text-dark');
+                            $('#fecha_gen_' + (j+1)).addClass('text-dark');
+                            $('#fecha_cierre_' + (j+1)).addClass('text-dark');
+                            $('#h_inicio_' + (j+1)).addClass('text-dark');
+                            $('#h_fin_' + (j+1)).addClass('text-dark');
+                            $('#h_h_' + (j+1)).addClass('text-dark');
+
                             $('#fecha_cierre_' + (j+1)).html(datos[j].fecha_cierre);
                             $('#h_inicio_' + (j+1)).html(datos[j].hora_i);
                             $('#h_fin_' + (j+1)).html(datos[j].hora_f);
                             $('#h_h_' + (j+1)).html(datos[j].horas_h);
+
+                                    
+                            //Hacemos la peticion para extraer el usuario de acuerdo al tecnico
+                            
+                            $.ajax({
+                                
+                                url: '../procesos/usuario_tecnico.php',
+                                method: 'post',
+                                dataType: 'html',
+                                data: {nombre: tecnico},  
+                                success: function(usuario) {
+                                    /*$('#img_antes_' + (j+1) ).attr('src', task_server + usuario + '/tarea_' + $('#id_tarea_' + (j+1)).text() + '/' + datos[j].img_antes);
+                                    $('#img_despues_' + (j+1) ).attr('src', task_server + usuario + '/tarea_' + $('#id_tarea_' + (j+1)).text() + '/' + datos[j].img_despues);*/
+                                    alert('El id es: ' + users);
+                                }
+                            });
 
                             if($('.cerrar_pendientes')) {
                                 $('#'+datos[j].id_tarea).removeClass('cerrar_pendientes');
@@ -618,6 +721,7 @@
                             $('#'+datos[j].id_tarea).text('Ver Detalles');
                             $('#'+datos[j].id_tarea).addClass('ver_detalles');
                             
+                            //console.log(datos[0].id_tarea);
                         }
    
                     }
