@@ -24,9 +24,9 @@
     
 
     //Cambiar el nombre del turno por manhana
-    /*if($turno == "Mañana") {
+    if($turno == "Mañana") {
         $turno = "Manhana";
-    }*/
+    }
 
 
     //Guardamos las imagenes que subimos de los trabajos
@@ -39,7 +39,9 @@
     $carpeta_antes = $_SERVER['DOCUMENT_ROOT'].'/tareas-electrica-app/tareas/'.$var_session.'/';
     $carpeta_despues = $_SERVER['DOCUMENT_ROOT'].'/tareas-electrica-app/tareas/'.$var_session.'/';
     
-    
+    /*$c = new conectar();
+    $con = $c->conexion();*/
+
     $obj = new metodos();
 
     $id_tipo_tar = "SELECT id_tar from t_tareas where tipo = '$tipo_tr'";
@@ -86,7 +88,8 @@
         }else {
             
             //Directorio donde van a ser almacenadas todas las imagenes de las tareas
-            $task_server = '/var/www/html/task_server/';
+            //$task_server = '/var/www/html/task_server/';
+            $task_server = "../../task_server/";
 
             //Creamos la carpeta(si no existe) donde almacenaremos las imagenes de acuerdo al usuario
             if (!file_exists($task_server.$var_session, 0777)) {
@@ -118,7 +121,7 @@
                 //Creamos la carpeta
                 mkdir($directorio, 0777);
                 //Le damos los permisos
-                chmod($directorio, 0777);
+                //chmod($directorio, 0777);
             }
             
             //Movemos las imagenes a la carpeta previamente creada
@@ -141,7 +144,7 @@
             rename($directorio.'/'.$antes_nombre, $directorio."/antes.".$tipo_antes);
             rename($directorio.'/'.$despues_nombre, $directorio."/despues.".$tipo_despues);
             
-            
+            echo 'El nombre es '. $antes_nombre .'<br>';
             $datos = array($tipo_tr, $estado_tr, $descripcion, $fecha_gen, $fecha_cierre, $hora_inicial, $hora_final, $horas_hombre, $turno, $car_tec[0], $car_tec[1], $antes_nombre, $despues_nombre, $id_tp_tr);
             
 
@@ -149,9 +152,8 @@
                 echo "<script>alert('Se agrego a la BD'); window.open('../src/agregar.php','_self');</script>";        
                 $modifica = $obj->modificar_nombre($tipo_antes, $tipo_despues, $res_id[0]);
             }else {
-                    echo "<script>alert('Error al agregar a la BD'); //window.open('../src/agregar.php','_self');</script>";        
+                    echo "<script>alert('Error al agregar a la BD'); window.open('../src/agregar.php','_self');</script>";     
             } 
-
 
         }
     

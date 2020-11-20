@@ -69,12 +69,12 @@
                             
                             <!-- Imagen del antes del trabajo -->
                             <div class="carousel-item active">
-                                <img src="../../task_server/R_Melida/tarea_1/antes.png" class="d-block w-100 img-thumbnail" id="img_antes_1" alt="Imagen antes">
+                                <img src="../../task_server/pendiente.jpg" class="d-block w-100 img-thumbnail" id="img_antes_1" alt="Imagen antes">
                             </div>
 
                             <!-- Imagen del despues del trabajo -->
                             <div class="carousel-item">
-                                <img src="../../task_server/R_Melida/tarea_1/despues.png" class="d-block w-100 img-thumbnail" id="img_despues_1" alt="Imagen despues">
+                                <img src="../../task_server/pendiente.jpg" class="d-block w-100 img-thumbnail" id="img_despues_1" alt="Imagen despues">
                             </div>
                         </div>
 
@@ -441,8 +441,8 @@
             $.ajax({
                 url: '../procesos/paginacion.php',
                 method: 'post',
-                dataType: 'json',
                 data: {pagina: pagina.attr('id')},  
+                dataType: 'json',
                 success: function(data) {
                     pagina.addClass('active');
 
@@ -451,7 +451,6 @@
                     $('#id_tarea_1').html(data[0].id_tarea);
                     $('#descripcion_1').html(data[0].des_tarea);
                     $('#fecha_gen_1').html(data[0].fecha_gen);
-
                    
 
                     if(data[0].estado == 'Pendiente') {
@@ -471,8 +470,8 @@
                         $('#h_fin_1').html('00:00:00');
                         $('#h_h_1').html('00:00:00');
 
-                        $('#img_antes_1').attr('src', task_server+'pendientes/pendiente.jpg');
-                        $('#img_despues_1').attr('src', task_server+'pendientes/pendiente.jpg');
+                        $('#img_antes_1').attr('src', task_server+'pendiente.jpg');
+                        $('#img_despues_1').attr('src', task_server+'pendiente.jpg');
 
                         if($('.ver_detalles')) {
                             $('.btn-ver-1').removeClass('ver_detalles');

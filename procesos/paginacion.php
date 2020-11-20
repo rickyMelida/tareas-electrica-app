@@ -29,10 +29,10 @@
 
     $estado_tarea = array();
 
-    foreach($key as $ver) {
+    /*foreach($ver as $key) {
         array_push($estado_tarea, $key['estado']);
-    }
+    }*/
 
     echo json_encode($ver);
-
+    //echo 'es: '. $id;
 ?>
