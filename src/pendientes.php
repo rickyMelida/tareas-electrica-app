@@ -706,7 +706,6 @@
                                 
                                 url: '../procesos/usuario_tecnico.php',
                                 method: 'post',
-                                dataType: 'html',
                                 data: {nombre: tecnico},  
                                 success: function(usuario) {
                                     /*$('#img_antes_' + (j+1) ).attr('src', task_server + usuario + '/tarea_' + $('#id_tarea_' + (j+1)).text() + '/' + datos[j].img_antes);

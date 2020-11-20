@@ -148,7 +148,6 @@ select tecnicos, horas_h from tareas where horas_h != "00:00:00"
 insert into tareas(t_tarea, estado, des_tarea,fecha,  turno)
 values("rutinas", "pendiente", "tareas","2019-10-20" , "tarde");
 
-select * from tareas order by id_tarea desc limit 1;
 
 truncate table tareas
 
@@ -194,9 +193,10 @@ SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(horas_h))) AS horas FROM tareas
 
 DATE_SUB(NOW(), INTERVAL 1 HOUR)
 
+
 select * from usuarios;
 select * from tecnicos;
-select * from tareas order by id_tarea asc limit 10
+select * from tareas order by id_tarea desc limit 10
 
 
 select * from tareas limit 10
@@ -216,8 +216,9 @@ select usuario from usuarios inner join tecnicos on usuarios.tecns=tecnicos.id_t
 
 update tareas set fecha_cierre = "2019-10-20"  where id_tarea <= 10
 
-update tareas set tecnicos = "Admin" where id_tarea = 3
+update tareas set tecnicos = "Admin" where id_tarea = 37
 
+SELECT * from tareas order by id_tarea desc limit 10, 10
 
 -- Cerramos un pendiente
 update tareas 
