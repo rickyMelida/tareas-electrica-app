@@ -3,7 +3,7 @@
         private $usuario;
         private $password;
 
-        public function setNombre($usuario, $con) {
+        public function setNombre($usuario) {
             $this->usuario = $usuario;
         }
 
@@ -11,24 +11,22 @@
             return $this->usuario;
         }
 
-        public function setPassword($password, $con) {
+        public function setPassword($password) {
             $this->password = $password;
         }
 
-        public function existeUsuario($usuario, $password, $con) {
+        public function existeUsuario($user, $pass, $con) {
+            $this->setNombre($user);
+            $this->setPassword($pass);
+            
             mysqli_set_charset($con,'utf8');
-            $sql = "SELECT * from usuarios where usuario= '$usuario' and pass='$password'";
+            $sql = "SELECT * from usuarios where usuario= '$user' and pass='$pass'";
 
             $resultado = mysqli_query($con, $sql);
-
+            
             return mysqli_num_rows($resultado);
         }
 
-        public function metodoPrueba() {
-            return "Metodo de prueba";
-        }
-
-        
     }
 
 ?>

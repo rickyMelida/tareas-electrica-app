@@ -4,10 +4,11 @@
 
     session_start();
 
+    $usuario = new Usuario();
     $obj = new conectar();
+
     $con = $obj->conexion();
 
-    $user = new Usuario();
 
 
     if (!$con) {
@@ -16,20 +17,16 @@
         $user = $_POST['usuario'];
         $pass = $_POST['pass'];
 
-        echo $user->metodoPrueba();
 
-        echo $res;
-
-        // if($user->existeUsuario($user, $pass, $con) > 0) {
-        //     $_SESSION['usuario'] = $usuario;
-
-        // }else {
-        //     echo "<script> alert('Contraseña o usuario incorrecto');
-        //         window.location='../index.php';
-        //     </script>";
-        // }
+        if($usuario->existeUsuario($user, $pass, $con) > 0) {
+            $_SESSION['usuario'] = $usuario;
+            header('Location: ../views/src/principal.php');
+            
+        }else {
+            echo "<script> alert('Contraseña o usuario incorrecto');
+                    window.location='../index.php';
+                  </script>";
+        }
     }
-
-
 
 ?>
