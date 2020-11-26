@@ -1,5 +1,5 @@
 <?php
-    require_once ("../validaciones/autorizacion.php");
+    require_once ("../../controller/validaciones/autorizacion.php");
     setcookie('usuario', $var_session, time() + 900);
 ?>
 
