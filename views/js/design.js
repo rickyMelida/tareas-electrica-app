@@ -75,10 +75,6 @@ function pendientes() {
 }
 
 
-
-
-
-
 //-------------Funcion para habilitar los horarios
 function habilitar_t() {    
     for (var i = 0; i < horas.length; i++) {
@@ -116,5 +112,13 @@ function validar(hora) {
     }else {
         return false;
     }
+}
+
+function usuarioAutenticado() {
+    Swal.fire(
+        'Good job!',
+        'You clicked the button!',
+        'success'
+      );
 }
 
