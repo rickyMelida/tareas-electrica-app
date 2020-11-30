@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tareas Electrica</title>
+  <link rel="shortcut icon" href="./views/iconos/electrico.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./views/css/bootstrap.css">
+  <link rel="stylesheet" href="./views/css/login.css">
+  <link rel="stylesheet" href="./views/css/waitMe.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-4 border border-dark p-3">
+        <form method="POST" id="formulario" class="">
+          <div class="form-group">
+            <label for="usuario">Usuario</label>
+            <input type="text" class="form-control" id="usuario" aria-describedby="emailHelp" autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password">
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="recuerdame">
+            <label class="form-check-label" for="recuerdame">Recuérdame</label>
+          </div>
+          <div class="p-3 mb-2 text-dark oculta-error-usuario" id="errorUsuario">
+            El usuario o la contraseña estan erroneas
+          </div>
+        </form>
+        <button type="submit" class="btn btn-primary btn-lg btn-block" id="btn-form">Iniciar</button>
+      </div>
+    </div>
+  </div>
+  <script src="./views/js/bootstrap.min.js"></script>
+  <script src="./views/js/jquery.min.js"></script>
+  <script src="./views/js/waitMe.js"></script>
+  <script src="./views/js/design.js"></script>
+
+</body>
+
+</html>

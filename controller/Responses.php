@@ -5,11 +5,12 @@
 
         public function authUser($res) {
             if($res) {
-                echo $this->$sweetAlert. "<br>" .$this->mainJS."<script> usuarioAutenticado(); window.open('principal.php', '_self');</script>";
-                // header('Location: ../../views/src/principal.php');
+                $output = ['status' => '200', "mensaje" => 'success'];
             }else {
-                echo "<script>alert('Error usuario o contrasenha incorrecta');</script>";
+                $output = ['status' => '404', "mensaje" => 'error'];
             }
+
+            return $output;
         }
     }
 

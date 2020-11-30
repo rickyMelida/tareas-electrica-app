@@ -1,6 +1,8 @@
 <?php
     // require_once ("../../controller/validaciones/autorizacion.php");
     // setcookie('usuario', $var_session, time() + 900);
+    session_start();
+
 ?>
 
 <!DOCTYPE html>
@@ -10,17 +12,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="../css/estilos.css">
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="../css/bootstrap.css">
     <title>Rutinas electricas</title>
     <link rel="shortcut icon" href="../iconos/electrico.ico" type="image/x-icon">
     <script>
-	  window.console = window.console || function(t) {};
+      window.console = window.console || function(t) {};
+      
 	</script>
 	<script>
 	  if (document.location.search.match(/type=embed/gi)) {
 	    window.parent.postMessage("resize", "*");
-	  }
+      }
     </script>
     
     <style>
@@ -42,7 +44,7 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link " href="#"> <?php echo $var_session;?><span class="sr-only">(current)</span></a>
+                    <a class="nav-link " href="#"><?php echo $_SESSION['usuario']?><span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Inicio</a>
@@ -54,7 +56,7 @@
                     <a class="nav-link" data-toggle="modal" data-target="#acceso" href="#">Reportes Horario</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../validaciones/cerrar_sesion.php">Cerrar Sesión</a>
+                    <a class="nav-link" href="../../models/validaciones/cerrar_sesion.php">Cerrar Sesión</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://rickymelida.github.io/" title="Desarrollador">Acerca De</a>

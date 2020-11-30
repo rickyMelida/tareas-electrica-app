@@ -12,26 +12,24 @@
     
     $con = $obj->conexion();
 
-    
-
     if (!$con) {
         header('Location: ../views/src/errorDB.php');
     }else {
-        $user = $_POST['usuario'];
-        $pass = $_POST['pass'];
+    
+        $user = addslashes(htmlspecialchars($_POST['usuario']));
+        $pass = addslashes(htmlspecialchars($_POST['password']));
 
 
         if($usuario->existeUsuario($user, $pass, $con) > 0) {
-            $_SESSION['usuario'] = $usuario;
+            $_SESSION['usuario'] = $user;
             $autenticacion = true;
             $rpta = $res->authUser($autenticacion);
-
-            // header('Location: ../views/src/principal.php');
+            echo json_encode($rpta);
             
         }else {
-            echo "<script> alert('Contraseña o usuario incorrecto');
-                    window.location='../index.php';
-                  </script>";
+            $autenticacion = false;
+            $rpta = $res->authUser($autenticacion);
+            echo json_encode($rpta);
         }
     }
 
