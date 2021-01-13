@@ -9,7 +9,8 @@
         private $horasHombre;
 
         public function __construct() {
-            $this->estado = "Finalizado";
+            $tarea_pendiente = new Tarea();
+            $tarea_pendiente.setEstado('Pendiente');
         }
 
         public function setFechaFin() {

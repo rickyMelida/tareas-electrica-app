@@ -1,7 +1,12 @@
 <?php
     class Sesion{
+        private $id;
         private $fecha;
         private $hora;
+
+        public function FunctionName() {
+            return $this->id;
+        }
     
         public function getFecha() {
             return $this->fecha;

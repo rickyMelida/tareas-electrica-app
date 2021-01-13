@@ -20,17 +20,17 @@
             return $this->rol;
         }
 
-        // public function existeUsuario($user, $pass, $con) {
-        //     $this->setNombre($user);
-        //     $this->setPassword($pass);
+        public function existeUsuario($user, $pass, $con) {
+            $this->setNombre($user);
+            $this->setPassword($pass);
             
-        //     mysqli_set_charset($con,'utf8');
-        //     $sql = "SELECT * from usuarios where usuario= '$user' and pass='$pass'";
+            mysqli_set_charset($con,'utf8');
+            $sql = "SELECT * from usuarios where usuario= '$user' and pass='$pass'";
 
-        //     $resultado = mysqli_query($con, $sql);
+            $resultado = mysqli_query($con, $sql);
             
-        //     return mysqli_num_rows($resultado);
-        // }
+            return mysqli_num_rows($resultado);
+        }
 
     }
 
