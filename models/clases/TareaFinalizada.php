@@ -1,19 +1,20 @@
 <?php
     require_once './Tarea.php';
     class TareaFinalizada extends Tarea {
-        
-        private $estado;
+     
         private $fechaFin;
         private $horaInicio;
         private $horaFin;
+        private $horaInicio;
         private $horasHombre;
 
-        public function __construct($estado) {
-            $this->estado = $estado;
+        public function __construct() {
+            $this->estado = "Finalizado";
         }
 
-        public function setFechaFin($fechaFin) {
-            $this->fechaFin = $fechaFin;
+        public function setFechaFin() {
+            $time = time();
+            $this->fechaFin = date("d-m-Y", $time);
         }
 
         public function getFechaFin() {
@@ -29,8 +30,9 @@
             return $this->horaInicio;
         }
 
-        public function setHoraFin($horaFin) {
-            $this->horaFin = $horaFin;
+        public function setHoraFin() {
+            $time = time();
+            $this->horaFin = date("H:i:s", $time)
         }
 
         public function getHoraFin() {

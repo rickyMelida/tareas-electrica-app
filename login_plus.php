@@ -32,7 +32,8 @@
 	<div class="limiter">
 		<div class="container-login100 bg-info">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form" method="post" action="./controller/validar_usuario.php">
+			<!-- action="./controller/validar_usuario.php" -->
+				<form class="" method="post" >
 					<span class="login100-form-title p-b-26 text-primary">
 						Tareas Eléctrica
 					</span>
@@ -56,7 +57,7 @@
 					<div class="container-login100-form-btn mb-5">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">
+							<button class="login100-form-btn" id="btn-form">
 								Acceder
 							</button>
 						</div>
