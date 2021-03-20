@@ -1,17 +1,19 @@
 <?php
-    require_once ("../validaciones/autorizacion.php");
-    include_once '../validaciones/conexionBD.php';
-    include_once '../validaciones/metodos_crud.php';
+    require_once ("../../models/validaciones/autorizacion.php");
+    setcookie('usuario', $var_session, time() + 900);
+    session_start();
+    // include_once '../validaciones/conexionBD.php';
+    // include_once '../validaciones/metodos_crud.php';
 
-    $obj = new conectar();
-    $con = $obj->conexion();
+    // $obj = new conectar();
+    // $con = $obj->conexion();
 
-    $tareas = "SELECT * from tareas";
+    // $tareas = "SELECT * from tareas";
 
-    $cant = mysqli_query($con, $tareas);
-    $cant_tar = mysqli_num_rows($cant);
+    // $cant = mysqli_query($con, $tareas);
+    // $cant_tar = mysqli_num_rows($cant);
 
-    $num_pag = ceil($cant_tar/10);
+    // $num_pag = ceil($cant_tar/10);
 
 ?>
 

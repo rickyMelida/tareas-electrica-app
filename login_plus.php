@@ -33,7 +33,7 @@
 		<div class="container-login100 bg-info">
 			<div class="wrap-login100">
 			<!-- action="./controller/validar_usuario.php" -->
-				<form class="" method="post" >
+				<form action="./controller/validar_usuario.php" method="post" >
 					<span class="login100-form-title p-b-26 text-primary">
 						Tareas Eléctrica
 					</span>

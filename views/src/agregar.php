@@ -1,6 +1,7 @@
 <?php
-    require_once "../validaciones/autorizacion.php";
-    require_once "../procesos/tecnicos.php";
+    require_once ("../../models/validaciones/autorizacion.php");
+    setcookie('usuario', $var_session, time() + 900);
+    session_start();
 
 ?>
 
@@ -33,54 +34,54 @@
         </div>
 
         <!-- Formulario de ingreso de tareas y pendientes ----- -->
-        <form action="../validaciones/formulario.php" method="post" name="formulario" class="border border-dark p-3 principal mx-lg-5" enctype="multipart/form-data">
+        <form action="../../controller/users-process/add_task.php" method="post" name="formulario" class="border border-dark p-3 principal mx-lg-5" enctype="multipart/form-data">
         <div class="row">
             
             <!---------------Tipos de trabajo--------------------->
             <div class="col-lg-4 col-md-12">
                 <h2>Tipos de Trabajo</h2>
                 <div class="form-check m-3">
-                    <input type="radio" class="form-check-input" name="t_trabajo" id="rutinas" value="Rutinas" checked>
+                    <input type="radio" class="form-check-input" name="t_task" id="rutinas" value="Rutinas" checked>
                     <label class="form-check-label" for="rutinas">Rutinas</label>
                 </div>
 
                 <div class="form-check m-3">
-                    <input type="radio" class="form-check-input" name="t_trabajo" id="asistencia" value="Asistencia" >
+                    <input type="radio" class="form-check-input" name="t_task" id="asistencia" value="Asistencia" >
                     <label class="form-check-label" for="asistencia">Asistencia</label>
                 </div>
 
                 <div class="form-check m-3">
-                    <input type="radio" class="form-check-input" name="t_trabajo" id="mantenimiento" value="Mantenimiento" >
+                    <input type="radio" class="form-check-input" name="t_task" id="mantenimiento" value="Mantenimiento" >
                     <label class="form-check-label" for="mantenimiento">Mantenimiento</label>
                 </div>
 
                 <div class="form-check m-3">
-                    <input type="radio" class="form-check-input" name="t_trabajo" id="correctivo" value="Correctivo" >
+                    <input type="radio" class="form-check-input" name="t_task" id="correctivo" value="Correctivo" >
                     <label class="form-check-label" for="correctivo">Correctivo</label>
                 </div>
 
                 <div class="form-check m-3">
-                    <input type="radio" class="form-check-input" name="t_trabajo" id="s_evento" value="Salon_de_Eventos" >
+                    <input type="radio" class="form-check-input" name="t_task" id="s_evento" value="Salon_de_Eventos" >
                     <label class="form-check-label" for="s_evento">Salon de Eventos</label>
                 </div>
 
                 <div class="form-check m-3">
-                    <input type="radio" class="form-check-input" name="t_trabajo" id="marketing" value="Marketing" >
+                    <input type="radio" class="form-check-input" name="t_task" id="marketing" value="Marketing" >
                     <label class="form-check-label" for="marketing">Marketing</label>
                 </div>
 
                 <div class="form-check m-3">
-                    <input type="radio" class="form-check-input" name="t_trabajo" id="b_center" value="Business_Center" >
+                    <input type="radio" class="form-check-input" name="t_task" id="b_center" value="Business_Center" >
                     <label class="form-check-label" for="b_center">Business Center</label>
                 </div>
 
                 <div class="form-check m-3">
-                    <input type="radio" class="form-check-input" name="t_trabajo" id="gym" value="Gimnasio" >
+                    <input type="radio" class="form-check-input" name="t_task" id="gym" value="Gimnasio" >
                     <label class="form-check-label" for="gym">Gimnasio</label>
                 </div>
 
                 <div class="form-check m-3">
-                    <input type="radio" class="form-check-input" name="t_trabajo" id="tic" value="TIC" >
+                    <input type="radio" class="form-check-input" name="t_task" id="tic" value="TIC" >
                     <label class="form-check-label" for="tic">TIC</label>
                 </div>
 
@@ -95,7 +96,7 @@
                         <div class="row">
                             <div class="col-lg-12 p-3">
                                 <div class="form-check">
-                                    <input type="radio" name="estado" id="pendiente" value="Pendiente" onclick="deshabilitar_t()" checked>
+                                    <input type="radio" name="status" id="pendiente" value="Pendiente" onclick="deshabilitar_t()" checked>
                                     <label class="form-check-label" for="Pendiente">Pendiente</label>
                                 </div>
                             </div>
@@ -103,7 +104,7 @@
                         <div class="row">
                             <div class="col-lg-12 p-3">
                                     <div class="form-check">
-                                        <input type="radio" name="estado" id="Finalizado" onclick="habilitar_t()" value="Finalizado">
+                                        <input type="radio" name="status" id="Finalizado" onclick="habilitar_t()" value="Finalizado">
                                         <label class="form-check-label" for="Finalizado">Finalizado</label>
                                     </div>                                     
                             </div>
@@ -113,7 +114,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <select class="form-control" name="turno" >
+                                    <select class="form-control" name="turn" >
                                         <option>Mañana</option>
                                         <option>Tarde</option>
                                         <option>Noche</option>
@@ -130,15 +131,15 @@
                             <h2>Horas trabajadas</h2>
                             <div class="form-group">
                                 <label for="h_inicial">Hora Inicial</label>
-                                <input type="text" name="h_inicial" id="h_inicial" class=" w-50 ml-4 horas" >
+                                <input type="text" name="generation_hour" id="h_inicial" class=" w-50 ml-4 horas" >
                             </div>
                             <div class="form-group">
                                 <label for="h_inicial">Hora Final</label>
-                                <input type="text" name="h_final" id="h_final" class="ml-4 w-50 horas" >
+                                <input type="text" name="end_hour" id="h_final" class="ml-4 w-50 horas" >
                             </div>
                             <div class="form-group disabled">
                                 <label for="h_hombre">Horas hombre</label>
-                                <input type="text" name="h_hombre" class="hora w-50" id="h_hombre" disabled>
+                                <input type="text" name="hours_man" class="hora w-50" id="h_hombre" disabled>
                                 <input type="hidden" name="res_hh" id="res_hh">
                             </div>
                         </div>
@@ -155,18 +156,16 @@
                 <div class="form-group">
                     <h4>Antes</h4>
                     <div class="col-sm-8">
-                        <input type="file" class="form-control images" id="image" name="antes" multiple>
+                        <input type="file" class="form-control images" id="image" name="before" multiple>
                     </div>
-                    <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
                 </div>
             </div>
             <div class="col-lg-12">
                 <div class="form-group">
                     <h4>Despúes</h4>
                     <div class="col-sm-8">
-                        <input type="file" class="form-control images" id="image" name="despues" multiple>
+                        <input type="file" class="form-control images" id="image" name="after" multiple>
                     </div>
-                    <!--button name="submit" class="btn btn-dark">Cargar Imagen</button-->
                 </div>
             </div>
         </div>
@@ -176,7 +175,7 @@
             <div class="col-lg-12 py-2 px-5">
                 <div class="form-group">
                     <h3>Descripcion del trabajo</h3>
-                    <textarea class="form-control" name="descripcion" id="txt_tarea" rows="5"></textarea>
+                    <textarea class="form-control" name="description" id="txt_tarea" rows="5"></textarea>
                 </div>
             </div>
         </div>    

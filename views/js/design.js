@@ -4,53 +4,7 @@ var images = document.getElementsByClassName('images');
 
 window.addEventListener('load', deshabilitar_t);
 
-var btnForm = $('#btn-form');
 
-
-btnForm.click((e) => {
-    var usuario = $('#usuario');
-    var pass = $('#password');
-
-    $.ajax({
-        type: 'post',
-        url: 'controller/validar_usuario.php',
-        data: {usuario: usuario.val(), password: pass.val()},
-        success: (data)=>{
-            var res = JSON.parse(data);
-            validarUsuario(res.mensaje, usuario, pass);
-        }
-    });
-});
-
-function carga(ruta) {
-    $('form').waitMe({
-        effect : 'facebook',
-        onClose : function() {}
-      });
-
-      setTimeout(()=>{
-        if(ruta != 'undefined') {
-            window.open(ruta, '_self');
-        }
-        console.log(`La ruta es ${ruta}`);
-        $('form').waitMe('hide');
-      }, 2000);
-    
-}
-
-//Funcion para validar el usuario
-function validarUsuario(status, user, password) {
-    var error = $('#errorUsuario');
-    var rutaMain = 'views/src/principal.php';
-    if(status == 'error') {
-        error.removeClass('oculta-error-usuario');
-        error.addClass('error-usuario');
-        password.val('');
-        password.focus();
-    }else {
-        carga(rutaMain);
-    }
-}
 
 //----------Condicionando horas----------------//
 seg.addEventListener('focusout', function () {
@@ -157,13 +111,5 @@ function validar(hora) {
     } else {
         return false;
     }
-}
-
-function usuarioAutenticado() {
-    Swal.fire(
-        'Good job!',
-        'You clicked the button!',
-        'success'
-    );
 }
 

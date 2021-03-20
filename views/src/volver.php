@@ -13,7 +13,7 @@
             <h4 class="alert-heading">Advertencia!</h4>
             <p>Favor iniciar sesion.<br>Debes iniciar sesión para poder visualizar el contenido de esta página.</p>
             <hr>
-            <p class="mb-0">Presione <a href="../index.php" class="text-dark">volver..</a> para volver al inicio.</p>
+            <p class="mb-0">Presione <a href="../../index.html" class="text-dark">volver..</a> para volver al inicio.</p>
         </div>
     </div>
 </body>

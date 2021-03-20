@@ -1,10 +1,18 @@
-.error-usuario {
-    background: #ffebe8;
-    border: 1px solid red;
-    font-weight: bold;
-    text-align: center;
+.errorUsuario {
+    display: block;
+    width: 100%;
+    background: rgb(202, 49, 49);
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px auto;
 }
 
-.oculta-error-usuario {
+.errorUsuario span {
+    color: aliceblue;
+    font-weight: bold;
+}
+
+.notError {
     display: none;
 }
+
