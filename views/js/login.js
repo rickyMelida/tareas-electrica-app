@@ -9,22 +9,24 @@ btnSubmit.addEventListener('click', () => {
     }
 
     $.ajax({
-        url: './controller/login/validar_usuario.php',
+        url: './controller/login/userValidate.php',
         type: 'post',
         data: data,
         success: (res) => {
             let dataRes = JSON.parse(res);
-            (dataRes.status == "200") ? loginSuccess() : errorData();
+            (dataRes.status == "200") ? loginSuccess(dataRes.message) : errorData(dataRes.message);
         }
     });
 });
 
-const loginSuccess = () => {
+const loginSuccess = (res) => {
     window.location = './views/src/principal.php';
+    console.log(res);
 }
 
-const errorData = () => {
+const errorData = (res) => {
     let error = document.querySelector('#error-data');
     error.classList.remove('notError');
     error.classList.add('errorUsuario');
+    console.log(res);
 }

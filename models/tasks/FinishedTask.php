@@ -10,7 +10,9 @@
         private $turn_finished;
 
         public function __construct( $type_of_task, $description, $responsable, $status,
-                                     $end_date, $start_hour, $end_hour, $hours_man, $turn_finished) {
+                                     $end_date,     $start_hour,  $end_hour,    $hours_man, 
+                                     $turn_finished) {
+
             parent::__construct($type_of_task, $description, $responsable, $status);
             $this->end_date = "";
             $this->start_hour = $start_hour;

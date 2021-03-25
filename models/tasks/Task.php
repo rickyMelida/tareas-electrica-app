@@ -15,9 +15,6 @@
             $this->status = $status;
         }
 
-        // public function __construct() {
-        //     echo "Esto es desde el contructor Task <br>";
-        // }
 
         public function setTypeOfTask ($type_of_task) {
             $this->type_of_task = $type_of_task;

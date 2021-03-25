@@ -1,5 +1,5 @@
 <?php
-    require_once ("../../models/validaciones/autorizacion.php");
+    require_once ("../../models/auth/auth.php");
     setcookie('usuario', $var_session, time() + 900);
     session_start();
 
@@ -39,7 +39,7 @@
                     <a class="nav-link" data-toggle="modal" data-target="#acceso" href="#">Reportes Horario</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../../models/validaciones/cerrar_sesion.php">Cerrar Sesión</a>
+                    <a class="nav-link" href="../../models/auth/cerrar_sesion.php">Cerrar Sesión</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="https://rickymelida.github.io/" target="_blank" title="Desarrollador">Acerca De</a>
