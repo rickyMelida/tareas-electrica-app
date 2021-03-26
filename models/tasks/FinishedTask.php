@@ -10,11 +10,10 @@
         private $turn_finished;
 
         public function __construct( $type_of_task, $description, $responsable, $status,
-                                     $end_date,     $start_hour,  $end_hour,    $hours_man, 
-                                     $turn_finished) {
+                                     $start_hour,  $end_hour,$hours_man, $turn_finished) {
 
             parent::__construct($type_of_task, $description, $responsable, $status);
-            $this->end_date = "";
+            $this->end_date = date("d-m-Y");
             $this->start_hour = $start_hour;
             $this->end_hour = $end_hour;
             $this->hours_man = $hours_man;
@@ -60,6 +59,33 @@
 
         public function setTurnFinished($turn_finished) {
             $this->turn_finished  = $turn_finished;
+        }
+
+        public function addTasks() {
+            $con = parent::getCon();
+
+            $data = 
+            [
+                't_tarea'      => $this->getTypeOfTask(),
+                'estado'       => $this->getState(),
+                'des_tarea'    => $this->getDescription(),
+                'fecha_gen'    => $this->getGenerationDate(),
+                'fecha_cierre' => $this->getEndDate(),
+                'hora_i'       => $this->getStartHour(),
+                'hora_i'       => $this->getEndHour(),
+                'horas_h'      => $this->getHourMan(),
+                'turno'        => $this->getTurnPending(), 
+                'tecnicos'     => $this->getResponsable(),
+                'cargo'        => 'Junior',
+                'img_antes'    => 'img/img_antes.jpg',
+                'img_despues'  => 'img/img_antes.jpg',
+                'id_tar1'      => 2
+            ];
+
+            $sql = "INSERT into tareas(t_tarea, estado, des_tarea, fecha_gen, fecha_cierre, hora_i, hora_f, horas_h, turno, tecnicos, cargo, img_antes, img_despues, id_tar1)
+                    values('$data[t_tarea]', '$data[estado]', '$data[des_tarea]', '$data[fecha_gen]', '$data[fecha_cierre]', '$data[hora_i]', '$data[hora_f]', '$data[horas_h]', '$data[turno]', '$data[tecnicos]', '$data[cargo]', '$data[img_antes]', '$data[img_despues]', '$data[id_tar1]')";
+
+            return $result = mysqli_query($con, $sql);
         }
     }
 

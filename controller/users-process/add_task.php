@@ -1,6 +1,9 @@
 <?php
     require_once '../../models/tasks/FinishedTask.php';
     require_once '../../models/tasks/PendingTask.php';
+    require_once '../../models/class/Responses.php';
+
+    session_start();
 
     $type_of_task = $_POST['t_task'];
     $work_status = $_POST['status'];
@@ -13,26 +16,24 @@
     
     if($turn == "Mañana") { $turn = "Manhana"; }
 
-    // $task = new PendingTask($type_of_task, $descripcion, 'Ricardo', $work_status, $turn);
-
+    $response = new Responses();
+    
 
     if($work_status == "Finalizado") {
         $generation_hour = $_POST['generation_hour'];
         $end_hour = $_POST['end_hour'];
         $hours_man = $_POST['hours_man'];
 
-        // $task = new FinishedTask();
-
-        // $task->setGenerationDate();
-        // $task->setEndHour();
-
-        
+        $task = new FinishedTask( $type_of_task, $description, 'Ricardo', $work_status, $generation_hour, $end_hour,$hours_man, $turn);
     
     }else {
-        echo $type_of_task . "<br>";
         $task = new PendingTask($type_of_task, $description, 'Ricardo', $work_status, $turn);
-        echo $task->getResponsable();
+        $add = $task->addTasks();
+        
+        echo json_encode($response->resDB($add));
     }
+
+    
     
 
 ?>

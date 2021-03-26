@@ -33,12 +33,12 @@
             </div>
         </div>
 
-        <!-- Formulario de ingreso de tareas y pendientes ----- -->
-        <form action="../../controller/users-process/add_task.php" method="post" name="formulario" class="border border-dark p-3 principal mx-lg-5" enctype="multipart/form-data">
+        <!-- Formulario de ingreso de tareas y pendientes action="../../controller/users-process/add_task.php" ----- -->
+        <form  method="post" name="formulario" class="border border-dark p-3 principal mx-lg-5" enctype="multipart/form-data">
         <div class="row">
             
             <!---------------Tipos de trabajo--------------------->
-            <div class="col-lg-4 col-md-12">
+            <div class="col-lg-4 col-md-12 radio">
                 <h2>Tipos de Trabajo</h2>
                 <div class="form-check m-3">
                     <input type="radio" class="form-check-input" name="t_task" id="rutinas" value="Rutinas" checked>
@@ -183,7 +183,7 @@
             <!---  Botones de guardar y volver --->
             <div class='row'>
                 <div class="col-lg-12 col-md-12">
-                    <button type="submit" iid="enviar" class="btn btn-dark m-4 px-3">Guardar</button>
+                    <button type="submit" id="enviar" class="btn btn-dark m-4 px-3">Guardar</button>
                     <a href="./principal.php" class="btn btn-dark float-right mt-4 mr-4">Volver..</a>
                 </div>
             </div>
@@ -191,9 +191,10 @@
     </div>
             
 
-    <script src="../js/design.js"></script>    
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../js/addTask.js"></script>   
+    <script src="../js/design.js"></script> 
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </body>
 </html>

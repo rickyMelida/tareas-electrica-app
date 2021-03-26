@@ -1,5 +1,5 @@
 <?php
-    require_once ("../../models/validaciones/autorizacion.php");
+    require_once '../../models/auth/auth.php';
     setcookie('usuario', $var_session, time() + 900);
     session_start();
     // include_once '../validaciones/conexionBD.php';
@@ -23,19 +23,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="shortcut icon" href="../iconos/electrico.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/waitMe.min.css">
+    <link rel="stylesheet" href="../css/main.css">
     <title>Pendientes</title>
-    <style>
-        .principal {
-            background: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-        }
-    </style>
 </head>
-<body class="principal">
+<body >
     <div class="container-fluid">
         
         <!-- Cabecera de la aplicacion -->

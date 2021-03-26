@@ -1,5 +1,8 @@
 <?php
-	class Technical {
+
+	require_once '../core/db_abstract_model.php';
+
+	class Technical extends DBAbstractModel {
 		private $name;
 		private $position;
 		private $turn;
@@ -10,9 +13,13 @@
 			$this->turn = $turn;
 		}
 
-		public function getName() {
-			
-			return $this->name;
+		public function getNameWithUserName($userName) {
+			$con = parent::open_connection();
+
+			$query = "SELECT nombre from tecnicos inner join usuarios on tecnicos.id_tecnico=usuarios.tecns where usuario='$userName'";
+			$result = mysqli_query($con, $query);
+
+			return mysqli_fetch_all($result, MYSQLI_ASSOC);
 		}
 
 		public function setName($name) {

@@ -62,10 +62,9 @@ create table tareas (
 );
 
 -- Modificacion de datos de la tabla tareas---------------
-alter table tareas change fecha fecha_gen date not null
+alter table tareas modify fecha_gen varchar(20) not null;
 
-
-ALTER TABLE tareas ADD fecha_cierre date AFTER fecha_gen;
+alter table tareas modify fecha_cierre varchar(20) not null;
 
 select * from tareas order by id_tarea desc limit 0, 10
 
@@ -81,7 +80,8 @@ create table tec_tareas(
 )
 
 drop table tec_tareas
-truncate table tareas
+truncate table t_tareas;
+select * from tareas
 alter table tareas add id_tar1 int
 alter  table tareas add foreign key(id_tar1) references t_tareas(id_tar)
 
@@ -222,20 +222,9 @@ SELECT * from tareas order by id_tarea desc limit 10, 10
 
 -- Cerramos un pendiente
 update tareas 
-set t_tarea = 'Correctivo', 
-estado = 'Finalizado',
-des_tarea = 'Se verifco algo',
-fecha_cierre = '2020-01-29',
-hora_i = '13:00',
-hora_f = '14:30',
-horas_h = '1:0',
-turno = 'Tarde',
-tecnicos = 'Luis Cabrera',
-cargo='Senior',
-img_antes = 'antes.jpg',
-img_despues = 'despues.jpg' where id_tarea=3;
+set t_tarea = 'Gimnasio' where id_tarea=42;
 
-select * from tareas where id_tarea=3
+select * from tareas where estado='Pendiente' 
 
 update tareas set img_antes='antes.jpg', img_despues='despues.jpg' where id_tarea=7
 
@@ -254,4 +243,5 @@ CREATE TABLE `demo` (
 INSERT INTO demo (fecha)
 VALUES (STR_TO_DATE(REPLACE('15/01/2005','/','.') ,GET_FORMAT(date,'EUR')))
 
-select * from demo
+INSERT into tareas(t_tarea, estado, des_tarea, fecha_gen, turno, tecnicos, cargo, id_tar1)
+            values ('Rutinas','Finalizado','Agregar tomas en spinning','2021-03-25','Noche','Ricardo', 'Junior', 2);
