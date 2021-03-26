@@ -131,8 +131,9 @@ update usuarios set id_usuario = 1 where usuario='C_Barreto'
 
 
 insert into tareas(t_tarea, estado, des_tarea, fecha_gen, fecha_cierre, hora_i, hora_f, horas_h, turno, tecnicos, cargo, img_antes, img_despues, id_tar1)
-values("Mantenimiento", "Finalizado", "Rutinas de trafos y generadores",STR_TO_DATE('10.31.2003' ,GET_FORMAT(date,'USA')),"1992-02-12",  "13:00", "15:30", "2:00",  "tarde", "Camilo Barreto", "Junior", "antes.jpg", "despues", 3);
+values("Mantenimiento", "Finalizado", "Rutinas de trafos y generadores", "2021-02-03", "2021-02-04",  "13:00", "15:00", "2:00",  "tarde", "Camilo Barreto", "Junior", "antes.jpg", "despues.jpg", 3);
 
+select * from usuarios
 -- ejemplo de formato fecha
 INSERT INTO demo (fecha)
 VALUES (STR_TO_DATE(REPLACE('15/01/2005','/','.') ,GET_FORMAT(date,'EUR')))
@@ -214,6 +215,10 @@ insert into usuarios(usuario, pass, tecns) values('Admin', 'electrica1234', '9')
 
 select usuario from usuarios inner join tecnicos on usuarios.tecns=tecnicos.id_tecnico where nombre = "Ricardo Melida"
 
+select nombre from tecnicos inner join usuarios on tecnicos.id_tecnico=usuarios.tecns where usuario="M_Sosa"
+
+select * from usuarios
+
 update tareas set fecha_cierre = "2019-10-20"  where id_tarea <= 10
 
 update tareas set tecnicos = "Admin" where id_tarea = 37
@@ -224,24 +229,11 @@ SELECT * from tareas order by id_tarea desc limit 10, 10
 update tareas 
 set t_tarea = 'Gimnasio' where id_tarea=42;
 
-select * from tareas where estado='Pendiente' 
+select * from tecnicos 
+select * from usuarios
 
 update tareas set img_antes='antes.jpg', img_despues='despues.jpg' where id_tarea=7
 
-
-
--- Ejemplo de BD de fechas ----
-create database formato_fecha
-use formato_fecha
-
-CREATE TABLE `demo` (
-	`id` int(11) NOT NULL auto_increment,
-	`fecha` date not null,
-	PRIMARY KEY  (`id`)
-) ENGINE=InnoDB
-
-INSERT INTO demo (fecha)
-VALUES (STR_TO_DATE(REPLACE('15/01/2005','/','.') ,GET_FORMAT(date,'EUR')))
 
 INSERT into tareas(t_tarea, estado, des_tarea, fecha_gen, turno, tecnicos, cargo, id_tar1)
             values ('Rutinas','Finalizado','Agregar tomas en spinning','2021-03-25','Noche','Ricardo', 'Junior', 2);
