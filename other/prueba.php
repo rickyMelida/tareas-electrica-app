@@ -1,10 +1,17 @@
 <?php
-    $usuario = addslashes(htmlspecialchars($_POST['usuario']));
-    $password = addslashes(htmlspecialchars($_POST['password']));
+    require '../vendor/autoload.php';
+
+    $dotenv = new Dotenv('../');
+    echo 'sale'; 
+    // $dotenv->load();
+
+    // $user = getenv('DDBB_USERNAME');
+    echo $user; 
+    
 
     // $usuario = $_POST['usuario'];
     // $password = $_POST['password'];
 
-    echo "Devuelve $usuario y $password";
+    // echo "Devuelve $usuario y $password";
 
 ?>

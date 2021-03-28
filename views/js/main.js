@@ -7,4 +7,5 @@ add.addEventListener('click', ()=>{
 
 view.addEventListener('click', ()=>{
     window.open('pendientes.php', '_self');
-})
+});
+

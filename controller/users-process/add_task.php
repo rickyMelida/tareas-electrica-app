@@ -2,6 +2,7 @@
     require_once '../../models/tasks/FinishedTask.php';
     require_once '../../models/tasks/PendingTask.php';
     require_once '../../models/class/Responses.php';
+    require_once "./getTechnical.php";
 
     session_start();
 
@@ -27,10 +28,14 @@
         $task = new FinishedTask( $type_of_task, $description, 'Ricardo', $work_status, $generation_hour, $end_hour,$hours_man, $turn);
     
     }else {
-        $task = new PendingTask($type_of_task, $description, 'Ricardo', $work_status, $turn);
-        $add = $task->addTasks();
+        // $task = new PendingTask($type_of_task, $description, 'Ricardo', $work_status, $turn);
+        // $add = $task->addTasks();
         
-        echo json_encode($response->resDB($add));
+        // echo json_encode($response->resDB($add));
+
+        $r = getTechnical();
+
+        echo json_encode($r);
     }
 
     
